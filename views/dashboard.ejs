@@ -1,0 +1,116 @@
+<!-- 
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="/styles.css">
+      <title>Admin Dashboard</title>
+  </head>
+  <body>
+      <header>
+          <h1>Admin Dashboard</h1>
+
+          <a href="/admin/logout">Logout</a>
+      </header>
+  
+      <main>
+          <section>
+              <h2>Manage Website Content</h2>
+              <ul>
+                  <li><a href="/admin/services">Manage Services</a></li>
+                  <li><a href="/admin/jobs">Manage Jobs</a></li>
+                  <li><a href="/admin/testimonials">Manage Testimonials</a></li>
+                  <li><a href="/admin/enquiries">Manage Job Enquiries</a></li> 
+              </ul>
+          </section>
+      </main>
+  </body>
+  </html>
+   -->
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+       <title>Admin Dashboard</title>
+       <style>
+           body {
+               background-color: #f8f9fa; /* Light background */
+           }
+           header {
+               background-color: #343a40; /* Dark background */
+               color: white;
+               padding: 20px;
+               text-align: center;
+           }
+           header a {
+               color: white;
+               text-decoration: none;
+           }
+           header a:hover {
+               text-decoration: underline;
+           }
+           .card {
+               box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow effect */
+               margin: 20px 0;
+           }
+       </style>
+   </head>
+   <body>
+       <header>
+           <h1>Admin Dashboard</h1>
+           <a href="/admin/logout" class="btn btn-danger">Logout</a>
+       </header>
+     
+       <main class="container mt-4">
+           <h2 class="text-center">Manage Website Content</h2>
+           <div class="row">
+               <div class="col-md-3">
+                   <div class="card text-center">
+                       <div class="card-body">
+                           <i class="fas fa-cogs fa-3x mb-3"></i>
+                           <h5 class="card-title">Manage Services</h5>
+                           <a href="/admin/services" class="btn btn-primary">Go to Services</a>
+                       </div>
+                   </div>
+               </div>
+               <div class="col-md-3">
+                   <div class="card text-center">
+                       <div class="card-body">
+                           <i class="fas fa-briefcase fa-3x mb-3"></i>
+                           <h5 class="card-title">Manage Jobs</h5>
+                           <a href="/admin/jobs" class="btn btn-primary">Go to Jobs</a>
+                       </div>
+                   </div>
+               </div>
+               <div class="col-md-3">
+                   <div class="card text-center">
+                       <div class="card-body">
+                           <i class="fas fa-comment-dots fa-3x mb-3"></i>
+                           <h5 class="card-title">Manage Testimonials</h5>
+                           <a href="/admin/testimonials" class="btn btn-primary">Go to Testimonials</a>
+                       </div>
+                   </div>
+               </div>
+               <div class="col-md-3">
+                   <div class="card text-center">
+                       <div class="card-body">
+                           <i class="fas fa-envelope fa-3x mb-3"></i>
+                           <h5 class="card-title">Manage Job Enquiries</h5>
+                           <a href="/admin/enquiries" class="btn btn-primary">Go to Enquiries</a>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </main>
+   
+       <!-- Bootstrap JS and dependencies (optional) -->
+       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.11/dist/umd/popper.min.js"></script>
+       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   </body>
+   </html>
+   

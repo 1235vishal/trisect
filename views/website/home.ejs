@@ -1,0 +1,3773 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Trisect</title>
+   <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: gilroy;
+    font-size: 0.625rem;
+    /* This sets 10px in rem */
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+
+    /* Custom scrollbar styles for WebKit browsers (Chrome, Safari) */
+    ::-webkit-scrollbar {
+        width: 5px;
+        /* Width of the scrollbar */
+        background-color: #f1f1f1;
+        /* Background of the scrollbar */
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #888;
+        /* Color of the scrollbar thumb */
+        border-radius: 5px;
+        /* Rounded corners for the scrollbar thumb */
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #555;
+        /* Darker color on hover */
+    }
+
+    /* For Firefox */
+    * {
+        scrollbar-width: thin;
+        /* Make the scrollbar thin */
+        scrollbar-color: #888 #f1f1f1;
+        /* Scrollbar thumb color and background color */
+    }
+
+    /* Optional: You can add styles for when the scrollbar is hovered */
+    *::-webkit-scrollbar:hover {
+        background-color: #ddd;
+        /* Light background on hover */
+    }
+
+}
+
+/* Optional additional styles */
+#mobile-nav {
+    background-color: #f9f9f9;
+    /* Light background for nav */
+}
+
+#mobile-nav a {
+    color: #333;
+    /* Dark text color for links */
+    transition: all 0.3s;
+    /* Smooth transition for hover effects */
+}
+
+#mobile-nav a:hover {
+    color: #451591;
+    /* Change text color on hover */
+    font-weight: bold;
+    /* Make links bold on hover */
+}
+
+
+
+.whatsapp-icon {
+    position: fixed;
+    /* Fixed positioning */
+    left: 95%;
+    /* Distance from the left side */
+    bottom: 20px;
+    /* Distance from the bottom */
+    width: 60px;
+    /* Width of the icon */
+    height: 60px;
+    /* Height of the icon */
+    border-radius: 50%;
+    /* Round shape */
+    background-color: #25D366;
+    /* WhatsApp color */
+    display: flex;
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-icon img {
+    width: 30px;
+    /* Width of the icon image */
+    height: 30px;
+    /* Height of the icon image */
+}
+
+.whatsapp-icon:hover {
+    transform: scale(1.1);
+    /* Scale effect on hover */
+}
+
+
+
+.page1 {
+    height: 88vh;
+    width: 100vw;
+
+}
+
+
+.top {
+    background-color: #FFFFFF;
+    width: 100%;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    /* Allow stacking for responsive behavior */
+
+    .nav {
+        height: 12vh;
+        width: 100%;
+        background-color: #ffffff;
+        display: flex;
+        align-items: center;
+        position: relative;
+        position: static;
+        justify-content: space-between;
+        padding-left: 2%;
+        padding-right: 2%;
+        /* Add right padding for spacing */
+    }
+
+    .logo img {
+        max-width: 150px;
+        height: auto;
+        margin-left: 10%;
+    }
+
+    .options {
+        display: flex;
+        gap: 4vh;
+        transition: transform 0.3s ease;
+        margin-left: -25%;
+        /* Removed negative margin */
+    }
+
+    .options a {
+        color: #333;
+        text-decoration: none;
+        font-size: 1.6rem;
+        /* Font size remains the same */
+        font-weight: 500;
+        position: relative;
+        /* Needed for positioning the pseudo-element */
+        overflow: hidden;
+        /* Ensures the animation stays within the link */
+    }
+
+    .options a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        /* Positioned at the start (left) of the link */
+        width: 100%;
+        /* Full width when animated */
+        height: 3px;
+        background-color: #451591;
+        transform: scaleX(0);
+        /* Initially hidden */
+        transform-origin: left;
+        /* The border grows from the left */
+        transition: transform 0.4s ease;
+        /* Smooth transition for the scale effect */
+    }
+
+    .options a:hover::after {
+        transform: scaleX(1);
+        /* Expands the border from left to right */
+    }
+
+    .options a:hover {
+        color: #353535;
+        transition: color 0.3s ease;
+    }
+
+    .options a:not(:hover)::after {
+        transform: scaleX(0);
+        /* Hides the border by shrinking it from the left */
+        transform-origin: right;
+        /* Shrinks back from right to left */
+    }
+
+
+
+
+    .toggle {
+        display: none;
+        font-size: 5.4rem;
+        /* Was 24px, now 2.4rem */
+        cursor: pointer;
+    }
+
+    .rightbtn {
+        background: linear-gradient(#ff68eb, #822291, #581991);
+        /* Gradient background */
+        color: #fff;
+        /* Default text color */
+        height: 100%;
+        /* Full height */
+        margin-right: -2.5%;
+        /* Right margin */
+        display: flex;
+        /* Flexbox for centering content */
+        align-items: center;
+        /* Vertical centering */
+        justify-content: center;
+        /* Horizontal centering */
+        font-size: 1.6rem;
+        /* Font size */
+        font-weight: 500;
+        /* Font weight */
+        width: 12vw;
+        /* Width */
+        cursor: pointer;
+        /* Pointer cursor on hover */
+        position: relative;
+        /* Position for the pseudo-element */
+        overflow: hidden;
+        /* Hide overflow for the after pseudo-element */
+        transition: color 0.3s ease, transform 0.3s ease;
+        /* Smooth transition for text color and transform */
+    }
+
+    /* Hover Effect */
+    .rightbtn:hover {
+        color: #000;
+        /* Change text color to black on hover */
+        transform: scale(1.01);
+        /* Slightly enlarge the button on hover */
+    }
+
+    /* Button After Pseudo-element for Background */
+    .rightbtn:after {
+        content: '';
+        /* Required for pseudo-element */
+        position: absolute;
+        /* Positioning */
+        top: 0;
+        /* Align to the top */
+        left: 0;
+        /* Align to the left */
+        width: 0;
+        /* Initial width */
+        height: 100%;
+        /* Full height */
+        background-color: rgba(0, 0, 0, 0.3);
+        /* Dark overlay for hover effect */
+        transition: width 0.3s ease;
+        /* Transition for expanding width */
+        z-index: -1;
+        /* Position behind the text */
+    }
+
+    /* Expand background on hover */
+    .rightbtn:hover:after {
+        width: 100%;
+        /* Expand the overlay color */
+    }
+
+
+    /* Change icon color on hover */
+    .rightbtn:hover i {
+        color: #000000;
+        /* Change icon color to white */
+    }
+
+
+    .rightbtn i {
+        font-size: 1.6rem;
+    }
+
+    .logosec {
+        height: 100%;
+        width: 15vw;
+        display: flex;
+        align-items: center;
+        gap: 1vw;
+        margin-right: -30%;
+        /* Adjusted margin for better alignment */
+    }
+
+    .logosec img {
+        height: 6vh;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 910px) {
+        .nav {
+            height: auto;
+            /* Adjust height for content flexibility */
+            padding-bottom: 1%;
+            /* Adjusted for vertical spacing */
+            padding-right: 2%;
+        }
+
+        .logo {
+            margin-left: 0;
+            /* Reset unnecessary margins for mobile */
+        }
+
+        .toggle {
+            display: block;
+            font-size: 2.4rem;
+            /* Adjusted for better scaling */
+            margin-left: -10%;
+        }
+
+        .toggle span {
+            font-size: 2.4rem;
+
+        }
+
+        .options {
+            position: absolute;
+            top: 10vh;
+            /* Adjusted top for better visibility */
+            left: 0;
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            gap: 1.5rem;
+            /* Was 15px, now 1.5rem */
+            background-color: #f0f0f0;
+            padding: 1rem 0;
+            /* Was 10px, now 1rem */
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .options.show {
+            display: flex;
+            transform: translateY(0);
+        }
+
+        .options a {
+            padding: 1rem 0;
+            /* Was 10px, now 1rem */
+            width: 100%;
+            text-align: center;
+        }
+
+        .rightbtn {
+            display: none;
+        }
+
+        .logosec {
+            display: none;
+        }
+    }
+
+    /* Smaller screens */
+    @media (max-width: 600px) {
+        .nav {
+            width: 100%;
+            height: auto;
+            /* Allow flexible height */
+            padding-top: 1vh;
+            padding-bottom: 2vh;
+        }
+
+        .logo {
+            width: 55vw;
+            height: 100%;
+            margin-left: -10%;
+        }
+        .logo img {
+            width: 100%;
+        }
+
+        .toggle {
+            margin-top: 0;
+            font-size: 2.4rem;
+            /* Adjusted for smaller screens */
+        }
+        .toggle span{
+            font-size: 3.5rem;
+        }
+        .top-right {
+            display: none;
+        }
+
+        .rightbtn {
+            display: none;
+        }
+    }
+
+    #mobile-nav {
+        transition: all ease-in 0.5s;
+    }
+}
+
+/* Ensure dropdown stays open when hovering over the dropdown */
+.group:hover .group-hover\\:block {
+    display: block;
+}
+
+#services-dropdown {
+    display: none;
+}
+
+/* Display dropdown on hover */
+.group:hover #services-dropdown {
+    display: block;
+}
+
+#mobile-services-content {
+    display: none;
+}
+
+#mobile-services-content.show {
+    display: block;
+}
+
+/* Additional hover effects */
+#mobile-services-dropdown button {
+    font-size: 2rem;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+.page1 .bottom {
+    height: 88vh;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    padding-left: 4%;
+    padding-top: 20vh;
+    animation: backgroundSlideshow 9s infinite;
+    /* Infinite background slideshow */
+}
+
+@keyframes backgroundSlideshow {
+    0% {
+        background-image: url(../../assets/1stpagebtm1.jpg);
+    }
+
+    25% {
+        background-image: url(../../assets/1stpagebtm2.jpg);
+    }
+
+    50% {
+        background-image: url(./assets/1stpagebtm3.jpeg);
+    }
+
+    100% {
+        background-image: url(./assets/1stpagebtm1.jpg);
+    }
+}
+
+.bottom h1 {
+    font-size: 8.8rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #ffffff;
+}
+
+.page1 .bottom h1 span {
+    background: linear-gradient(#ff68eb, #822291, #581991);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 8.8rem;
+}
+
+.bottom h1,
+.bottom p,
+.bottom button {
+    opacity: 0;
+    /* Start hidden */
+    transform: translateY(20px);
+    /* Start slightly lower */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.bottom h1.visible,
+.bottom p.visible {
+    opacity: 1;
+    /* Fully visible */
+    transform: translateY(0);
+    /* Slide to original position */
+}
+
+/* Paragraph styling */
+.page1 .bottom p {
+    font-size: 1.3vw;
+    font-weight: 500;
+    line-height: 1.3;
+    color: white;
+    width: 50%;
+    margin-top: 2%;
+}
+
+.button-container {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    text-align: center;
+    height: 8vh;
+    /* Height of the button container */
+    width: 12vw;
+    /* Width of the button container */
+    font-size: 1.6rem;
+    color: white;
+    /* Initial text color */
+    margin-top: 2%;
+}
+
+/* Button styling */
+.button-container button {
+    position: relative;
+    /* Ensure pseudo-element can position correctly */
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Center content in button */
+    height: 100%;
+    /* Full height of container */
+    width: 100%;
+    /* Full width of container */
+    z-index: 1;
+    /* Ensure button is above the background */
+    opacity: 1;
+    /* Button is visible */
+    font-size: 1.6rem;
+    /* Font size for button text */
+    border: none;
+    /* No border for button */
+    background-color: transparent;
+    /* No background for button */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    transition: color 0.3s ease;
+    /* Transition for text color */
+}
+
+
+
+
+
+/* on load animation */
+.button-container.visible {
+    border: 2px solid rgb(255, 255, 255);
+}
+
+.button-container.visible button {
+    opacity: 1;
+    /* Button becomes visible after the white box moves */
+    transform: translateX(0);
+    /* Slide into the original position */
+    height: 100%;
+    width: 100%;
+}
+
+.button-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: white;
+    /* White color sliding right */
+    z-index: 2;
+    transform: translateX(-100%);
+    /* Start off-screen to the left */
+    transition: transform 0.8s ease;
+    /* Speed and ease of the sliding white box */
+}
+
+.button-container.visible::before {
+    transform: translateX(100%);
+    /* Move the white box out of view to the right */
+}
+
+/* Pseudo-element for background color animation */
+.button-container button:after {
+    position: absolute;
+    content: "";
+    width: 0;
+    /* Start with zero width */
+    height: 100%;
+    top: 0;
+    right: 0;
+    background-color: #ffffff;
+    /* Background color on hover */
+    transition: width 0.3s ease;
+    /* Smooth transition for width */
+    z-index: -1;
+    /* Behind the button text */
+}
+
+/* Icon styling */
+.button-container button i {
+    font-size: 1.6rem;
+    /* Icon font size */
+    margin-left: 0%;
+    /* Space between icon and text */
+}
+
+/* Heading styling */
+.button-container button h1 {
+    font-size: 1.2rem;
+    /* Font size for heading */
+    font-weight: 600;
+    /* Font weight for heading */
+    line-height: 1.1;
+    /* Line height for heading */
+    color: white;
+    /* Initial text color for heading */
+    width: 70%;
+    /* Width of heading */
+}
+
+/* Hover effect */
+.button-container:hover button {
+    color: #fff;
+    /* Change text color to white */
+}
+
+.button-container:hover button:after {
+    width: 100%;
+    /* Expand the background color */
+}
+
+.button-container:hover h1 {
+    color: black;
+    /* Change heading color to black */
+}
+
+.button-container:hover button i {
+    color: black;
+    /* Change icon color to black */
+}
+
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+    .bottom h1 {
+        font-size: 6rem;
+        /* Adjust heading size for smaller screens */
+    }
+
+    .page1 .bottom p {
+        font-size: 2vw;
+        /* Responsive font size for paragraphs */
+        width: 70%;
+        /* Adjust width for smaller screens */
+    }
+
+    .button-container {
+        width: 20vw;
+        /* Adjust button container width */
+    }
+}
+
+@media (max-width: 768px) {
+    .bottom {
+        padding-top: 15vh;
+        /* Reduce padding for smaller screens */
+    }
+
+    .bottom h1 {
+        font-size: 5rem;
+        /* Further reduce heading size */
+    }
+
+    .page1 .bottom p {
+        font-size: 3vw;
+        /* Increase paragraph font size slightly */
+        width: 90%;
+        /* Further adjust width */
+    }
+
+    .button-container {
+        width: 30vw;
+        /* Adjust button container width */
+    }
+}
+
+@media (max-width: 480px) {
+    .whatsapp-icon {
+        left: 85vw;
+    }
+
+    .bottom {
+        padding-top: 10vh;
+        /* Further reduce padding */
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .bottom .h1 {
+        font-size: 2rem;
+        /* Further reduce heading size */
+        margin-top: 10vh;
+    }
+
+    .page1 .bottom h1 span {
+        font-size: 5rem;
+        /* Further reduce heading size */
+        background: linear-gradient(#ff68eb, #822291, #581991);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .page1 .bottom p {
+        margin-top: 5%;
+        font-weight: 400;
+        font-size: 5vw;
+        /* Increase paragraph font size slightly */
+        width: 100%;
+        /* Full width */
+    }
+
+    .button-container {
+        width: 45vw;
+        /* Adjust button container width */
+        height: 6vh;
+        margin-top: 5%;
+        font-weight: 400;
+    }
+}
+
+.page2 {
+
+    background-image: url(./assets/2ndpagebg.png);
+    background-size: cover;
+    background-position: center;
+    background-color: #f1f1f1;
+    height: 180vh;
+    width: 100%;
+    padding-top: 3%;
+    padding-left: 10%;
+    padding-right: 10%;
+
+}
+
+
+.page2 .service {
+    height: 3vh;
+    font-size: 1.5rem;
+    text-align: center;
+    border-left: 4px solid blueviolet;
+    padding-left: 0.7%;
+    font-weight: 600;
+}
+
+.services {
+    z-index: 9;
+    margin-top: 2%;
+    display: grid;
+    /* Use CSS Grid */
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 columns by default */
+    height: auto;
+    /* Adjust height automatically */
+}
+
+.box {
+    padding: 20px;
+    /* Padding inside the box */
+    background-color: rgb(255, 255, 255);
+    padding: 15px;
+    /* Padding inside each box */
+    display: flex;
+    color: #000;
+    flex-direction: column;
+    /* Stack contents vertically */
+    height: 50vh;
+    transform: translateY(0);
+    opacity: 1;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+.box:hover {
+    background: linear-gradient(#ff68eb, #822291, #581991);
+    color: #000;
+    transition: transform 0.3s ease-out, background-color 0.3s ease-out;
+    /* Smooth transition */
+}
+
+.services .box.pre-animate {
+    transform: translateY(50px);
+    /* Initial offset */
+    opacity: 0;
+    /* Invisible at start */
+}
+
+.box p {
+    margin: 10px 0;
+    /* Margin for spacing */
+    font-size: 1.8rem;
+    /* Paragraph font size */
+    color: gray;
+}
+
+
+.img {
+    height: 85px;
+    /* Set a fixed height for the image container */
+    width: 5.5vw;
+    margin-bottom: 15px;
+    /* Space below the image */
+}
+
+.img img {
+    width: 100%;
+    height: 100%;
+    /* Fill the height of the container */
+    object-fit: cover;
+    /* Crop image if needed */
+    border-radius: 5px;
+    /* Rounded corners for images */
+}
+
+.box h1 {
+    margin: 0;
+    font-size: 2.4rem;
+    /* Heading font size */
+    font-weight: 600;
+}
+
+.box button {
+    background-color: #cf64e4;
+    color: #000000;
+    /* Button text color */
+    padding: 10px 30px;
+    /* Button padding */
+    border: none;
+    /* Remove default border */
+    border-radius: 5px;
+    /* Rounded corners */
+    cursor: pointer;
+    /* Change cursor on hover */
+    font-size: 1.5rem;
+    bottom: 1%;
+    align-self: flex-start;
+    /* Align button to the start */
+    transition: background-color 0.3s;
+    /* Smooth transition for hover */
+}
+
+
+
+.box button:hover {
+    background-color: #d650d1;
+    /* Button hover color */
+    transform: scale(1.05);
+    /* Slight scale up on hover */
+}
+
+/* Large Desktops */
+@media (min-width: 1200px) {
+    .service {
+        font-size: 1.3rem;
+    }
+
+
+    .servicetxt {
+        margin-top: 10%;
+        font-size: 2rem;
+    }
+
+    .services {
+        grid-template-columns: repeat(3, 1fr);
+        /* 3 columns for large desktops */
+    }
+}
+
+/* Tablets and Small Desktops */
+@media (max-width: 1199px) and (min-width: 768px) {
+    .page2 {
+        height: auto;
+        background-image: none;
+        /* Remove the background image */
+        background-color: #ffffff;
+        /* Ensure the background color is still applied */
+    }
+
+    .servicetxt {
+        margin-top: 5%;
+        font-size: 1.5rem;
+    }
+
+    .services {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 columns on medium screens */
+        gap: 15px;
+    }
+
+    .box {
+        height: 45vh;
+        /* Adjust height for medium screens */
+    }
+
+    .box h1 {
+        font-size: 2.5rem;
+        /* Slightly smaller heading */
+    }
+
+    .box p {
+        font-size: 1.4rem;
+        /* Smaller paragraph font */
+    }
+
+    .img {
+        height: 65px;
+        /* Smaller image container for medium screens */
+        width: 20vw;
+    }
+}
+
+/* Mobile Devices */
+@media (max-width: 767px) {
+    .page2 {
+        height: 400vh;
+        background-image: none;
+        /* Remove the background image */
+        background-color: #ebebeb;
+        /* Ensure the background color is still applied */
+    }
+
+    .services {
+        margin-top: 5%;
+        grid-template-columns: 1fr;
+        /* Single column on small devices */
+        gap: 10px;
+    }
+
+    .box {
+        height: auto;
+        /* Adjust height for mobile */
+        background-color: #ffffff;
+    }
+
+    .img {
+        height: 10 vh;
+        /* Adjust image container height */
+        width: 18vw;
+        /* Adjust image container width */
+    }
+
+    .box h1 {
+        font-size: 2.2rem;
+        /* Smaller heading */
+        width: 50%;
+    }
+
+    .box p {
+        margin-top: 5%;
+        width: 90%;
+        font-size: 1.6rem;
+        /* Smaller paragraph font */
+    }
+
+    .box button {
+        padding: 8px 20px;
+        /* Adjust button padding for smaller screens */
+        font-size: 1.3rem;
+        /* Smaller button text */
+    }
+
+}
+
+
+body {
+    margin: 0;
+    /* Reset default margin */
+    overflow-x: hidden;
+    /* Prevent horizontal scroll */
+}
+
+.page3 {
+    height: 95vh;
+    /* Use full viewport height */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    /* Center vertically */
+    justify-content: center;
+    /* Center horizontally */
+    position: relative;
+    /* Enable relative positioning for child elements */
+    overflow: hidden;
+    /* Hide overflow to prevent scrolling issues */
+}
+
+.page3 .left {
+    height: 100%;
+    /* Full height of parent */
+    width: 50vw;
+    /* Width for the left section */
+    position: relative;
+    /* Allow positioning for parallax */
+    overflow: hidden;
+    /* Hide overflow */
+    background-image: url('./assets/1stpagebtm1.jpg');
+    /* Set the background image */
+    background-size: cover;
+    /* Cover the entire area */
+    background-attachment: fixed;
+    /* Create parallax effect */
+    background-position: center;
+    /* Center the background image */
+    z-index: 1;
+    /* Place it behind content */
+}
+
+.parallax-bg {
+    position: absolute;
+    /* Position absolutely within the parent */
+    top: 0;
+    /* Align to the top */
+    left: 0;
+    /* Align to the left */
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height for the background */
+    z-index: 1;
+    /* Place it behind content */
+}
+
+.page3 .right {
+    padding-top: 1%;
+    padding-left: 5%;
+    padding-right: 5%;
+    width: 50vw;
+    /* Width for the right section */
+    height: 100%;
+    /* Ensure the right section takes full height */
+    background-image: url(./assets/2ndpagebg.png);
+    /* Background image */
+    background-size: cover;
+    /* Cover the entire area */
+    background-position: center;
+    /* Center the background image */
+    background-repeat: no-repeat;
+    /* Prevent repeating of the background image */
+    background-color: #ebebeb;
+    z-index: 2;
+    /* Ensure content is above background */
+}
+
+.page3 h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    width: 12vw;
+    padding-bottom: -5%;
+}
+
+.page3 h2 {
+    font-size: 7rem;
+    font-weight: bold;
+    line-height: 1;
+    margin-top: 2%;
+    width: 40vw;
+    z-index: 9;
+}
+
+.page3 .dash {
+    height: 25px;
+    width: 89%;
+
+    border-bottom: 20px solid #661C91;
+    margin-top: -4%;
+}
+
+.page3 p {
+    font-size: 1.6rem;
+    width: 95%;
+    margin-top: 4%;
+    color: grey;
+}
+
+.page3 .points {
+    display: grid;
+    /* Use CSS Grid for layout */
+    grid-template-columns: repeat(2, 1fr);
+    /* Two columns */
+    grid-template-rows: repeat(2, 1fr);
+    height: auto;
+    /* Allow height to adjust based on content */
+    width: 100%;
+    margin-top: 0%;
+    margin-left: -3%;
+}
+
+.page3 .points p {
+    font-size: 1.6rem;
+    color: grey;
+    margin-left: 9%;
+    margin-top: -3%;
+}
+
+.page3 .points h3 {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+
+.page3 .points h3 i {
+    margin-left: -5%;
+    font-weight: bolder;
+    font-size: 4.5rem;
+    color: #6816c1;
+}
+
+.pt {
+    border-radius: 10px;
+    /* Rounded corners */
+    padding: 15px;
+    /* Padding inside each box */
+}
+
+
+/* Responsive: Tablet (768px to 1024px) */
+@media (max-width: 1024px) {
+    .page3 {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .page3 .left {
+        width: 100%;
+        /* Full width for smaller devices */
+        height: 50vh;
+        /* Reduce height for better view on tablets */
+    }
+
+    .parallax-bg {
+        background-attachment: scroll;
+        /* Disable fixed attachment on tablets */
+        background-size: cover;
+        /* Ensure the background covers */
+        height: 100%;
+        /* Make sure the background height adjusts properly */
+    }
+
+    .page3 .right {
+        width: 100%;
+        height: auto;
+        padding: 5%;
+    }
+
+    .page3 h2 {
+        font-size: 5rem;
+    }
+
+    .page3 .points {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Responsive: Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+    .page3 {
+        height: auto;
+        flex-direction: column;
+    }
+
+    .page3 .left {
+        width: 100%;
+        height: 50vh;
+        /* Make the left side smaller on mobile */
+    }
+
+    .parallax-bg {
+        background-attachment: scroll;
+        /* Disable parallax for mobile for performance reasons */
+        background-position: center;
+        /* Center the background for better visibility */
+        background-size: cover;
+    }
+
+    .page3 .right {
+        width: 100%;
+        height: auto;
+        padding: 10px;
+    }
+
+    .page3 h2 {
+        font-size: 4rem;
+    }
+
+    .page3 .points {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Responsive: Small Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+    .page3 .left {
+        width: 100%;
+        height: 30vh;
+        /* Smaller height for small mobile */
+    }
+
+    .parallax-bg {
+        background-attachment: scroll;
+        /* No parallax on small screens */
+        background-size: cover;
+    }
+
+    .page3 .right h1 {
+        font-size: 2rem;
+        width: 100vw;
+    }
+
+    .page3 .right {
+        padding: 5%;
+    }
+
+    .page3 h2 {
+        font-size: 3rem;
+        width: 70vw;
+    }
+
+    .page3 .dash {
+        width: 55vw;
+        height: 5px;
+        border-bottom: 10px solid #661C91;
+        margin-top: -2.5%;
+    }
+
+    .page3 p {
+        font-size: 1.8rem;
+    }
+
+    .page3 .points h3 {
+        font-size: 2rem;
+    }
+
+    .page3 .points p {
+        font-size: 1.8rem;
+    }
+}
+
+
+.page4 {
+    height: 100vh;
+    /* Use full viewport height */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    /* Center vertically */
+    justify-content: space-between;
+    /* Space out child elements */
+    position: relative;
+    /* Enable relative positioning for child elements */
+    overflow: hidden;
+    /* Hide overflow to prevent scrolling issues */
+    background-color: #f8f9fa;
+    /* Light background color for contrast */
+}
+
+.page4 .left {
+    width: 49.5vw;
+    /* Width for the right section */
+    height: 100%;
+    /* Ensure the right section takes full height */
+    background-image: url(./assets/4thpagebg.png);
+    /* Background image */
+    background-size: cover;
+    /* Cover the entire area */
+    background-position: center;
+    /* Center the background image */
+    background-repeat: no-repeat;
+    /* Prevent repeating of the background image */
+    color: #fffdfd;
+    padding-top: 2%;
+    padding-left: 5%;
+}
+
+.page4 h1 {
+    font-size: 5.5rem;
+    /* Font size for title */
+    font-weight: bold;
+    /* Bold text for title */
+    margin-bottom: 10px;
+    /* Space below title */
+    width: 60%;
+    line-height: 1.2;
+
+}
+
+.page4 p {
+    font-size: 1.8rem;
+    /* Font size for paragraph */
+    margin-bottom: 20px;
+    /* Space below paragraph */
+    color: #a2a2a2;
+    /* Dark text color for contrast */
+    margin-top: 2%;
+    width: 80%;
+}
+
+.progress {
+    margin-top: 5px;
+    /* Space above the progress section */
+}
+
+.progress h2 {
+    font-size: 2rem;
+    margin-top: -2%;
+}
+
+.progress-bar-container {
+    width: 70%;
+    /* Full width of the parent */
+    background-color: #000000;
+    /* Dark background for the progress bar */
+    border-radius: 5px;
+    /* Rounded corners */
+    height: 8px;
+    /* Height of the progress bar */
+    overflow: hidden;
+    /* Hide overflow */
+}
+
+.progress-bar {
+    width: 0%;
+    /* Start with 0% width */
+    height: 100%;
+    /* Full height of the container */
+    background-color: #661C91;
+    /* Color of the progress bar */
+    transition: width 0.4s ease;
+    /* Smooth transition effect */
+}
+
+.progress-number {
+    font-size: 16px;
+    margin-top: 2%;
+    color: #661C91;
+    /* Color of the number */
+    font-weight: bold;
+    /* Make the number bold */
+    margin-left: 65%;
+}
+
+.page4 .dash {
+    height: 20px;
+    width: 100%;
+
+    border-bottom: 20px solid #661C91;
+    margin-top: -5%;
+}
+
+.page4 .left button {
+    padding: 10px 25px;
+    /* Padding for .page4 .left button*/
+    background-color: #661C91;
+    /* Button color */
+    color: white;
+    /* Button text color */
+    border: none;
+    /* Remove default border */
+    margin-top: 3%;
+    border-radius: 5px;
+    /* Rounded corners */
+    cursor: pointer;
+    /* Pointer cursor */
+    font-size: 1.5rem;
+    /* Font size */
+    transition: background-color 0.3s;
+    /* Smooth background change */
+}
+
+.page4 .left button:hover {
+    background-color: #5a1580;
+    /* Darker color on hover */
+}
+
+.page4 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 90vh;
+    /* Full height of the viewport */
+    background-color: #3a3a3a;
+    /* Background color */
+
+}
+
+
+.right {
+    width: 51vw;
+    /* Width for the right section */
+    height: 100%;
+    /* Full height */
+    position: relative;
+    /* For absolute positioning */
+}
+
+
+
+.page4 .right {
+    width: 50vw;
+    /* Width for the right section */
+    height: 100%;
+    /* Full height of parent */
+    position: relative;
+    /* Allow absolute positioning for parallax */
+    overflow: hidden;
+    /* Hide overflow */
+}
+
+.parallax-bg {
+    position: absolute;
+    /* Position absolutely within the parent */
+    top: 0;
+    /* Align to the top */
+    left: 0;
+    /* Align to the left */
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height for the background */
+    background-size: cover;
+    /* Cover the entire area */
+    background-attachment: fixed;
+    /* Fixed background for parallax effect */
+    background-position: center;
+    /* Center the background */
+    z-index: 1;
+    /* Place it behind content */
+}
+
+.page4 .content {
+    position: relative;
+    /* Allow z-index positioning */
+    z-index: 2;
+    /* Bring content above background */
+    padding: 20px;
+    /* Add padding for content */
+    color: #333;
+    /* Text color for contrast */
+    background-color: rgba(255, 255, 255, 0.8);
+    /* Slightly transparent background for readability */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Add shadow for depth */
+}
+
+
+/* Responsive: Tablet (768px to 1024px) */
+@media (max-width: 1024px) {
+    .page4 {
+        flex-direction: column;
+        /* Stack elements vertically */
+        height: auto;
+        /* Adjust height */
+    }
+
+    .page4 .left {
+        width: 100%;
+        /* Full width for smaller devices */
+        height: 70vh;
+        /* Reduce height for better view on tablets */
+    }
+
+    .page4 .right {
+        width: 100%;
+        /* Full width */
+        height: 50vh;
+        /* Adjust height */
+        padding: 5%;
+        /* Add padding */
+    }
+
+    .page4 h1 {
+        font-size: 4rem;
+        /* Adjust title font size */
+    }
+
+    .page4 p {
+        font-size: 1.5rem;
+        /* Adjust paragraph font size */
+    }
+
+    .page4 .progress-bar-container {
+        width: 90%;
+        /* Adjust progress bar width */
+    }
+
+    .page4 .points {
+        grid-template-columns: 1fr;
+        /* Single column layout */
+    }
+}
+
+/* Responsive: Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+    .page4 {
+        height: auto;
+        /* Auto height for mobile */
+        flex-direction: column;
+        /* Stack vertically */
+    }
+
+    .page4 .left {
+        width: 100%;
+        /* Full width */
+        height: 60vh;
+        /* Adjust height */
+    }
+
+    .page4 .right {
+        width: 100%;
+        /* Full width */
+        height: 40vh;
+        /* Adjust height */
+        padding: 10px;
+        /* Add padding */
+    }
+
+    .page4 h1 {
+        font-size: 3rem;
+        /* Smaller title font size */
+    }
+
+    .page4 p {
+        font-size: 1.2rem;
+        /* Smaller paragraph font size */
+    }
+
+    .page4 .progress-bar-container {
+        width: 90%;
+        /* Adjust progress bar width */
+    }
+
+    .page4 .points {
+        grid-template-columns: 1fr;
+        /* Single column layout */
+    }
+}
+
+/* Responsive: Small Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+    .page4 .left {
+        padding-top: 10%;
+        width: 100%;
+        /* Full width */
+        height: 60vh;
+        /* Smaller height for small mobile */
+    }
+
+    .page4 .right h1 {
+        font-size: 2rem;
+        /* Adjust title size */
+        width: 100vw;
+        /* Full width */
+    }
+
+    .page4 .right {
+        height: 30vh;
+        padding: 5%;
+    }
+
+    .page4 h1 {
+        font-size: 2.5rem;
+        /* Adjust title font size */
+        width: 100%;
+        /* Full width */
+    }
+
+    .page4 p {
+        font-size: 1.2rem;
+        /* Adjust paragraph font size */
+    }
+
+    .page4 .dash {
+        width: 55vw;
+        /* Adjust width */
+        height: 5px;
+        /* Height of the dash */
+        border-bottom: 10px solid #661C91;
+        /* Dash color */
+        margin-top: -2.5%;
+        /* Adjust margin */
+    }
+
+    .page4 .points h3 {
+        font-size: 2rem;
+        /* Adjust points title size */
+    }
+
+    .page4 .points p {
+        font-size: 1.5rem;
+        /* Adjust points paragraph size */
+    }
+}
+
+
+
+.page5 {
+    height: 100vh;
+    width: 100%;
+    background-color: #FFFFFF;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 4%;
+}
+
+.page5 .service {
+    height: 3vh;
+    padding-top: 0.1%;
+    color: #414141;
+    font-size: 1.4rem;
+    text-align: center;
+    border-left: 4px solid blueviolet;
+    padding-left: 0.6%;
+    font-weight: 700;
+    margin-left: 3.65%;
+    margin-bottom: 1.5%;
+}
+
+.companieslogo {
+    display: flex;
+    flex-wrap: wrap;
+    height: 75vh;
+    justify-content: center;
+    width: 100%;
+    /* Container takes full width */
+    margin: 0 auto;
+    /* Center the container horizontally */
+}
+
+.logo-box {
+    width: calc(20% - 20px);
+    /* Set width for 5 logos per row */
+    height: 190px;
+    /* Fixed height for logo container */
+    border: 0.1px solid #b7b7b7;
+    /* Border around each box */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-box img {
+    max-width: 140px;
+    /* Scale properly within the box */
+    max-height: 100%;
+    /* Maintain aspect ratio */
+    object-fit: contain;
+    /* Prevent image stretching */
+    filter: grayscale(100%);
+    /* Initially make logos black and white */
+    transition: filter 0.3s ease, transform 0.3s ease;
+    /* Smooth hover transition */
+}
+
+.logo-box:hover img {
+    filter: none;
+    /* Restore original colors on hover */
+}
+
+.logo-box:hover {
+    background-color: rgb(90, 90, 90);
+    /* Background change on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .page5 {
+        height: 130vh;
+    }
+
+    .logo-box {
+        width: calc(25% - 20px);
+        /* 4 logos per row */
+    }
+}
+
+@media (max-width: 992px) {
+    .page5 {
+        height: 150vh;
+    }
+
+    .logo-box {
+        width: calc(33.33% - 20px);
+        /* 3 logos per row */
+    }
+}
+
+@media (max-width: 768px) {
+    .page5 {
+        height: 220vh;
+    }
+
+    .logo-box {
+        width: calc(50% - 20px);
+        /* 2 logos per row */
+    }
+}
+
+@media (max-width: 478px) {
+    .page5 {
+        height: 290vh;
+    }
+
+    .logo-box:hover {
+        background-color: rgb(242, 242, 242);
+    }
+
+    .page5 .service {
+        margin-left: 2.5%;
+        padding-left: 2%;
+    }
+
+    .companieslogo {
+        margin-top: 4%;
+    }
+
+    .logo-box {
+        width: calc(100% - 20px);
+        /* 1 logo per row */
+        height: 170px;
+        /* Adjust height for smaller screens */
+    }
+
+    .logo-box img {
+        height: 170px;
+        filter: none;
+        /* Restore original colors on hover */
+    }
+}
+
+
+
+.page6 {
+    position: relative;
+    height: 90vh;
+    /* Adjusted height */
+    width: 100%;
+    /* Full width */
+    overflow: hidden;
+    /* Prevent content overflow */
+    background-image: url('./assets/1stpagebtm1.jpg');
+    /* Background image */
+    background-size: cover;
+    /* Ensure the background covers the entire container */
+    background-attachment: fixed;
+    /* Parallax effect */
+    background-position: center;
+    background-repeat: no-repeat;
+    /* No repetition */
+}
+
+.page6 img {
+    max-width: 100%;
+    /* Adjust image size */
+    text-align: right;
+    margin-left: 20%;
+    opacity: 0;
+    /* Initially hidden */
+    transform: translateX(100%);
+    /* Start off-screen to the right */
+}
+
+.page6 .text {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 100%;
+    width: 50%;
+    z-index: 10;
+    margin-left: 50%;
+
+}
+
+
+.page6 .text h1 {
+    color: #000000;
+    font-size: 8rem;
+    font-weight: 800;
+    margin-top: 15%;
+    width: 50%;
+    line-height: 1;
+
+}
+
+.page6 .text h2 {
+    font-size: 3.4rem;
+    line-height: 1;
+    color: white;
+    margin-top: 3%;
+    width: 85%;
+    font-weight: 700;
+}
+
+.page6 .text p {
+    font-size: 2.2rem;
+    width: 80%;
+    font-weight: 400;
+    margin-top: 3%;
+}
+
+/* Button Styles */
+.page6 .text button {
+    font-size: 2rem;
+    /* Font size for the button */
+    margin-top: 4%;
+    /* Margin at the top */
+    font-weight: 600;
+    /* Font weight */
+    border: 2px solid rgb(0, 0, 0);
+    /* Border styling */
+    padding: 10px 30px;
+    /* Padding inside the button */
+    position: relative;
+    /* For the pseudo-element positioning */
+    overflow: hidden;
+    /* Hide overflow for the after pseudo-element */
+    background-color: transparent;
+    /* Transparent background */
+    color: rgb(0, 0, 0);
+    /* Default text color */
+    transition: color 0.3s ease;
+    /* Transition for text color */
+}
+
+/* Hover Effect */
+.page6 .text button:hover {
+    color: #fff;
+    /* Change text color to white */
+}
+
+/* Button After Pseudo-element for Background */
+.page6 .text button:after {
+    content: '';
+    /* Required for pseudo-element */
+    position: absolute;
+    /* Positioning */
+    top: 0;
+    /* Align to the top */
+    left: 0;
+    /* Align to the left */
+    width: 0;
+    /* Initial width */
+    height: 100%;
+    /* Full height */
+    background-color: rgb(0, 0, 0);
+    /* Background color for the hover effect */
+    transition: width 0.3s ease;
+    /* Transition for expanding width */
+    z-index: -1;
+    /* Position behind the text */
+}
+
+/* Expand background on hover */
+.page6 .text button:hover:after {
+    width: 100%;
+    /* Expand the background color */
+}
+
+/* Optional: Ensure proper styling for the icon */
+.page6 .text button i {
+    transition: color 0.3s ease;
+    /* Transition for icon color */
+}
+
+/* Change icon color on hover */
+.page6 .text button:hover i {
+    color: black;
+    /* Change icon color to black */
+}
+
+.page6 .text button i {
+    font-size: 2rem;
+}
+
+
+/* Responsive: Tablet (768px to 1024px) */
+@media (max-width: 1024px) {
+    .page6 {
+        height: 70vh;
+        /* Allow height to adjust */
+    }
+
+    .page6 .text {
+        width: 100%;
+        /* Adjust width for better visibility */
+        margin-left: 40%;
+        /* Center align */
+        margin-top: -14%;
+    }
+
+    .page6 h1 {
+        margin-top: -5%;
+        font-size: 4rem;
+        /* Adjust font size */
+    }
+
+    .page6 h2 {
+        margin-top: -5%;
+        font-size: 2rem;
+        /* Adjust font size */
+    }
+
+    .page6 p {
+        margin-top: -2%;
+        font-size: 1.5rem;
+        /* Adjust font size */
+    }
+
+    .page6 img {
+        margin-left: 10%;
+        /* Center align */
+        transform: translateX(0);
+        /* Bring image into view */
+        opacity: 1;
+        /* Make image visible */
+    }
+}
+
+/* Responsive: Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+    .page6 {
+        height: 70vh;
+        /* Allow height to adjust */
+
+    }
+
+    .page6 .text {
+        width: 100%;
+        /* Full width for mobile */
+        margin-left: 55%;
+        /* Center align */
+    }
+
+    .page6 h1 {
+        font-size: 1.5rem;
+        /* Adjust font size */
+        margin-top: 5%;
+    }
+
+    .page6 h2 {
+        font-size: 1.5rem;
+        /* Adjust font size */
+    }
+
+    .page6 p {
+        font-size: 1rem;
+        /* Adjust font size */
+    }
+
+    .page6 img {
+        margin-left: 0;
+        /* Center align */
+        height: 100%;
+        transform: translateX(0);
+        /* Bring image into view */
+        opacity: 1;
+        /* Make image visible */
+    }
+
+    .page6 .text button {
+        font-size: 1.6rem;
+        /* Adjust button font size */
+        padding: 8px 20px;
+        /* Adjust padding */
+    }
+}
+
+/* Responsive: Small Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+    .page6 {
+        height: 80vh;
+    }
+
+    .page6 img {
+        height: 100%;
+        margin-left: 0%;
+    }
+
+    .page6 .text {
+        margin-top: 0%;
+        width: 100%;
+        /* Full width for small devices */
+        margin-left: -50%;
+        padding: 20px;
+        /* Center align */
+    }
+
+    .page6 h1 {
+        margin-top: 5%;
+        font-size: 1rem;
+    }
+
+    #career {
+        font-size: 6rem;
+    }
+
+    .page6 h2 {
+        font-size: 1.2rem;
+        font-weight: 400;
+        /* Adjust font size */
+    }
+
+    .page6 p {
+        font-size: 1.2rem;
+        /* Adjust font size */
+        color: #b5abab;
+    }
+
+    .page6 .text button {
+        font-size: 1.6rem;
+        /* Adjust button font size */
+        padding: 6px 15px;
+
+        border: 3px solid rgb(0, 0, 0);
+        /* Adjust padding */
+    }
+}
+
+
+.page7 {
+    height: 70vh;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 15px;
+    /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    /* Soft shadow */
+    background-image: url(./assets/2ndpagebg.png);
+}
+
+.page7 .reviews {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 70vh;
+    /* Overall section height remains the same */
+}
+
+.page7 .reviews h1 {
+    font-size: 5rem;
+    /* Adjusted size */
+    font-weight: 600;
+    color: #451591;
+    /* Darker color for contrast */
+    margin-bottom: 20px;
+    /* Space below the title */
+}
+
+.rimg {
+    height: 100%;
+    /* Increased container height to 60vh */
+    width: 50vw;
+    /* Decreased width for a more balanced look */
+    position: relative;
+    /* Enable positioning for the children */
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: auto;
+    overflow: hidden;
+    /* Prevent overflow of images */
+}
+
+.rimg img {
+    position: absolute;
+    object-fit: cover;
+    /* Ensure images cover the container */
+    opacity: 0;
+    /* Initially hidden */
+    transform: scale(0.8);
+    /* Start slightly smaller */
+    border-radius: 10px;
+    /* Match image corners */
+}
+
+
+/* Responsive: Tablet (768px to 1024px) */
+@media (max-width: 1024px) {
+    .page7 {
+        height: auto;
+        /* Allow height to adjust based on content */
+        padding: 20px;
+        /* Add some padding for better spacing */
+    }
+
+    .page7 .reviews h1 {
+        font-size: 4rem;
+        /* Smaller title size for tablets */
+    }
+
+    .rimg {
+        width: 80vw;
+        /* Make image container wider */
+    }
+
+    .rimg img {
+        transform: scale(0.9);
+        /* Adjust scale for better visibility */
+    }
+}
+
+/* Responsive: Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+    .page7 {
+        height: auto;
+        /* Allow height to adjust based on content */
+        padding: 15px;
+        /* Adjust padding for smaller screens */
+    }
+
+    .page7 .reviews h1 {
+        font-size: 3.5rem;
+        /* Further reduce title size */
+    }
+
+    .rimg {
+        width: 90vw;
+        /* Make image container wider */
+        height: 50vh;
+        /* Adjust height for mobile */
+    }
+
+    .rimg img {
+        transform: scale(1);
+        /* Scale back to normal size */
+    }
+}
+
+/* Responsive: Small Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+    .page7 {
+        padding: 10px;
+        /* Smaller padding for very small screens */
+    }
+
+    .page7 .reviews h1 {
+        font-size: 3rem;
+        /* Further reduce title size */
+    }
+
+    .rimg {
+        width: 100vw;
+        /* Full width for small mobile */
+        height: 40vh;
+        /* Smaller height */
+    }
+
+    .rimg img {
+        transform: scale(1);
+        /* Keep the image size normal */
+    }
+}
+
+
+.page8 {
+    height: 95vh;
+    width: 100%;
+    background-image: url(./assets/2ndpagebg.png);
+    display: flex;
+
+
+}
+
+.page8 .leftt {
+    height: 100%;
+    width: 50%;
+    padding-top: 5%;
+    padding-left: 8%;
+}
+
+.page8 .leftt h1 {
+    font-size: 7rem;
+    width: 90%;
+    line-height: 1;
+    font-weight: 700;
+}
+
+.page8 .leftt h2 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    color: #454545;
+    margin-top: 5%;
+}
+
+.page8 .leftt .frame {
+    height: 20vh;
+    width: 40vw;
+    margin-top: 2%;
+
+}
+
+.page8 .grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 columns */
+    height: 100%;
+    /* Fill the frame height */
+    align-items: center;
+    /* Center items vertically */
+}
+
+.page8 .grid-item {
+    font-size: 2rem;
+    display: flex;
+    gap: 5px;
+}
+
+.page8 .grid-item h3 {
+    margin-top: 4%;
+    font-weight: bold;
+}
+
+.page8 .grid-item i {
+    font-size: 3rem;
+    /* Size of the icon */
+    font-weight: 900;
+    /* Weight of the icon */
+    color: #451591;
+    /* Icon color */
+    border-radius: 50%;
+    /* Make it circular */
+    border: 5px solid #451591;
+    /* Border color */
+    width: 50px;
+    /* Set a fixed width */
+    height: 50px;
+    /* Set a fixed height */
+    display: flex;
+    /* Use flex to center the icon */
+    align-items: center;
+    /* Center icon vertically */
+    justify-content: center;
+    /* Center icon horizontally */
+    margin-right: 10px;
+    /* Space between icon and text */
+    background-color: #ffffff00;
+    /* Background color for the circle */
+}
+
+/* Button Styles for .page8 .leftt */
+.page8 .leftt button {
+    font-size: 2rem;
+    /* Font size for the button */
+    padding: 10px 20px;
+    /* Padding inside the button */
+    font-weight: 600;
+    /* Font weight */
+    border: 2px solid #000;
+    /* Border styling */
+    margin-top: 5%;
+    /* Margin at the top */
+    position: relative;
+    /* For positioning the pseudo-element */
+    overflow: hidden;
+    /* Hide overflow for the after pseudo-element */
+    background-color: transparent;
+    /* Transparent background */
+    color: #000;
+    /* Default text color */
+    transition: color 0.3s ease;
+    /* Transition for text color */
+}
+
+/* Hover Effect */
+.page8 .leftt button:hover {
+    color: #fff;
+    /* Change text color to white */
+}
+
+/* Button After Pseudo-element for Background */
+.page8 .leftt button:after {
+    content: '';
+    /* Required for pseudo-element */
+    position: absolute;
+    /* Positioning */
+    top: 0;
+    /* Align to the top */
+    left: 0;
+    /* Align to the left */
+    width: 0;
+    /* Initial width */
+    height: 100%;
+    /* Full height */
+    background-color: #000;
+    /* Background color for the hover effect */
+    transition: width 0.3s ease;
+    /* Transition for expanding width */
+    z-index: -1;
+    /* Position behind the text */
+}
+
+/* Expand background on hover */
+.page8 .leftt button:hover:after {
+    width: 100%;
+    /* Expand the background color */
+}
+
+/* Optional: Ensure proper styling for the icon */
+.page8 .leftt button i {
+    transition: color 0.3s ease;
+    /* Transition for icon color */
+}
+
+/* Change icon color on hover */
+.page8 .leftt button:hover i {
+    color: white;
+    /* Change icon color to white */
+}
+
+.page8 .rightt {
+    height: 100%;
+    width: 50%;
+    padding-top: 5%;
+    padding-left: 10%;
+    position: relative;
+    /* Set to relative for absolute positioning of circles */
+}
+
+/* General styles for the circles */
+.circle {
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    border: 2px dashed rgb(207, 207, 207);
+    flex-direction: column;
+}
+
+/* Circle headings */
+.circle h1 {
+    font-weight: 700;
+}
+
+.circle h2 {
+    font-weight: 500;
+}
+
+/* Runner element for animation along the border */
+.runner {
+    width: 2px;
+    /* Width of the runner element */
+    height: 10px;
+    /* Height of the runner element */
+    background-color: #451591;
+    /* Color of the runner element */
+    position: absolute;
+    /* Positions the runner absolutely within its parent */
+    top: 50%;
+    /* Centers the runner vertically */
+    left: 50%;
+    /* Centers the runner horizontally */
+}
+
+
+/* Circle 1 styles */
+.circle1 {
+    width: 250px;
+    height: 250px;
+    top: 30%;
+    left: 20%;
+}
+
+.circle1 .runner {
+    animation: run-along-border-1 6s linear infinite;
+}
+
+@keyframes run-along-border-1 {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg) translateX(125px);
+        /* Half of 250px */
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg) translateX(125px);
+        /* Half of 250px */
+    }
+}
+
+/* Circle 2 styles */
+.circle2 {
+    width: 160px;
+    height: 160px;
+    top: 23%;
+    left: 55%;
+}
+
+.circle2 .runner {
+    animation: run-along-border-2 4s linear infinite;
+}
+
+@keyframes run-along-border-2 {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg) translateX(80px);
+        /* Half of 160px */
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg) translateX(80px);
+        /* Half of 160px */
+    }
+}
+
+/* Circle 3 styles */
+.circle3 {
+    width: 200px;
+    height: 200px;
+    top: 50%;
+    left: 52%;
+}
+
+.circle3 .runner {
+    animation: run-along-border-3 5s linear infinite;
+}
+
+@keyframes run-along-border-3 {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg) translateX(100px);
+        /* Half of 200px */
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg) translateX(100px);
+        /* Half of 200px */
+    }
+}
+
+/* Specific styles for each circle */
+.circle1 h1 {
+    margin-top: -5%;
+    font-size: 10rem;
+    /* Font size for the number in circle 1 */
+    color: #451591;
+    /* Color of the number */
+
+}
+
+.circle1 h2 {
+    margin-top: -10%;
+    font-size: 3rem;
+    /* Font size for the title in circle 1 */
+    color: #333;
+    /* Darker color for the title */
+}
+
+.circle2 h1 {
+    margin-top: -5%;
+    font-size: 5rem;
+    /* Font size for the number in circle 2 */
+    color: #451591;
+    /* Color of the number */
+}
+
+.circle2 h2 {
+    margin-top: -8%;
+    font-size: 1.5rem;
+    /* Font size for the title in circle 2 */
+    color: #333;
+    /* Darker color for the title */
+}
+
+.circle3 h1 {
+    margin-top: -5%;
+    font-size: 7rem;
+    /* Font size for the number in circle 3 */
+    color: #451591;
+    /* Color of the number */
+}
+
+.circle3 h2 {
+    margin-top: -12%;
+    font-size: 2.5rem;
+    /* Font size for the title in circle 3 */
+    color: #333;
+    /* Darker color for the title */
+}
+
+
+
+/* Responsive: Tablet (768px to 1024px) */
+@media (max-width: 1024px) {
+    .page8 {
+        flex-direction: column;
+        /* Stack the left and right sections vertically */
+        height: auto;
+        /* Adjust height based on content */
+        padding: 20px;
+        /* Add padding for spacing */
+    }
+
+    .page8 .leftt,
+    .page8 .rightt {
+        width: 100%;
+        /* Full width for each section */
+    }
+
+    .page8 .leftt h1 {
+        font-size: 5rem;
+        /* Smaller title size */
+        margin-top: -2%;
+    }
+
+    .page8 .leftt h2 {
+        font-size: 2rem;
+        /* Smaller subtitle size */
+        margin-top: 1%;
+    }
+
+    .page8 .leftt .frame {
+        gap: 10px;
+        width: 80%;
+        /* Wider frame for tablets */
+
+    }
+
+    .page8 .leftt .frame h3 {
+        margin-top: 0.5%;
+    }
+
+    .page8 .leftt .frame i {
+        height: 30px;
+        width: 30px;
+        font-size: 2rem;
+        border: 3px solid #451591;
+    }
+
+    .page8 .grid-container {
+        grid-template-columns: repeat(1, 1fr);
+        /* Stack grid items in a single column */
+    }
+
+    .page8 .grid-item {
+        font-size: 1.5rem;
+        /* Smaller font size for grid items */
+    }
+
+    .page8 .leftt button {
+        margin-top: 5%;
+        font-size: 1.5rem;
+        /* Smaller button font size */
+        padding: 8px 16px;
+        /* Adjust padding for smaller buttons */
+    }
+
+    .page8 {
+        height: 100vh;
+    }
+
+    /* Circle 3 styles */
+    .circle3 {
+        width: 200px;
+        height: 200px;
+        top: 80%;
+        left: 62%;
+    }
+
+    .circle1 {
+        left: 30%;
+        top: 60%;
+    }
+
+}
+
+/* Responsive: Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+    .page8 {
+        padding: 10px;
+        /* Smaller padding for mobile */
+    }
+
+    .page8 .leftt h1 {
+        font-size: 4rem;
+        /* Further reduce title size */
+    }
+
+    .page8 .leftt h2 {
+        font-size: 1.8rem;
+        /* Further reduce subtitle size */
+    }
+
+    .page8 .leftt .frame {
+        width: 90%;
+        /* Full width for the frame */
+    }
+
+    .page8 .grid-item {
+        font-size: 1.2rem;
+        /* Smaller font size for grid items */
+    }
+
+    .page8 .leftt button {
+        font-size: 1.2rem;
+        /* Further reduce button font size */
+        padding: 6px 12px;
+        /* Smaller padding for mobile buttons */
+    }
+
+    .page8 .rightt {
+        margin-left: -20%;
+    }
+}
+
+/* Responsive: Small Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+    .page8 {
+        height: 145vh;
+    }
+
+    .page8 .leftt h1 {
+        margin-top: -20%;
+        font-size: 5rem;
+        /* Further reduce title size */
+    }
+
+    .page8 .leftt {
+        height: auto;
+    }
+
+    .page8 .leftt h2 {
+        font-size: 1.8rem;
+        margin-top: 5%;
+        /* Further reduce subtitle size */
+    }
+
+    .page8 .leftt .frame {
+        width: 100%;
+        margin-top: 5%;
+        /* Full width for the frame */
+    }
+
+    .page8 .leftt .frame h3 {
+        font-size: 2rem;
+        margin-top: 0%;
+        font-weight: 500;
+    }
+
+    .page8 .grid-item {
+        font-size: 1rem;
+        /* Further reduce font size for grid items */
+    }
+
+    .page8 .leftt button {
+        font-size: 2rem;
+        margin-top: 2%;
+        /* Further reduce button font size */
+        padding: 4px 8px;
+        /* Smaller padding for mobile buttons */
+    }
+
+    .page8 .rightt {
+        margin-top: 5%;
+        height: auto;
+    }
+
+    .circle1 {
+        top: 50vh;
+        left: 40%;
+    }
+
+    .circle2 {
+        left: 50%;
+        top: 7vh;
+    }
+
+    .circle3 {
+        left: 45%;
+        top: 26vh;
+
+    }
+}
+
+.footer {
+    background-color: #2b2d42;
+    color: #ffffff;
+    padding: 3rem 5%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 1.6rem;
+    transition: background-color 0.3s ease-in-out;
+    /* Smooth background transition on hover */
+}
+
+.footer:hover {
+    background-color: #1a1c33;
+    /* Darker shade on hover */
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    transition: transform 0.3s ease-in-out;
+    /* Smooth transformation on hover */
+}
+
+
+
+.footer-brand {
+    width: 38%;
+}
+
+.footer-brand img {
+    height: 10vh;
+    text-align: left;
+    margin-left: -10%;
+}
+
+.footer-brand h2 {
+    margin-top: 5%;
+    font-size: 2rem;
+    margin-left: -3.5%;
+}
+
+.footer-brand p {
+    font-size: 1.5rem;
+    width: 60%;
+    margin-top: 2%;
+    color: rgb(186, 186, 186);
+    margin-left: -3.5%;
+}
+
+.footer-section {
+    width: 15%;
+    margin-right: 5%;
+}
+
+.footer-section h2 {
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+    color: #ff68eb;
+    font-weight: 600;
+    position: relative;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-section h2::after {
+    content: "";
+    width: 0;
+    height: 2px;
+    background: #ff68eb;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    transition: width 0.4s ease;
+}
+
+.footer-section h2:hover::after {
+    width: 100%;
+    /* Underline grows on hover */
+}
+
+.footer-section p,
+.footer-section ul {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+}
+
+.footer-section p {
+    width: 150%;
+}
+
+.footer-section ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.6rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: #ff68eb;
+    transform: translateX(5px);
+    /* Slide effect on hover */
+}
+
+.footer-section i {
+    font-size: 1.7rem;
+}
+
+.footer-section a {
+    font-size: 1.2rem;
+}
+
+#social {
+    margin-top: 6%;
+}
+
+.social-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.social-icons li {
+    display: inline-block;
+}
+
+.social-icons a {
+    color: #ffffff;
+    font-size: 6rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+    position: relative;
+}
+
+.social-icons a:hover {
+    color: #ff68eb;
+    transform: rotate(360deg);
+    /* Full rotation on hover */
+}
+
+.social-icons a::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 104, 235, 0.3);
+    border-radius: 50%;
+    transition: width 0.5s ease, height 0.5s ease, top 0.5s ease, left 0.5s ease;
+}
+
+.social-icons a:hover::before {
+    width: 120%;
+    height: 120%;
+    top: -10%;
+    left: -10%;
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    border-top: 1px solid rgb(75, 75, 75);
+    border-width: 100%;
+}
+
+.footer-bottom p {
+    font-size: 1.7rem;
+    margin: 0;
+    margin-top: 2%;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom p:hover {
+    color: #ff68eb;
+}
+
+/* Responsive for screen widths up to 768px (tablets) */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-brand {
+        width: 100%;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .footer-brand img {
+        height: 8vh;
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .footer-brand h2 {
+        font-size: 1.8rem;
+        margin-top: 2%;
+        margin-left: 0;
+    }
+
+    .footer-brand p {
+        font-size: 1.4rem;
+        margin-top: 1%;
+        width: 100%;
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .footer-section {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 2rem;
+    }
+
+    .footer-section h2 {
+        font-size: 2rem;
+        margin-bottom: 8px;
+    }
+
+    .footer-section p,
+    .footer-section ul li a {
+        font-size: 1.6rem;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+
+    .social-icons a {
+        font-size: 4rem;
+    }
+
+    .footer-bottom p {
+        font-size: 1.6rem;
+    }
+}
+
+/* Responsive for screen widths up to 478px (mobile phones) */
+@media (max-width: 478px) {
+    .footer {
+        padding: 2rem 4%;
+    }
+
+    .footer-brand {
+        width: 100%;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .footer-brand img {
+        height: 7vh;
+        margin-left: 27%;
+    }
+
+    .footer-brand h2 {
+        font-size: 1.6rem;
+        margin-top: 1%;
+    }
+
+    .footer-brand p {
+        font-size: 1.2rem;
+        width: 100%;
+        margin-top: 1%;
+        text-align: center;
+    }
+
+    .footer-section {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 1.5rem;
+    }
+
+    .footer-section h2 {
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+    }
+
+    .footer-section p,
+    .footer-section ul li a {
+        font-size: 1.4rem;
+    }
+
+    .social-icons a {
+        font-size: 3rem;
+    }
+
+    .footer-bottom {
+        font-size: 1.4rem;
+    }
+}
+   </style>
+</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<body>
+    <a href="https://wa.me/7415118765?text=Hello%20there!" target="_blank" class="whatsapp-icon">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+    </a>
+
+    <main>
+        <div class="top">
+            <div class="nav">
+                <div class="logo">
+                    <img src="./assets/mainlogo.png" alt="Logo">
+                </div>
+                <div class="options" id="nav-options">
+                    <a href="/">Home</a>
+                    <a href="/about">About Us</a>
+
+                
+                    <!-- Services Link with Dropdown -->
+                    <div class="relative inline-block text-left group">
+                        <a href="#" id="services-button" class="inline-flex justify-center items-center w-full rounded-md px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none">
+                            Services
+                            <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                
+                        <!-- Dropdown Options -->
+                        <div class="absolute right-0 z-10  w-72 rounded-lg shadow-xl bg-white ring-1 ring-black ring-opacity-10 transition-transform duration-300 ease-out hidden group-hover:block" role="menu" aria-orientation="vertical" aria-labelledby="services-button" id="services-dropdown">
+                            <div class="py-3 space-y-2" role="none">
+                                <!-- Executive Services -->
+                                <a href="./executiveservice.html" class="flex items-center px-4 py-3 text-base font-semibold text-gray-800 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition-all duration-300 ease-in-out" role="menuitem">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-3 0v3m-3-6V9m9 3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    Executive Services
+                                </a>
+                                <!-- Human Resources -->
+                                <a href="./humanresources.html" class="flex items-center px-4 py-3 text-base font-semibold text-gray-800 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition-all duration-300 ease-in-out" role="menuitem">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 10H5m14 4H5m14 4H5m4-10h10M9 10H5v4m4-4v4M5 6h10m4 4V6m0 8v-4m-4 8v-4m4 0V4" />
+                                    </svg>
+                                    Human Resources
+                                </a>
+                                <!-- Placement Services -->
+                                <a href="./placementservices.html" class="flex items-center px-4 py-3 text-base font-semibold text-gray-800 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition-all duration-300 ease-in-out" role="menuitem">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6m6-6v6m6-6v12" />
+                                    </svg>
+                                    Placement Services
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <a href="./contactus.html">Contact Us</a>
+                </div>
+                
+                
+                <!-- JavaScript for Dropdown Toggle -->
+                <script>
+                    const servicesButton = document.getElementById('services-button');
+                    const servicesDropdown = document.getElementById('services-dropdown');
+                
+                    servicesButton.addEventListener('click', (event) => {
+                        event.preventDefault(); // Prevent the default anchor behavior
+                        servicesDropdown.classList.toggle('hidden'); // Toggle visibility of dropdown menu
+                    });
+                
+                    // Close the dropdown if clicked outside
+                    window.addEventListener('click', (event) => {
+                        if (!servicesButton.contains(event.target) && !servicesDropdown.contains(event.target)) {
+                            servicesDropdown.classList.add('hidden');
+                        }
+                    });
+                </script>
+                
+
+                <div class="toggle" id="toggle-btn">
+                    <span>&#9776;</span> <!-- Hamburger icon for mobile -->
+                </div>
+                <div class="logosec">
+                    <img src="./assets/1stpagelogo1.png" alt="">
+                    <img src="./assets/1stpagelogo2.png" alt="">
+                    <img src="./assets/1stpagelogo3.png" alt="">
+                </div>
+                <div class="rightbtn">
+                    <h1>Get Started<i class="ri-arrow-right-wide-line"></i></h1>
+                </div>
+            </div>
+
+            <div id="mobile-nav"
+            class="fixed left-[-100%] top-0 w-full h-full bg-white shadow-md z-50 transition-transform duration-300 ease-in-out transform scale-100 origin-left">
+            <div class="p-4">
+                <!-- Close button -->
+                <div class="flex justify-end">
+                    <button id="close-btn" class="text-6xl font-bold" style="font-size: 4rem;">&times;</button>
+                </div>
+                <div class="space-y-6 mt-8">
+                    <a href="#" class="block px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200"
+                        style="font-size: 2rem;">Home</a>
+                    <a href="#" class="block px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200"
+                        style="font-size: 2rem;">About Us</a>
+                    
+                    <!-- Services Link with Dropdown for Mobile -->
+                    <div id="mobile-services-dropdown" class="block">
+                        <button id="mobile-services-toggle"
+                            class="w-full flex justify-between px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200 items-center"
+                            style="font-size: 2rem;">Services
+                            <svg class="h-6 w-6 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+        
+                        <!-- Dropdown Options for Mobile -->
+                        <div id="mobile-services-content" class="hidden space-y-2 mt-2 pl-4">
+                            <a href="./executiveservice.html"
+                                class="block text-base font-semibold py-4 mt-2 text-gray-800 hover:bg-gray-100 transition-all duration-300 ease-in-out py-2 rounded-lg"
+                                style="font-size: 2rem;">Executive Services</a>
+                            <a href="./humanresources.html"
+                                class="block text-base font-semibold py-4 text-gray-800 hover:bg-gray-100 transition-all duration-300 ease-in-out py-2 rounded-lg"
+                                style="font-size: 2rem;">Human Resources</a>
+                            <a href="./placementservices.html"
+                                class="block text-base font-semibold py-4 text-gray-800 hover:bg-gray-100 transition-all duration-300 ease-in-out py-2 rounded-lg"
+                                style="font-size: 2rem;">Placement Services</a>
+                        </div>
+                    </div>
+        
+                    <a href="#" class="block px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200"
+                        style="font-size: 2rem;">Contact Us</a>
+                    <a href="#" class="block px-6 py-4 rounded bg-[#882390] transition-colors duration-200"
+                        style="font-size: 2.5rem; text-align: center;">Get Started</a>
+                </div>
+            </div>
+        </div>
+        
+        <script>document.getElementById('mobile-services-toggle').addEventListener('click', function() {
+            const dropdownContent = document.getElementById('mobile-services-content');
+            dropdownContent.classList.toggle('show');
+        });
+        </script>
+
+
+            <script>
+                const toggleBtn = document.getElementById('toggle-btn');
+                const mobileNav = document.getElementById('mobile-nav');
+                const closeBtn = document.getElementById('close-btn');
+                const navbar = document.querySelector('.nav');
+
+                toggleBtn.addEventListener('click', () => {
+                    mobileNav.classList.toggle('left-[-100%]');
+                    mobileNav.classList.toggle('left-0');
+                });
+
+                closeBtn.addEventListener('click', () => {
+                    mobileNav.classList.add('left-[-100%]');
+                    mobileNav.classList.remove('left-0');
+                });
+
+                // GSAP ScrollTrigger Animation
+                gsap.registerPlugin(ScrollTrigger);
+
+                // Animation to make the navbar appear when scrolling down
+                gsap.from(navbar, {
+                    y: -50, // Start above the view
+                    opacity: 0, // Start hidden
+                    duration: 0.5,
+                    scrollTrigger: {
+                        trigger: navbar, // Trigger this animation when scrolling
+                        start: "top 20%", // Start the animation when the top of the navbar reaches 20% from the top of the viewport
+                        end: "top 30%", // End when it reaches 30%
+                        toggleActions: "play none none reverse", // Play on scroll down, reverse on scroll up
+                        once: true // Animation runs only once
+                    }
+                });
+            </script>
+
+
+
+
+        </div>
+        <div class="page1">
+
+            <div class="bottom">
+                <h1 class="hh"> <span>LET'S START</span> <br>THE CAREERS HERE</h1>
+                <p>Your gateway to a successful professional journey, providing personalized guidance and comprehensive
+                    resources for career growth. Join us and unlock your full potential today.</p>
+                <div class="button-container">
+                    <button>
+                        <h1 style="font-size: 16px;">Our Services<i class="ri-arrow-right-wide-line"></i></h1>
+
+                    </button>
+                </div>
+            </div>
+
+            <script>
+                window.onload = function () {
+                    const elements = document.querySelectorAll('.bottom h1, .bottom p');
+                    const buttonContainer = document.querySelector('.button-container');
+
+                    elements.forEach((el, index) => {
+                        setTimeout(() => {
+                            el.classList.add('visible');
+                        }, index * 400); // Delay between h1 and p animations
+                    });
+
+                    // Trigger the button reveal after h1 and p animations
+                    setTimeout(() => {
+                        buttonContainer.classList.add('visible');
+                    }, elements.length * 200);
+                };
+
+
+            </script>
+
+
+        </div>
+        <div class="page2">
+
+            <button class="service">OUR SERVICES</button>
+            <div class="services">
+                <div class="box">
+                    <div class="img">
+                        <img src="./assets/oil.png" alt="">
+                    </div>
+                    <h1>OIL & GAS</h1>
+                    <p>A career in the oil and gas industry offers unparalleled opportunities for growth, innovation,
+                        and global impact in the world’s most vital energy sector.</p>
+                    <button>Contact US</button>
+                </div>
+                <div class="box">
+                    <div class="img">
+                        <img src="./assets/civil.webp" alt="">
+                    </div>
+                    <h1>CIVIL CONSTRUCTION</h1>
+                    <p>Forge a gratifying path in civil construction, molding the very infrastructure of cities and
+                        communities for a more promising future.
+                    </p>
+                    <button>Contact US</button>
+                </div>
+                <div class="box">
+                    <div class="img">
+                        <img src="./assets/marine.webp" alt="">
+                    </div>
+                    <h1>MARINE & SHIPPING</h1>
+                    <p>Embark on a fulfilling journey within the marine industry, navigating international waters and
+                        facilitating the seamless movement of goods and people.</p>
+                    <button>Contact US</button>
+                </div>
+                <div class="box">
+                    <div class="img">
+                        <img src="./assets/power.webp" alt="">
+                    </div>
+                    <h1>POWER & ENERGY</h1>
+                    <p>Initiate a career of impact within the power sector, catalyzing innovation and sustainability to
+                        address the world’s energy requirements.</p>
+                    <button>Contact US</button>
+                </div>
+                <div class="box">
+                    <div class="img">
+                        <img src="./assets/water.jpg" alt="">
+                    </div>
+                    <h1>WATER TREATMENT</h1>
+                    <p>Begin a promising and fulfilling career in water treatment, ensuring clean water access for
+                        communities and industries.</p>
+                    <button>Contact US</button>
+                </div>
+                <div class="box">
+                    <div class="img">
+                        <img src="./assets/medical.png" alt="">
+                    </div>
+                    <h1>MEDICAL</h1>
+                    <p>Pursue a fulfilling medical career, making a meaningful difference through compassionate care and
+                        innovative solutions.</p>
+                    <button>Contact US</button>
+                </div>
+                <div class="box">
+                    <div class="img">
+                        <img src="./assets/onshore.png" alt="">
+                    </div>
+                    <h1>ONSHORE & OFFSHORE</h1>
+                    <p>Enter into an exciting career in onshore and offshore industries, playing a vital role in the
+                        exploration and production of essential resources.</p>
+                    <button>Contact US</button>
+                </div>
+                <div class="box">
+                    <div class="img">
+                        <img src="./assets/iron.webp" alt="">
+                    </div>
+                    <h1>IRON & STEEL PLANT</h1>
+                    <p>Step into a dynamic career in the iron and steel industry, assuming a vital role in shaping
+                        infrastructure and propelling industrial progress.</p>
+                    <button>Contact US</button>
+                </div>
+                <div class="box">
+                    <div class="img">
+                        <img src="./assets/hospitality.png" alt="">
+                    </div>
+                    <h1>HOSPITALITY</h1>
+                    <p>Forge a dynamic career within the hospitality industry, crafting unforgettable experiences and
+                        delivering exceptional service to guests worldwide.</p>
+                    <button>Contact US</button>
+                </div>
+                <script>
+                    // Wait for DOM content to load
+                    document.addEventListener("DOMContentLoaded", function () {
+                        // Register the ScrollTrigger plugin with GSAP
+                        gsap.registerPlugin(ScrollTrigger);
+
+                        // Function to handle animations based on viewport width
+                        function handleAnimation() {
+                            // Clear previous ScrollTriggers
+                            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+
+                            // Check if the viewport width is above 768px (desktop)
+                            if (window.innerWidth > 768) {
+                                // Animate each .box element one by one with stagger for desktop
+                                gsap.utils.toArray(".services .box").forEach((box, i) => {
+                                    gsap.from(box, {
+                                        y: 20, // Start with a vertical offset for a smooth entry
+                                        opacity: 0, // Start with opacity 0
+                                        duration: 0.1, // Duration of the animation
+                                        ease: "power2.out", // Easing function for smooth motion
+                                        delay: i * 0.1,
+                                        scrollTrigger: {
+                                            trigger: box, // Trigger each .box individually
+                                            start: "top 99%",
+                                            once: true, // Only animate once
+                                        },
+                                    });
+                                });
+                            }
+                        }
+
+                        // Initial call to handle animation
+                        handleAnimation();
+
+                        // Add event listener for window resize to handle responsive changes
+                        window.addEventListener('resize', handleAnimation);
+                    });
+                </script>
+
+
+
+
+
+
+            </div>
+
+
+        </div>
+        <div class="page3">
+            <div class="left">
+                <div class="parallax-bg" style="background-image: url('./assets/1stpagebtm1.jpg');"></div>
+                <!-- Parallax Background -->
+            </div>
+
+            <div class="right">
+                <h1>ABOUT US -</h1>
+                <h2>WELCOME TO TRISECT GLOBAL</h2>
+                <div class="dash"></div>
+                <p>Trisect Global is an authorized recruiting company managed by a team of highly experienced
+                    professionals. We specialize in the selection and placement of both white-collar and blue-collar
+                    personnel across various industries, including Oil & Gas, Petrochemicals, Offshore, Power Plants,
+                    Civil Construction, Marine & Shipping, Catering, Medical, and Hospitality. Our extensive database
+                    includes candidates from India, Nepal, Sri Lanka, and Bangladesh.</p>
+                <div class="points">
+                    <div class="pt">
+                        <h3><i class="ri-arrow-right-s-line"></i>Specialization</h3>
+                        <p>Recruitment for white-collar and blue-collar personnel across industries.</p>
+                    </div>
+                    <div class="pt">
+                        <h3><i class="ri-arrow-right-s-line"></i>Diverse Talent</h3>
+                        <p>Database of candidates from India, Nepal, Sri Lanka, and Bangladesh.</p>
+                    </div>
+                    <div class="pt">
+                        <h3><i class="ri-arrow-right-s-line"></i>Services</h3>
+                        <p>Staffing, recruitment, training, HR outsourcing, and consulting.</p>
+                    </div>
+                    <div class="pt">
+                        <h3><i class="ri-arrow-right-s-line"></i>Client Focus</h3>
+                        <p>Dedicated to meeting the needs of clients and candidates.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page4">
+            <div class="left">
+                <h1>Making Dreams <div class="dash"></div> And Aspirations Come True</h1>
+
+                <p>Unlock the potential of your dreams and aspirations with Let’s Start Careers Here. Our dedicated team
+                    is ready to provide personalized guidance, valuable resources, and expert support to help you
+                    navigate the path to success. Contact us today and let’s make your career dreams a reality.</p>
+
+                <div class="progress">
+                    <div class="progress-item">
+                        <div class="progress-number">0%</div> <!-- Added number display -->
+                        <h2>Trusted</h2>
+
+                        <div class="progress-bar-container">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-number">0%</div> <!-- Added number display -->
+                        <h2>Many Partners</h2>
+
+                        <div class="progress-bar-container">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-number">0%</div> <!-- Added number display -->
+                        <h2>Professionals</h2>
+
+                        <div class="progress-bar-container">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <button>Learn More</button>
+            </div>
+
+            <div class="right">
+                <div class="parallax-bg" style="background-image: url('./assets/1stpagebtm2.jpg');"></div>
+                <!-- Parallax Background -->
+            </div>
+        </div>
+
+        <div class="page5">
+            <button class="service">OUR PARTNERS</button>
+            <div class="companieslogo">
+                <div class="logo-box"><img src="./assets/page5logo1.png" alt=""></div>
+                <div class="logo-box"><img src="./assets/page5logo2.jpg" alt=""></div>
+                <div class="logo-box"><img src="./assets/page5logo3.png" alt=""></div>
+                <div class="logo-box"><img src="./assets/page5logo4.png" alt=""></div>
+                <div class="logo-box"><img src="./assets/page5logo5.png" alt=""></div>
+                <div class="logo-box"><img src="./assets/page5logo6.png" alt=""></div>
+                <div class="logo-box"><img src="./assets/page5logo7.jpg" alt=""></div>
+                <div class="logo-box"><img src="./assets/page5logo8.jpeg" alt=""></div>
+                <div class="logo-box"><img src="./assets/page5logo9.jpeg" alt=""></div>
+                <div class="logo-box"><img src="./assets/page5logo10.jpeg" alt=""></div>
+                <div class="logo-box"><img src="./assets/page5logo11.jpeg" alt=""></div>
+                <div class="logo-box"><img src="./assets/page5logo12.png" alt=""></div>
+                <div class="logo-box"><img src="./assets/page5logo13.png" alt=""></div>
+                <div class="logo-box"><img src="./assets/page5logo14.png" alt=""></div>
+                <div class="logo-box"><img src="./assets/page5logo15.webp" alt=""></div>
+            </div>
+
+        </div>
+
+        <div class="page6">
+
+            <img src="./assets/page6gradient.png" alt="" class="animated-image">
+            <div class="text">
+                <h1 id="career">Career Testimonials</h1>
+                <h2>Showcasing the positive impact of Let’s Start Careers Here on professional lives. Meet the
+                    transformation.</h2>
+                <p>We’re helping individuals overcome challenges, find meaningful work, and achieve their career goals.
+                </p>
+                <button>Learn more<i class="ri-arrow-right-s-line"></i></button>
+            </div>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/ScrollTrigger.min.js"></script>
+
+            <script>
+                gsap.registerPlugin(ScrollTrigger);
+            
+                // Define responsive breakpoints using matchMedia
+                let mm = gsap.matchMedia();
+            
+                // For desktop and larger screens (min-width: 768px)
+                mm.add("(min-width: 768px)", () => {
+                    // Only run animations for larger screens (non-responsive part)
+            
+                    // Animate the image
+                    gsap.to(".animated-image", {
+                        scrollTrigger: {
+                            trigger: ".page6", // Trigger the animation when .page6 enters the viewport
+                            start: "top 99%", // Animation starts when the top of .page6 hits 99% of the viewport
+                        },
+                        duration: 1, // Animation duration
+                        x: 0, // Move the image to its original position
+                        opacity: 1, // Fade in the image
+                        ease: "power3.out" // Smooth easing for the animation
+                    });
+            
+                    // Animate the text
+                    gsap.to(".text", {
+                        scrollTrigger: {
+                            trigger: ".page6", // Trigger the animation when .page6 enters the viewport
+                            start: "top 95%", // Animation starts when the top of .page6 hits 95% of the viewport
+                        },
+                        duration: 1.5, // Animation duration
+                        x: -700, // Move the text to its original position (700px to the left)
+                        opacity: 1, // Fade in the text
+                        ease: "power3.out", // Smooth easing for the animation
+                    });
+                });
+            
+                // No animations for responsive screens (max-width: 767px)
+            </script>
+
+        </div>
+
+        <div class="page7">
+            <div class="reviews">
+                <h1>Review box</h1>
+                <div class="rimg">
+                    <img src="./assets/review1.png" alt="">
+                    <img src="./assets/review2.png" alt="">
+                    <img src="./assets/review3.png" alt="">
+                    <img src="./assets/review4.png" alt="">
+                    <img src="./assets/review5.png" alt="">
+                </div>
+            </div>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+            <script>
+                const reviewImages = document.querySelectorAll('.rimg img');
+                let currentIndex = 0; // Keep track of the current image index
+
+                function animateImages() {
+                    // Hide all images initially
+                    reviewImages.forEach((img) => {
+                        img.style.opacity = 0; // Hide all images
+                        img.style.transform = 'scale(0.8)'; // Scale down
+                    });
+
+                    // Show the current image
+                    function showNextImage() {
+                        // Animate the current image
+                        const img = reviewImages[currentIndex];
+                        gsap.to(img, {
+                            opacity: 1,
+                            scale: 1,
+                            duration: 0.5,
+                            ease: "power1.out",
+                            onComplete: () => {
+                                // Set a timeout before hiding the current image and showing the next
+                                setTimeout(() => {
+                                    gsap.to(img, {
+                                        opacity: 0,
+                                        scale: 0.8,
+                                        duration: 0.5,
+                                        ease: "power1.in",
+                                        onComplete: () => {
+                                            currentIndex = (currentIndex + 1) % reviewImages.length; // Loop back to the start
+                                            showNextImage(); // Show the next image
+                                        }
+                                    });
+                                }, 2000); // Show each image for 2 seconds
+                            }
+                        });
+                    }
+
+                    // Start the animation
+                    showNextImage();
+                }
+
+                // Call the animation function when the DOM is fully loaded
+                document.addEventListener("DOMContentLoaded", animateImages);
+            </script>
+        </div>
+        <div class="page8">
+            <div class="leftt">
+                <h1>More Jobs Equal a Better World</h1>
+                <h2>The belief that more jobs equal a better world holds true as the creation of employment
+                    opportunities not only fosters economic growth but also promotes social development, reduces
+                    inequality, and enhances overall well-being in communities worldwide.</h2>
+                <div class="frame">
+                    <div class="grid-container">
+                        <div class="grid-item"><i class="ri-arrow-right-s-line"></i>
+                            <h3> Economic Growth</h3>
+                        </div>
+                        <div class="grid-item"><i class="ri-arrow-right-s-line"></i>
+                            <h3> Social Development</h3>
+                        </div>
+                        <div class="grid-item"><i class="ri-arrow-right-s-line"></i>
+                            <h3> Reduced Inequality</h3>
+                        </div>
+                        <div class="grid-item"><i class="ri-arrow-right-s-line"></i>
+                            <h3> Enhanced Well-being</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <button>Learn more</button>
+            </div>
+            <div class="rightt">
+                <div class="circle circle1">
+                    <h1>5</h1>
+                    <h2>Experience</h2>
+                    <div class="runner"></div> <!-- Runner element -->
+                </div>
+                <div class="circle circle2">
+                    <h1>10+</h1>
+                    <h2>Expert Trainers</h2>
+                    <div class="runner"></div> <!-- Runner element -->
+                </div>
+                <div class="circle circle3">
+                    <h1>4+</h1>
+                    <h2>Companies</h2>
+                    <div class="runner"></div> <!-- Runner element -->
+                </div>
+
+                <script>
+                    // Ensure you include the GSAP and ScrollTrigger library in your project
+                    gsap.registerPlugin(ScrollTrigger);
+                
+                    // Define responsive breakpoints using matchMedia
+                    let mmm = gsap.matchMedia();
+                
+                    // Only run this code for screens larger than 768px
+                    mmm.add("(min-width: 768px)", () => {
+                        document.querySelectorAll('.circle h1').forEach((h1, index) => {
+                            let targetValue = parseInt(h1.textContent); // Get the target number from the h1
+                            let isPlusSign = h1.textContent.includes('+'); // Check if it already has a '+' sign
+                            h1.textContent = '0'; // Start from 0
+                
+                            // Create the counting animation
+                            gsap.to(h1, {
+                                scrollTrigger: {
+                                    trigger: h1,
+                                    start: "top 75%", // Start when the top of h1 reaches 75% of the viewport
+                                    end: "bottom 50%", // End animation when h1 reaches the middle of the viewport
+                                },
+                                textContent: targetValue, // Target number
+                                duration: 0.5, // Speed up the counting to 0.5 seconds
+                                ease: "power1.out",
+                                snap: { textContent: 1 }, // Increment in whole numbers
+                                onUpdate: function () {
+                                    h1.textContent = Math.ceil(h1.textContent) + (isPlusSign ? '+' : ''); // Ensure it's always a whole number and append '+' if it had one
+                                }
+                            });
+                        });
+                    });
+                
+                    // No animations on screens smaller than 768px (mobile and small tablets)
+                </script>
+                
+
+
+            </div>
+
+        </div>
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                   
+                        <img src="./assets/mainlogo.png" alt="">
+
+                    <h2>Let’s Start Careers Here</h2>
+                    <p>Your trusted partner in achieving career success through personalized guidance and support.</p>
+                </div>
+                <div class="footer-section">
+                    <h2>Pages</h2>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h2>Quick Links</h2>
+                    <ul>
+                        <li><a href="#">Human Resources</a></li>
+                        <li><a href="#">Placement Services</a></li>
+                        <li><a href="#">Executive Services</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h2>Contact Us</h2>
+                    <p>
+                        <i class="fas fa-map-marker-alt"></i> 
+                        Address: Trisect Global, Laxmi Plaza, B Wing, No. 004, Patlipada, Hiranandani Estate, Behind McDonald's, Godbunder Road, Thane (W)- 400607 Maharashtra.
+                    </p>
+                    <p>
+                        <i class="fas fa-phone-alt"></i> 
+                        Phone: <a href="tel:02235647615">022-35647615</a>
+                    </p>
+                    <p>
+                        <i class="fas fa-envelope"></i> 
+                        Email: <a href="mailto:hrd@trisectglobal.com">hrd@trisectglobal.com</a>
+                    </p>
+                </div>
+                
+                <div class="footer-section social" id="social">
+                    <h2>Follow Us</h2>
+                    <ul class="social-icons">
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 TRISECT GLOBAL • All Rights Reserved</p>
+            </div>
+        </footer>
+        
+
+</body>
+
+</html>
+</div>
+
+
+
+
+
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+
+<script>
+    // Register the ScrollTrigger plugin
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Select all progress items
+    const progressItems = document.querySelectorAll(".progress-item");
+
+    // Create ScrollTrigger for page4
+    ScrollTrigger.create({
+        trigger: ".page4", // The section that triggers the animation
+        start: "top 40%", // Start the animation when the top of page4 is at 40% of the viewport
+        end: "bottom top", // End the animation when the bottom of page4 hits the top of the viewport
+        onEnter: () => {
+            progressItems.forEach((item) => {
+                const progressBar = item.querySelector(".progress-bar");
+                const progressNumber = item.querySelector(".progress-number");
+
+                // Animate the progress bar width
+                gsap.to(progressBar, {
+                    width: "90%", // Fill the bar to 90%
+                    duration: 1, // Duration of the animation
+                    ease: "power1.out" // Easing function for the animation
+                });
+
+                // Animate the number from 0 to 90%
+                let count = 0; // Initialize the count
+                const interval = setInterval(() => {
+                    if (count < 90) {
+                        count++;
+                        progressNumber.innerText = count + "%"; // Update the displayed number
+                    } else {
+                        clearInterval(interval); // Clear the interval once it reaches 90%
+                    }
+                }, 10); // Adjust speed of the counting
+            });
+        },
+
+    });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+    integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+    integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="script.js"></script>
+</body>
+
+</html>

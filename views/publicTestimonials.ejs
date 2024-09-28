@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Testimonials</title>
+</head>
+<body>
+    <header>
+        <h1>What Our Clients Say</h1>
+    </header>
+
+    <main>
+        
+        <div class="testimonials-container">
+            <% testimonials.forEach(testimonial => { %>
+                <div class="testimonial-card">
+                    <img src="<%= testimonial.image %>" alt="Testimonial Image" width="100px">
+                    <h2><%= testimonial.name %></h2>
+                    <p><%= testimonial.text %></p>
+                </div>
+            <% }) %>
+        </div>
+    
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Your Company Name</p>
+    </footer>
+</body>
+</html>
