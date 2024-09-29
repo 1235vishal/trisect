@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const flash = require('connect-flash');
-
+const bodyParser = require('body-parser'); 
 
 
 const adminRoutes = require('./routes/admin');
@@ -36,7 +36,7 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());  // Make sure this is used
 
-
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(session({
     secret: 'your_secret_key',
@@ -45,7 +45,7 @@ app.use(session({
 }));
 app.use(flash());
 app.use(express.static('public'));
-
+app.use(express.json());
 
 // Static files (CSS, images)
 app.use(express.static(path.join(__dirname, 'public')));

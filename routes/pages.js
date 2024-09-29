@@ -1,15 +1,20 @@
 // routes/pages.js
 const express = require('express');
 const router = express.Router();
+const Testimonial = require('../models/Testimonial');
 
 // Home route
-router.get('/', (req, res) => {
-  res.render('website/home'); // Updated path to point to views/website/home.ejs
+router.get('/', async (req, res) => {
+  const testimonials = await Testimonial.find(); // Fetch testimonials from the database
+  const images = testimonials.map(testimonial => ({ src: testimonial.image, alt: testimonial.name })); // Extract image paths
+  res.render('website/home', { testimonials, images }); // Pass both testimonials and images
 });
+
 
 // About route
 router.get('/about', (req, res) => {
   res.render('website/about'); // Updated path to point to views/website/about.ejs
+  
 });
 
 // Contact route

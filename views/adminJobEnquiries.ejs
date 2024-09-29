@@ -84,14 +84,25 @@
                                         <% } %>
                                     </td>
                                     <td><%= new Date(enquiry.createdAt).toLocaleString() %></td>
+                                    <td>
+                                      <!-- Delete Button -->
+      <form action="/delete/<%= enquiry._id %>" method="POST" style="display:inline;">
+    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this enquiry?');">
+        <i class="bi bi-trash"></i> Delete
+    </button>
+</form>
+  
+
+                                    </td>
                                 </tr>
                             <% }); %>
                         <% } else { %>
                             <tr>
-                                <td colspan="7" class="text-center">No enquiries yet.</td>
+                                <td colspan="8" class="text-center">No enquiries yet.</td>
                             </tr>
                         <% } %>
                     </tbody>
+                    
                 </table>
             </div>
         </main>
@@ -106,38 +117,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
-    <script>
-        // Function to generate and download PDF
-        document.getElementById('downloadPdf').addEventListener('click', function () {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            let table = document.querySelector('table');
-            let rows = table.querySelectorAll('tbody tr');
-
-            doc.setFontSize(18);
-            doc.text("Job Enquiries", 14, 22);
-            doc.setFontSize(11);
-            doc.setTextColor(100);
-
-            let startY = 30;
-            rows.forEach((row, index) => {
-                const cols = row.querySelectorAll('td');
-                let rowText = Array.from(cols).map(col => {
-                    if (col.querySelector('a')) {
-                        return col.querySelector('a').textContent.trim();
-                    }
-                    return col.textContent.trim();
-                });
-                // Adjust column positions
-                let x = 14;
-                rowText.forEach((text, i) => {
-                    doc.text(text, x, startY + (index * 10));
-                    x += 30; // Adjust spacing as needed
-                });
-            });
-
-            doc.save('job_enquiries.pdf');
-        });
-    </script>
+ 
 </body>
 </html>

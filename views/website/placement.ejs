@@ -9,1521 +9,1592 @@
     <link rel="stylesheet" href="executiveservice.css">
     <title>Trisect</title>
     <style>
+        @font-face {
+            font-family: 'Nunito Sans';
+            src: url('./assets/nunito-sans/NunitoSans-Regular.woff2') format('woff2'),
+                url('./assets/nunito-sans/NunitoSans-Regular.woff') format('woff'),
+                url('./assets/nunito-sans/NunitoSans-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Nunito Sans';
+            src: url('./assets/nunito-sans/NunitoSans-Bold.woff2') format('woff2'),
+                url('./assets/nunito-sans/NunitoSans-Bold.woff') format('woff'),
+                url('./assets/nunito-sans/NunitoSans-Bold.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
         * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: gilroy;
-    font-size: 0.625rem;
-    /* This sets 10px in rem */
-}
-
-html,
-body {
-    height: 100%;
-    width: 100%;
-    overflow-x: hidden;
-
-    /* Custom scrollbar styles for WebKit browsers (Chrome, Safari) */
-    ::-webkit-scrollbar {
-        width: 5px;
-        /* Width of the scrollbar */
-        background-color: #f1f1f1;
-        /* Background of the scrollbar */
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background-color: #888;
-        /* Color of the scrollbar thumb */
-        border-radius: 5px;
-        /* Rounded corners for the scrollbar thumb */
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-        background-color: #555;
-        /* Darker color on hover */
-    }
-
-    /* For Firefox */
-    * {
-        scrollbar-width: thin;
-        /* Make the scrollbar thin */
-        scrollbar-color: #888 #f1f1f1;
-        /* Scrollbar thumb color and background color */
-    }
-
-    /* Optional: You can add styles for when the scrollbar is hovered */
-    *::-webkit-scrollbar:hover {
-        background-color: #ddd;
-        /* Light background on hover */
-    }
-
-}
-
-/* Optional additional styles */
-#mobile-nav {
-    background-color: #f9f9f9;
-    /* Light background for nav */
-}
-
-#mobile-nav a {
-    color: #333;
-    /* Dark text color for links */
-    transition: all 0.3s;
-    /* Smooth transition for hover effects */
-}
-
-#mobile-nav a:hover {
-    color: #451591;
-    /* Change text color on hover */
-    font-weight: bold;
-    /* Make links bold on hover */
-}
-
-
-
-.whatsapp-icon {
-    position: fixed;
-    /* Fixed positioning */
-    left: 95%;
-    /* Distance from the left side */
-    bottom: 20px;
-    /* Distance from the bottom */
-    width: 60px;
-    /* Width of the icon */
-    height: 60px;
-    /* Height of the icon */
-    border-radius: 50%;
-    /* Round shape */
-    background-color: #25D366;
-    /* WhatsApp color */
-    display: flex;
-    z-index: 999;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease;
-}
-
-.whatsapp-icon img {
-    width: 30px;
-    /* Width of the icon image */
-    height: 30px;
-    /* Height of the icon image */
-}
-
-.whatsapp-icon:hover {
-    transform: scale(1.1);
-    /* Scale effect on hover */
-}
-
-
-
-
-
-.top {
-    background-color: #FFFFFF;
-    width: 100%;
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-    /* Allow stacking for responsive behavior */
-
-    .nav {
-        height: 12vh;
-        width: 100%;
-        background-color: #ffffff;
-        display: flex;
-        align-items: center;
-        position: relative;
-        position: static;
-        justify-content: space-between;
-        padding-left: 2%;
-        padding-right: 2%;
-        /* Add right padding for spacing */
-    }
-
-    .logo img {
-        max-width: 150px;
-        height: auto;
-        margin-left: 10%;
-    }
-
-    .options {
-        display: flex;
-        gap: 4vh;
-        transition: transform 0.3s ease;
-        margin-left: -25%;
-        /* Removed negative margin */
-    }
-
-    .options a {
-        color: #333;
-        text-decoration: none;
-        font-size: 1.6rem;
-        /* Font size remains the same */
-        font-weight: 500;
-        position: relative;
-        /* Needed for positioning the pseudo-element */
-        overflow: hidden;
-        /* Ensures the animation stays within the link */
-    }
-
-    .options a::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        /* Positioned at the start (left) of the link */
-        width: 100%;
-        /* Full width when animated */
-        height: 3px;
-        background-color: #451591;
-        transform: scaleX(0);
-        /* Initially hidden */
-        transform-origin: left;
-        /* The border grows from the left */
-        transition: transform 0.4s ease;
-        /* Smooth transition for the scale effect */
-    }
-
-    .options a:hover::after {
-        transform: scaleX(1);
-        /* Expands the border from left to right */
-    }
-
-    .options a:hover {
-        color: #353535;
-        transition: color 0.3s ease;
-    }
-
-    .options a:not(:hover)::after {
-        transform: scaleX(0);
-        /* Hides the border by shrinking it from the left */
-        transform-origin: right;
-        /* Shrinks back from right to left */
-    }
-
-
-
-
-    .toggle {
-        display: none;
-        font-size: 5.4rem;
-        /* Was 24px, now 2.4rem */
-        cursor: pointer;
-    }
-
-    .rightbtn {
-        background: linear-gradient(#ff68eb, #822291, #581991);
-        /* Gradient background */
-        color: #fff;
-        /* Default text color */
-        height: 100%;
-        /* Full height */
-        margin-right: -2.5%;
-        /* Right margin */
-        display: flex;
-        /* Flexbox for centering content */
-        align-items: center;
-        /* Vertical centering */
-        justify-content: center;
-        /* Horizontal centering */
-        font-size: 1.6rem;
-        /* Font size */
-        font-weight: 500;
-        /* Font weight */
-        width: 12vw;
-        /* Width */
-        cursor: pointer;
-        /* Pointer cursor on hover */
-        position: relative;
-        /* Position for the pseudo-element */
-        overflow: hidden;
-        /* Hide overflow for the after pseudo-element */
-        transition: color 0.3s ease, transform 0.3s ease;
-        /* Smooth transition for text color and transform */
-    }
-
-    /* Hover Effect */
-    .rightbtn:hover {
-        color: #000;
-        /* Change text color to black on hover */
-        transform: scale(1.01);
-        /* Slightly enlarge the button on hover */
-    }
-
-    /* Button After Pseudo-element for Background */
-    .rightbtn:after {
-        content: '';
-        /* Required for pseudo-element */
-        position: absolute;
-        /* Positioning */
-        top: 0;
-        /* Align to the top */
-        left: 0;
-        /* Align to the left */
-        width: 0;
-        /* Initial width */
-        height: 100%;
-        /* Full height */
-        background-color: rgba(0, 0, 0, 0.3);
-        /* Dark overlay for hover effect */
-        transition: width 0.3s ease;
-        /* Transition for expanding width */
-        z-index: -1;
-        /* Position behind the text */
-    }
-
-    /* Expand background on hover */
-    .rightbtn:hover:after {
-        width: 100%;
-        /* Expand the overlay color */
-    }
-
-
-    /* Change icon color on hover */
-    .rightbtn:hover i {
-        color: #000000;
-        /* Change icon color to white */
-    }
-
-
-    .rightbtn i {
-        font-size: 1.6rem;
-    }
-
-    .logosec {
-        height: 100%;
-        width: 15vw;
-        display: flex;
-        align-items: center;
-        gap: 1vw;
-        margin-right: -30%;
-        /* Adjusted margin for better alignment */
-    }
-
-    .logosec img {
-        height: 6vh;
-    }
-
-    /* Responsive styles */
-    @media (max-width: 910px) {
-        .nav {
-            height: auto;
-            /* Adjust height for content flexibility */
-            padding-bottom: 1%;
-            /* Adjusted for vertical spacing */
-            padding-right: 2%;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 0.625rem;
+            /* This sets 10px in rem */
         }
 
-        .logo {
-            margin-left: 0;
-            /* Reset unnecessary margins for mobile */
-        }
-
-        .toggle {
-            display: block;
-            font-size: 2.4rem;
-            /* Adjusted for better scaling */
-            margin-left: -10%;
-        }
-
-        .toggle span {
-            font-size: 2.4rem;
-
-        }
-
-        .options {
-            position: absolute;
-            top: 10vh;
-            /* Adjusted top for better visibility */
-            left: 0;
-            display: none;
-            flex-direction: column;
+        html,
+        body {
+            height: 100%;
             width: 100%;
-            gap: 1.5rem;
-            /* Was 15px, now 1.5rem */
-            background-color: #f0f0f0;
-            padding: 1rem 0;
-            /* Was 10px, now 1rem */
-            transform: translateY(-100%);
+            overflow-x: hidden;
+
+            /* Custom scrollbar styles for WebKit browsers (Chrome, Safari) */
+            ::-webkit-scrollbar {
+                width: 5px;
+                /* Width of the scrollbar */
+                background-color: #f1f1f1;
+                /* Background of the scrollbar */
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background-color: #888;
+                /* Color of the scrollbar thumb */
+                border-radius: 5px;
+                /* Rounded corners for the scrollbar thumb */
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background-color: #555;
+                /* Darker color on hover */
+            }
+
+            /* For Firefox */
+            * {
+                scrollbar-width: thin;
+                /* Make the scrollbar thin */
+                scrollbar-color: #888 #f1f1f1;
+                /* Scrollbar thumb color and background color */
+            }
+
+            /* Optional: You can add styles for when the scrollbar is hovered */
+            *::-webkit-scrollbar:hover {
+                background-color: #ddd;
+                /* Light background on hover */
+            }
+
+        }
+
+        /* Optional additional styles */
+        #mobile-nav {
+            background-color: #f9f9f9;
+            /* Light background for nav */
+        }
+
+        #mobile-nav a {
+            color: #333;
+            /* Dark text color for links */
+            transition: all 0.3s;
+            /* Smooth transition for hover effects */
+        }
+
+        #mobile-nav a:hover {
+            color: #451591;
+            /* Change text color on hover */
+            font-weight: bold;
+            /* Make links bold on hover */
+        }
+
+
+
+        .whatsapp-icon {
+            position: fixed;
+            /* Fixed positioning */
+            left: 95%;
+            /* Distance from the left side */
+            bottom: 20px;
+            /* Distance from the bottom */
+            width: 60px;
+            /* Width of the icon */
+            height: 60px;
+            /* Height of the icon */
+            border-radius: 50%;
+            /* Round shape */
+            background-color: #25D366;
+            /* WhatsApp color */
+            display: flex;
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease;
         }
 
-        .options.show {
+        .whatsapp-icon img {
+            width: 30px;
+            /* Width of the icon image */
+            height: 30px;
+            /* Height of the icon image */
+        }
+
+        .whatsapp-icon:hover {
+            transform: scale(1.1);
+            /* Scale effect on hover */
+        }
+        @media (max-width: 480px) {
+            .whatsapp-icon {
+                left: 82%;
+            }}
+
+
+
+
+        .top {
+            background-color: #FFFFFF;
+            width: 100%;
+            z-index: 999;
             display: flex;
-            transform: translateY(0);
+            flex-direction: column;
+            /* Allow stacking for responsive behavior */
+
+            .nav {
+                height: 12vh;
+                width: 100%;
+                background-color: #ffffff;
+                display: flex;
+                align-items: center;
+                position: relative;
+                position: static;
+                justify-content: space-between;
+                padding-left: 2%;
+                padding-right: 2%;
+                /* Add right padding for spacing */
+            }
+
+            .logo img {
+                max-width: 150px;
+                height: auto;
+                margin-left: 10%;
+            }
+
+            .options {
+                display: flex;
+                gap: 4vh;
+                transition: transform 0.3s ease;
+                margin-left: -25%;
+                /* Removed negative margin */
+            }
+
+            .options a {
+                color: #060606;
+                text-decoration: none;
+                font-size: 1.6rem;
+                /* Font size remains the same */
+                font-weight: 600;
+                position: relative;
+                /* Needed for positioning the pseudo-element */
+                overflow: hidden;
+                /* Ensures the animation stays within the link */
+            }
+
+            .options a::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                /* Positioned at the start (left) of the link */
+                width: 100%;
+                /* Full width when animated */
+                height: 3px;
+                background-color: #451591;
+                transform: scaleX(0);
+                /* Initially hidden */
+                transform-origin: left;
+                /* The border grows from the left */
+                transition: transform 0.4s ease;
+                /* Smooth transition for the scale effect */
+            }
+
+            .options a:hover::after {
+                transform: scaleX(1);
+                /* Expands the border from left to right */
+            }
+
+            .options a:hover {
+                color: #353535;
+                transition: color 0.3s ease;
+            }
+
+            .options a:not(:hover)::after {
+                transform: scaleX(0);
+                /* Hides the border by shrinking it from the left */
+                transform-origin: right;
+                /* Shrinks back from right to left */
+            }
+
+
+
+
+            .toggle {
+                display: none;
+                font-size: 5.4rem;
+                /* Was 24px, now 2.4rem */
+                cursor: pointer;
+            }
+
+            .rightbtn {
+                background: linear-gradient(#ff68eb, #822291, #581991);
+                /* Gradient background */
+                color: #fff;
+                /* Default text color */
+                height: 100%;
+                /* Full height */
+                margin-right: -2.5%;
+                /* Right margin */
+                display: flex;
+                /* Flexbox for centering content */
+                align-items: center;
+                /* Vertical centering */
+                justify-content: center;
+                /* Horizontal centering */
+                font-size: 1.6rem;
+                /* Font size */
+                font-weight: 500;
+                /* Font weight */
+                width: 12vw;
+                /* Width */
+                cursor: pointer;
+                /* Pointer cursor on hover */
+                position: relative;
+                /* Position for the pseudo-element */
+                overflow: hidden;
+                /* Hide overflow for the after pseudo-element */
+                transition: color 0.3s ease, transform 0.3s ease;
+                /* Smooth transition for text color and transform */
+            }
+
+            /* Hover Effect */
+            .rightbtn:hover {
+                color: #000;
+                /* Change text color to black on hover */
+                transform: scale(1.01);
+                /* Slightly enlarge the button on hover */
+            }
+
+            /* Button After Pseudo-element for Background */
+            .rightbtn:after {
+                content: '';
+                /* Required for pseudo-element */
+                position: absolute;
+                /* Positioning */
+                top: 0;
+                /* Align to the top */
+                left: 0;
+                /* Align to the left */
+                width: 0;
+                /* Initial width */
+                height: 100%;
+                /* Full height */
+                background-color: rgba(0, 0, 0, 0.3);
+                /* Dark overlay for hover effect */
+                transition: width 0.3s ease;
+                /* Transition for expanding width */
+                z-index: -1;
+                /* Position behind the text */
+            }
+
+            /* Expand background on hover */
+            .rightbtn:hover:after {
+                width: 100%;
+                /* Expand the overlay color */
+            }
+
+
+            /* Change icon color on hover */
+            .rightbtn:hover i {
+                color: #000000;
+                /* Change icon color to white */
+            }
+
+
+            .rightbtn i {
+                font-size: 1.6rem;
+            }
+
+            .logosec {
+                height: 100%;
+                width: 15vw;
+                display: flex;
+                align-items: center;
+                gap: 1vw;
+                margin-right: -30%;
+                /* Adjusted margin for better alignment */
+            }
+
+            .logosec img {
+                height: 6vh;
+            }
+
+            /* Responsive styles */
+            @media (max-width: 910px) {
+                .nav {
+                    height: auto;
+                    /* Adjust height for content flexibility */
+                    padding-bottom: 1%;
+                    /* Adjusted for vertical spacing */
+                    padding-right: 2%;
+                }
+
+                .logo {
+                    margin-left: 0;
+                    /* Reset unnecessary margins for mobile */
+                }
+
+                .toggle {
+                    display: block;
+                    font-size: 2.4rem;
+                    /* Adjusted for better scaling */
+                    margin-left: -10%;
+                }
+
+                .toggle span {
+                    font-size: 2.4rem;
+
+                }
+
+                .options {
+                    position: absolute;
+                    top: 10vh;
+                    /* Adjusted top for better visibility */
+                    left: 0;
+                    display: none;
+                    flex-direction: column;
+                    width: 100%;
+                    gap: 1.5rem;
+                    /* Was 15px, now 1.5rem */
+                    background-color: #f0f0f0;
+                    padding: 1rem 0;
+                    /* Was 10px, now 1rem */
+                    transform: translateY(-100%);
+                    transition: transform 0.3s ease;
+                }
+
+                .options.show {
+                    display: flex;
+                    transform: translateY(0);
+                }
+
+                .options a {
+                    padding: 1rem 0;
+                    /* Was 10px, now 1rem */
+                    width: 100%;
+                    text-align: center;
+                }
+
+                .rightbtn {
+                    display: none;
+                }
+
+                .logosec {
+                    display: none;
+                }
+            }
+
+            /* Smaller screens */
+            @media (max-width: 600px) {
+                .nav {
+                    width: 100%;
+                    height: auto;
+                    /* Allow flexible height */
+                    padding-top: 1vh;
+                    padding-bottom: 2vh;
+                }
+
+                .logo {
+                    margin-left: -10%;
+                    /* Removed unnecessary margins */
+                }
+
+                .toggle {
+                    margin-top: 0;
+                    font-size: 2.4rem;
+                    /* Adjusted for smaller screens */
+                }
+
+                .top-right {
+                    display: none;
+                }
+
+                .rightbtn {
+                    display: none;
+                }
+            }
+
+            #mobile-nav {
+                transition: all ease-in 0.5s;
+            }
         }
 
-        .options a {
-            padding: 1rem 0;
-            /* Was 10px, now 1rem */
-            width: 100%;
-            text-align: center;
-        }
-
-        .rightbtn {
+        #mobile-services-content {
             display: none;
         }
 
-        .logosec {
-            display: none;
+        #mobile-services-content.show {
+            display: block;
         }
-    }
 
-    /* Smaller screens */
-    @media (max-width: 600px) {
-        .nav {
+        /* Additional hover effects */
+        #mobile-services-dropdown button {
+            font-size: 2rem;
+            display: flex;
+            justify-content: space-between;
             width: 100%;
+        }
+
+       
+
+        
+
+
+        .ex-services {
+            height: 30vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem; /* Slightly reduce size for readability */
+            font-weight: 700;
+            color: #fff;
+            width: 100%;
+            background: linear-gradient(90deg, #8C2898, #FF5E9C);
+        
+        
+           
+            /* Gradient background for depth */
+            
+            /* Add a shadow for text to make it pop */
+            text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.5);
+            
+            /* Subtle border to define the section */
+            border-radius: 10px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+        
+            /* Add padding for better spacing */
+            padding: 20px;
+            box-sizing: border-box;
+            
+            /* Smooth font transition */
+            transition: font-size 0.3s ease-in-out, background-color 0.3s ease-in-out;
+        }
+        
+        /* Add hover effects for interaction */
+        .ex-services:hover {
+            background-color: #5e23dd;
+            background-image: linear-gradient(135deg, #4d3489 0%, #341b6b 100%);
+            text-shadow: 4px 6px 12px rgba(0, 0, 0, 0.7);
+        }
+        
+
+        /* Responsive Typography: Adjust font size for smaller screens */
+        @media (max-width: 768px) {
+            .ex-services {
+                font-size: 4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ex-services {
+                font-size: 3rem;
+            }
+        }
+
+        /* General Styles for .page1 */
+        .page1 {
+            height: 80vh;
+            width: 100%;
+            display: flex;
+            background-image: url(./assets/2ndpagebg.png);
+            /* Background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #ebebeb;
+            position: relative;
+            overflow: hidden;
+            padding: 2% 5%;
+            /* Add padding for better layout structure */
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.2);
+            /* Soft shadow for depth */
+        }
+
+        /* Left Section (Text + Image) */
+        .page1 .left {
+            height: 100%;
+            width: 50%;
+            padding: 0 0 0 5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .page1 .left h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: #1f1f1f;
+            text-transform: uppercase;
+            line-height: 1.1;
+            letter-spacing: 2px;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            /* Light shadow for text readability */
+        }
+
+        .page1 .left img {
+            width: 80%;
+            /* Adjust image size for proportional look */
+            max-width: 500px;
+            margin-top: -10%;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            /* Image shadow for emphasis */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* Smooth hover effect */
+        }
+
+        .page1 .left img:hover {
+            transform: scale(1.05);
+            /* Slight zoom on hover */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            /* Darker shadow on hover */
+        }
+
+        /* Right Section (Text + Call-to-Action Button) */
+        .page1 .right {
+            height: 100%;
+            width: 50%;
+            padding-right: 5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .page1 .right p {
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: #515151;
+            line-height: 1.5;
+            margin-top: 20px;
+            width: 85%;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow for readability */
+            margin-bottom: 30px;
+        }
+
+        /* Button Design */
+        .page1 .right button {
+            padding: 15px 30px;
+            border-radius: 50px;
+            /* Rounded button for a modern feel */
+            background: linear-gradient(45deg, #ff68eb, #822291, #581991);
+            /* Gradient effect */
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(88, 25, 145, 0.3);
+            /* Box-shadow for emphasis */
+        }
+
+        .page1 .right button:hover {
+            transform: translateY(-5px);
+            /* Move up slightly */
+            box-shadow: 0 8px 20px rgba(88, 25, 145, 0.5);
+            /* Darker shadow on hover */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .page1 {
+                height: auto;
+                flex-direction: column;
+                padding: 5%;
+            }
+
+            .page1 .left,
+            .page1 .right {
+                width: 100%;
+                padding: 5%;
+            }
+
+            .page1 .left h1 {
+                font-size: 3.8rem;
+            }
+
+            .page1 .right p {
+                font-size: 1.8rem;
+                width: 100%;
+            }
+
+            .page1 .right button {
+                font-size: 1.4rem;
+                padding: 12px 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page1 .left h1 {
+                font-size: 3.2rem;
+            }
+
+            .page1 .right p {
+                font-size: 1.6rem;
+            }
+
+            .page1 .right button {
+                font-size: 1.2rem;
+                padding: 10px 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page1 {
+                height: auto;
+            }
+
+            .page1 .left h1 {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+
+            .page1 .left img {
+                width: 100%;
+                /* Full width for smaller screens */
+            }
+
+            .page1 .right p {
+                font-size: 1.4rem;
+            }
+
+            .page1 .right button {
+                font-size: 1rem;
+                padding: 8px 15px;
+            }
+        }
+
+
+
+
+
+
+
+
+        .page8 {
+            height: 95vh;
+            width: 100%;
+            background-image: url(./assets/2ndpagebg.png);
+            display: flex;
+            background-color: #ffffff;
+
+        }
+
+        .page8 .leftt {
+            height: 100%;
+            width: 50%;
+            padding-top: 5%;
+            padding-left: 8%;
+        }
+
+        .page8 .leftt h1 {
+            font-size: 7rem;
+            width: 90%;
+            line-height: 1;
+            font-weight: 700;
+        }
+
+        .page8 .leftt h2 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            color: #454545;
+            margin-top: 5%;
+        }
+
+        .page8 .leftt .frame {
+            height: 20vh;
+            width: 40vw;
+            margin-top: 2%;
+
+        }
+
+        .page8 .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            /* 2 columns */
+            height: 100%;
+            /* Fill the frame height */
+            align-items: center;
+            /* Center items vertically */
+        }
+
+        .page8 .grid-item {
+            font-size: 2rem;
+            display: flex;
+            gap: 5px;
+        }
+
+        .page8 .grid-item h3 {
+            margin-top: 4%;
+            font-weight: bold;
+        }
+
+        .page8 .grid-item i {
+            font-size: 3rem;
+            /* Size of the icon */
+            font-weight: 900;
+            /* Weight of the icon */
+            color: #451591;
+            /* Icon color */
+            border-radius: 50%;
+            /* Make it circular */
+            border: 5px solid #451591;
+            /* Border color */
+            width: 50px;
+            /* Set a fixed width */
+            height: 50px;
+            /* Set a fixed height */
+            display: flex;
+            /* Use flex to center the icon */
+            align-items: center;
+            /* Center icon vertically */
+            justify-content: center;
+            /* Center icon horizontally */
+            margin-right: 10px;
+            /* Space between icon and text */
+            background-color: #fff;
+            /* Background color for the circle */
+        }
+
+        /* Button Styles for .page8 .leftt */
+        .page8 .leftt button {
+            font-size: 2rem;
+            /* Font size for the button */
+            padding: 10px 20px;
+            /* Padding inside the button */
+            font-weight: 600;
+            /* Font weight */
+            border: 2px solid #000;
+            /* Border styling */
+            margin-top: 5%;
+            /* Margin at the top */
+            position: relative;
+            /* For positioning the pseudo-element */
+            overflow: hidden;
+            /* Hide overflow for the after pseudo-element */
+            background-color: transparent;
+            /* Transparent background */
+            color: #000;
+            /* Default text color */
+            transition: color 0.3s ease;
+            /* Transition for text color */
+        }
+
+        /* Optional: Ensure proper styling for the icon */
+        .page8 .leftt button i {
+            font-size: 1.8rem;
+        }
+
+        /* General Button Styling */
+        .learn-more-btn1 {
+            position: relative;
+            /* Make the button the relative parent for pseudo-element */
+            overflow: hidden;
+            /* Hide the overflowing box effect */
+
+            color: white;
+            /* Text color */
+            padding: 12px 30px;
+            /* Padding around the button */
+            font-size: 1.5rem;
+            /* Font size */
+            font-weight: 600;
+            /* Bold text */
+            border: none;
+            /* Remove border */
+            margin: 10px 0;
+            /* Margin for spacing */
+            cursor: pointer;
+            /* Pointer cursor on hover */
+            display: inline-flex;
+            /* Flexbox for icon positioning */
+            align-items: center;
+            /* Vertically center the text and icon */
+            gap: 10px;
+            /* Space between text and icon */
+            transition: all 0.3s ease;
+            /* Smooth transition on hover */
+            outline: none;
+            /* Remove default outline */
+        }
+
+        .learn-more-btn1 span {
+            font-size: 1.5rem;
+            /* Icon size */
+            z-index: 1;
+            /* Ensure icon stays above the hover effect */
+            transition: transform 0.3s ease;
+            font-size: 2rem;
+        }
+
+        /* Pseudo-element for hover box */
+        .learn-more-btn1::before {
+            content: "";
+            /* Empty content for the box */
+            position: absolute;
+            top: 0;
+            left: -100%;
+            /* Position the box off-screen to the left */
+            width: 100%;
+            /* Full width of the button */
+            height: 100%;
+            /* Full height of the button */
+            background: black;
+            /* Semi-transparent */
+            z-index: 0;
+            /* Make sure it's behind the text and icon */
+            transition: left 0.4s ease;
+            /* Smooth transition from the left */
+        }
+
+        /* Hover Effect */
+        .learn-more-btn1:hover::before {
+            left: 0;
+            /* Slide the box in from the left */
+        }
+
+        .learn-more-btn1:hover {
+
+            color: #ffffff;
+        }
+
+        /* Icon styling */
+        .learn-more-btn1 i {
+            margin-left: -2%;
+            font-size: 1.5rem;
+            /* Icon size */
+            z-index: 1;
+            /* Ensure icon stays above the hover effect */
+
+        }
+
+        /* Move the icon slightly on hover */
+        .learn-more-btn1:hover i {
+            transform: translateX(5px);
+            /* Slide the arrow icon to the right */
+            color: white;
+        }
+
+        .learn-more-btn1:hover span {
+            color: white;
+        }
+
+
+        /* Responsive Adjustments */
+        @media (max-width: 600px) {
+            .learn-more-btn {
+                font-size: 1.2rem;
+                /* Adjust font size for smaller screens */
+                padding: 10px 20px;
+                /* Adjust padding for smaller screens */
+            }
+        }
+
+
+        .page8 .rightt {
+            height: 100%;
+            width: 50%;
+            padding-top: 5%;
+            padding-left: 10%;
+            position: relative;
+            /* Set to relative for absolute positioning of circles */
+        }
+
+        /* General styles for the circles */
+        .circle {
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            border: 2px dashed rgb(207, 207, 207);
+            flex-direction: column;
+        }
+
+        /* Circle headings */
+        .circle h1 {
+            font-weight: 700;
+        }
+
+        .circle h2 {
+            font-weight: 500;
+        }
+
+        /* Runner element for animation along the border */
+        .runner {
+            width: 2px;
+            /* Width of the runner element */
+            height: 10px;
+            /* Height of the runner element */
+            background-color: #451591;
+            /* Color of the runner element */
+            position: absolute;
+            /* Positions the runner absolutely within its parent */
+            top: 50%;
+            /* Centers the runner vertically */
+            left: 50%;
+            /* Centers the runner horizontally */
+        }
+
+
+        /* Circle 1 styles */
+        .circle1 {
+            width: 250px;
+            height: 250px;
+            top: 30%;
+            left: 20%;
+        }
+
+        .circle1 .runner {
+            animation: run-along-border-1 6s linear infinite;
+        }
+
+        @keyframes run-along-border-1 {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg) translateX(125px);
+                /* Half of 250px */
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg) translateX(125px);
+                /* Half of 250px */
+            }
+        }
+
+        /* Circle 2 styles */
+        .circle2 {
+            width: 160px;
+            height: 160px;
+            top: 23%;
+            left: 55%;
+        }
+
+        .circle2 .runner {
+            animation: run-along-border-2 4s linear infinite;
+        }
+
+        @keyframes run-along-border-2 {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg) translateX(80px);
+                /* Half of 160px */
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg) translateX(80px);
+                /* Half of 160px */
+            }
+        }
+
+        /* Circle 3 styles */
+        .circle3 {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 52%;
+        }
+
+        .circle3 .runner {
+            animation: run-along-border-3 5s linear infinite;
+        }
+
+        @keyframes run-along-border-3 {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg) translateX(100px);
+                /* Half of 200px */
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg) translateX(100px);
+                /* Half of 200px */
+            }
+        }
+
+        /* Specific styles for each circle */
+        .circle1 h1 {
+            margin-top: -5%;
+            font-size: 10rem;
+            /* Font size for the number in circle 1 */
+            color: #451591;
+            /* Color of the number */
+
+        }
+
+        .circle1 h2 {
+            margin-top: -10%;
+            font-size: 3rem;
+            /* Font size for the title in circle 1 */
+            color: #333;
+            /* Darker color for the title */
+        }
+
+        .circle2 h1 {
+            margin-top: -5%;
+            font-size: 5rem;
+            /* Font size for the number in circle 2 */
+            color: #451591;
+            /* Color of the number */
+        }
+
+        .circle2 h2 {
+            margin-top: -8%;
+            font-size: 1.5rem;
+            /* Font size for the title in circle 2 */
+            color: #333;
+            /* Darker color for the title */
+        }
+
+        .circle3 h1 {
+            margin-top: -5%;
+            font-size: 7rem;
+            /* Font size for the number in circle 3 */
+            color: #451591;
+            /* Color of the number */
+        }
+
+        .circle3 h2 {
+            margin-top: -12%;
+            font-size: 2.5rem;
+            /* Font size for the title in circle 3 */
+            color: #333;
+            /* Darker color for the title */
+        }
+
+
+
+        /* Responsive: Tablet (768px to 1024px) */
+        @media (max-width: 1024px) {
+            .page8 {
+                flex-direction: column;
+                /* Stack the left and right sections vertically */
+                height: auto;
+                /* Adjust height based on content */
+                padding: 20px;
+                /* Add padding for spacing */
+            }
+
+            .page8 .leftt,
+            .page8 .rightt {
+                width: 100%;
+                /* Full width for each section */
+            }
+
+            .page8 .leftt h1 {
+                font-size: 5rem;
+                /* Smaller title size */
+                margin-top: -2%;
+            }
+
+            .page8 .leftt h2 {
+                font-size: 2rem;
+                /* Smaller subtitle size */
+                margin-top: 1%;
+            }
+
+            .page8 .leftt .frame {
+                gap: 10px;
+                width: 80%;
+                /* Wider frame for tablets */
+
+            }
+
+            .page8 .leftt .frame h3 {
+                margin-top: 0.5%;
+            }
+
+            .page8 .leftt .frame i {
+                height: 30px;
+                width: 30px;
+                font-size: 2rem;
+                border: 3px solid #451591;
+            }
+
+            .page8 .grid-container {
+                grid-template-columns: repeat(1, 1fr);
+                /* Stack grid items in a single column */
+            }
+
+            .page8 .grid-item {
+                font-size: 1.5rem;
+                /* Smaller font size for grid items */
+            }
+
+            .page8 .leftt button {
+                margin-top: 5%;
+                font-size: 1.5rem;
+                /* Smaller button font size */
+                padding: 8px 16px;
+                /* Adjust padding for smaller buttons */
+            }
+
+            .page8 {
+                height: 100vh;
+            }
+
+            /* Circle 3 styles */
+            .circle3 {
+                width: 200px;
+                height: 200px;
+                top: 80%;
+                left: 62%;
+            }
+
+            .circle1 {
+                left: 30%;
+                top: 60%;
+            }
+
+        }
+
+        /* Base styling for mobile devices */
+        @media (max-width: 768px) {
+            .page8 {
+                padding: 10px;
+                /* Adjust padding */
+            }
+
+            .page8 .leftt h1 {
+                font-size: 3.5rem;
+                /* Adjust title size for better scalability */
+            }
+
+            .page8 .leftt h2 {
+                font-size: 1.6rem;
+                /* Adjust subtitle size */
+            }
+
+            .page8 .leftt .frame {
+                width: 100%;
+                /* Ensure frame uses full width */
+                margin-top: 5%;
+            }
+
+            .page8 .grid-item {
+                font-size: 1.2rem;
+                /* Adjust grid item font size */
+            }
+
+            .page8 .leftt button {
+                font-size: 1.2rem;
+                padding: 6px 12px;
+                /* Ensure button scales well */
+            }
+
+            .page8 .rightt {
+                margin-left: -10%;
+                /* Reduce margin for better alignment */
+            }
+        }
+
+        /* Styling for small mobile devices (max-width: 480px) */
+        @media (max-width: 480px) {
+            .page8 {
+
+                height: 130vh;
+                padding: 8px;
+                /* Adjust padding and height for smaller screens */
+            }
+
+            .page8 .leftt h1 {
+                font-size: 3rem;
+                /* Reduce title size for small mobile */
+            }
+
+            .page8 .leftt h2 {
+                font-size: 1.5rem;
+                margin-top: 3%;
+                /* Adjust subtitle size and margin */
+            }
+
+            .page8 .leftt .frame {
+                width: 100%;
+                margin-top: 5%;
+            }
+
+            .page8 .leftt .frame h3 {
+                font-size: 1.5rem;
+                font-weight: 500;
+                /* Adjust font size for smaller screens */
+            }
+
+            .page8 .grid-item {
+                font-size: 1rem;
+                /* Smaller font size for grid items */
+            }
+
+            .page8 .leftt button {
+                font-size: 1.5rem;
+                margin-top: 2%;
+                padding: 4px 8px;
+                /* Smaller buttons for better usability */
+            }
+
+            .page8 .rightt {
+                margin-top: 15%;
+                /* Adjust margin and height */
+            }
+
+            /* Circles alignment */
+            .circle1 {
+                top: 25vh;
+                left: 30%;
+            }
+
+            .circle2 {
+                left: 40%;
+                top: -20vh;
+            }
+
+            .circle3 {
+                left: 35%;
+                top: 0vh;
+            }
+        }
+
+        /* Styling for very small screens (max-width: 360px) */
+        @media (max-width: 360px) {
+            .page8 .leftt h1 {
+                font-size: 2.5rem;
+                /* Further reduce title size */
+            }
+
+            .page8 .leftt h2 {
+                font-size: 1.4rem;
+                /* Adjust subtitle size */
+            }
+
+            .page8 .leftt .frame h3 {
+                font-size: 1.3rem;
+                /* Smaller font size for frame */
+            }
+
+            .page8 .leftt button {
+                font-size: 1.2rem;
+                padding: 3px 6px;
+                /* Adjust button size for very small screens */
+            }
+
+            .page8 .grid-item {
+                font-size: 0.9rem;
+                /* Smaller grid item font size */
+            }
+        }
+
+
+
+
+
+
+        .footer {
+            background-color: #2b2d42;
+            color: #ffffff;
+            padding: 3rem 5%;
             height: auto;
-            /* Allow flexible height */
-            padding-top: 1vh;
-            padding-bottom: 2vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            font-size: 1.6rem;
+            transition: background-color 0.3s ease-in-out;
+            /* Smooth background transition on hover */
         }
 
-        .logo {
+        .footer:hover {
+            background-color: #1a1c33;
+            /* Darker shade on hover */
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            transition: transform 0.3s ease-in-out;
+            /* Smooth transformation on hover */
+        }
+
+
+
+        .footer-brand {
+            width: 38%;
+        }
+
+        .footer-brand img {
+            height: 10vh;
+            text-align: left;
             margin-left: -10%;
-            /* Removed unnecessary margins */
         }
 
-        .toggle {
-            margin-top: 0;
-            font-size: 2.4rem;
-            /* Adjusted for smaller screens */
+        .footer-brand h2 {
+            margin-top: 5%;
+            font-size: 2rem;
+            margin-left: -3.5%;
         }
 
-        .top-right {
-            display: none;
+        .footer-brand p {
+            font-size: 1.5rem;
+            width: 60%;
+            margin-top: 2%;
+            color: rgb(186, 186, 186);
+            margin-left: -3.5%;
         }
 
-        .rightbtn {
-            display: none;
+        .footer-section {
+            width: 15%;
+            margin-right: 5%;
         }
-    }
-
-    #mobile-nav {
-        transition: all ease-in 0.5s;
-    }
-}
-#mobile-services-content {
-    display: none;
-}
-
-#mobile-services-content.show {
-    display: block;
-}
-
-/* Additional hover effects */
-#mobile-services-dropdown button {
-    font-size: 2rem;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
-
-.page1 {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    background-image: url(./assets/2ndpagebg.png);
-    /* Background image */
-    background-size: cover;
-    /* Cover the entire area */
-    background-position: center;
-    /* Center the background image */
-    background-repeat: no-repeat;
-    /* Prevent repeating of the background image */
-    background-color: #ebebeb;
-}
-
-.left {
-    height: 100%;
-    width: 50%;
-    padding-top: 3%;
-    padding-left: 8%;
-    font-weight: 600;
-}
-
-.left h1 {
-    color: #2f2f2f;
-    font-size: 8rem;
-
-}
-
-.left img {
-    height: 50vh;
-    width: 90%;
-    margin-top: 5%;
-}
-
-.left .img {
-    height: 100%;
-    width: 100%;
-}
-
-/* General Button Styling */
-.learn-more-btn {
-    position: relative;
-    /* Make the button the relative parent for pseudo-element */
-    overflow: hidden;
-    /* Hide the overflowing box effect */
-    background: linear-gradient(#ff68eb, #822291, #581991);
-    color: white;
-    /* Text color */
-    padding: 12px 30px;
-    /* Padding around the button */
-    font-size: 1.8rem;
-    /* Font size */
-    font-weight: 600;
-    /* Bold text */
-    border: none;
-    /* Remove border */
-    margin-top: 5%;
-    cursor: pointer;
-    /* Pointer cursor on hover */
-    display: inline-flex;
-    /* Flexbox for icon positioning */
-    align-items: center;
-    /* Vertically center the text and icon */
-    gap: 10px;
-    /* Space between text and icon */
-    transition: all 0.3s ease;
-    /* Smooth transition on hover */
-    outline: none;
-    /* Remove default outline */
-}
-
-/* Pseudo-element for hover box */
-.learn-more-btn::before {
-    content: "";
-    /* Empty content for the box */
-    position: absolute;
-    top: 0;
-    left: -100%;
-    /* Position the box off-screen to the left */
-    width: 100%;
-    /* Full width of the button */
-    height: 100%;
-    /* Full height of the button */
-    background: rgba(189, 189, 189, 0.1);
-    /* Semi-transparent white */
-    z-index: 0;
-    /* Make sure it's behind the text and icon */
-    transition: left 0.4s ease;
-    /* Smooth transition from the left */
-}
-
-/* Hover Effect */
-.learn-more-btn:hover::before {
-    left: 0;
-    /* Slide the box in from the left */
-}
-
-.learn-more-btn:hover {
-    background: linear-gradient(#ff68eb, #822291, #581991);
-    transform: translateY(-2px);
-    /* Lift the button slightly */
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-    /* Shadow effect */
-}
-
-/* Icon styling */
-.learn-more-btn i {
-    font-size: 2rem;
-    /* Icon size */
-    z-index: 1;
-    margin-left: -5%;
-    /* Make sure icon stays above the hover effect */
-    transition: transform 0.3s ease;
-    /* Smooth transformation on hover */
-}
-
-/* Move the icon slightly on hover */
-.learn-more-btn:hover i {
-    transform: translateX(5px);
-    /* Slide the arrow icon to the right */
-}
-
-/* Ensure text stays above the hover box */
-.learn-more-btn span {
-    z-index: 1;
-    /* Keep text above hover effect */
-}
-
-
-
-
-.page1{
-    height: 80vh;
-    width: 100%;
-    display: flex;
-    background-image: url(./assets/2ndpagebg.png);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: #ebebeb;
-}
-.page1 .left{
-    height: 100%;
-    width: 50%;
-    padding-top: 3%;
-    padding-left: 8%;
-    font-weight: 600;
-   
-}
-.page1 .left h1{
-    color: rgb(0, 0, 0);
-    font-size: 5rem;
-    text-transform: uppercase;
-    line-height: 1;
-    font-weight: 600;
-}
-.page1 .left img{
-    height: 50vh;
-    width: 90%;
-    margin-top: 5%;
-}
-.page1 .right {
-    height: 100%;
-    width: 50%;
-    padding-top: 3%;
-    padding-right: 8%;
-}
-.page1 .right p{
-    margin-top: 13%;
-    color: rgb(81, 81, 81);
-    font-size: 2rem;
-    line-height: 1.1;
-    width: 99%;
-}
-.page1 .right button{
-    margin-top: 5%;
-    padding: 10px 20px;
-    background: linear-gradient(#ff68eb, #822291, #581991);
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 1.5rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-
-/* Media Queries for Responsive Design */
-@media (max-width: 1024px) {
-    .page1 {
-        flex-direction: column; /* Stack elements vertically */
-        height: auto; /* Allow height to adjust */
-    }
-
-    .page1 .left,
-    .page1 .right {
-        width: 100%; /* Take full width on smaller screens */
-        padding: 0 5%; /* Adjust padding */
-    }
-
-    .page1 .left h1 {
-        font-size: 4rem; /* Smaller font size */
-    }
-
-    .page1 .left img {
-        height: 40vh; /* Adjust image height */
-    }
-
-    .page1 .right p {
-        font-size: 1.5rem; /* Smaller font size */
-    }
-
-    .page1 .right button {
-        font-size: 1.2rem; /* Smaller button text */
-        padding: 8px 16px; /* Adjust button padding */
-    }
-}
-
-@media (max-width: 600px) {
-    .page1 {
-        padding-top: 5%;
-        flex-direction: column; /* Stack elements vertically */
-        height: 80vh; /* Allow height to adjust */
-    }
-    .page1 .left h1 {
-        font-size: 3rem; /* Further decrease font size */
-    }
-
-    .page1 .left img {
-        height: 30vh; /* Further adjust image height for mobile */
-    }
-
-    .page1 .right p {
-        font-size: 1.2rem; /* Further decrease font size */
-    }
-
-    .page1 .right button {
-        font-size: 1rem; /* Further decrease button text */
-        padding: 6px 12px; /* Further adjust button padding */
-    }
-}
-
-
-
-
-
-
-
-.page8 {
-    height: 95vh;
-    width: 100%;
-    background-image: url(./assets/2ndpagebg.png);
-    display: flex;
-    background-color: #ffffff;
-
-}
-
-.page8 .leftt {
-    height: 100%;
-    width: 50%;
-    padding-top: 5%;
-    padding-left: 8%;
-}
-
-.page8 .leftt h1 {
-    font-size: 7rem;
-    width: 90%;
-    line-height: 1;
-    font-weight: 700;
-}
-
-.page8 .leftt h2 {
-    font-size: 2.5rem;
-    line-height: 1.2;
-    color: #454545;
-    margin-top: 5%;
-}
-
-.page8 .leftt .frame {
-    height: 20vh;
-    width: 40vw;
-    margin-top: 2%;
-
-}
-
-.page8 .grid-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    /* 2 columns */
-    height: 100%;
-    /* Fill the frame height */
-    align-items: center;
-    /* Center items vertically */
-}
-
-.page8 .grid-item {
-    font-size: 2rem;
-    display: flex;
-    gap: 5px;
-}
-
-.page8 .grid-item h3 {
-    margin-top: 4%;
-    font-weight: bold;
-}
-
-.page8 .grid-item i {
-    font-size: 3rem;
-    /* Size of the icon */
-    font-weight: 900;
-    /* Weight of the icon */
-    color: #451591;
-    /* Icon color */
-    border-radius: 50%;
-    /* Make it circular */
-    border: 5px solid #451591;
-    /* Border color */
-    width: 50px;
-    /* Set a fixed width */
-    height: 50px;
-    /* Set a fixed height */
-    display: flex;
-    /* Use flex to center the icon */
-    align-items: center;
-    /* Center icon vertically */
-    justify-content: center;
-    /* Center icon horizontally */
-    margin-right: 10px;
-    /* Space between icon and text */
-    background-color: #fff;
-    /* Background color for the circle */
-}
-
-/* Button Styles for .page8 .leftt */
-.page8 .leftt button {
-    font-size: 2rem;
-    /* Font size for the button */
-    padding: 10px 20px;
-    /* Padding inside the button */
-    font-weight: 600;
-    /* Font weight */
-    border: 2px solid #000;
-    /* Border styling */
-    margin-top: 5%;
-    /* Margin at the top */
-    position: relative;
-    /* For positioning the pseudo-element */
-    overflow: hidden;
-    /* Hide overflow for the after pseudo-element */
-    background-color: transparent;
-    /* Transparent background */
-    color: #000;
-    /* Default text color */
-    transition: color 0.3s ease;
-    /* Transition for text color */
-}
-/* Optional: Ensure proper styling for the icon */
-.page8 .leftt button i {
-  font-size: 1.8rem;
-}
-
-/* General Button Styling */
-.learn-more-btn1 {
-    position: relative;       /* Make the button the relative parent for pseudo-element */
-    overflow: hidden;        /* Hide the overflowing box effect */
-    
-    color: white;            /* Text color */
-    padding: 12px 30px;     /* Padding around the button */
-    font-size: 1.5rem;      /* Font size */
-    font-weight: 600;       /* Bold text */
-    border: none;           /* Remove border */
-    margin: 10px 0;        /* Margin for spacing */
-    cursor: pointer;        /* Pointer cursor on hover */
-    display: inline-flex;    /* Flexbox for icon positioning */
-    align-items: center;    /* Vertically center the text and icon */
-    gap: 10px;              /* Space between text and icon */
-    transition: all 0.3s ease; /* Smooth transition on hover */
-    outline: none;          /* Remove default outline */
-}
-.learn-more-btn1 span{
-    font-size: 1.5rem;           /* Icon size */
-    z-index: 1;                  /* Ensure icon stays above the hover effect */
-    transition: transform 0.3s ease; 
-    font-size: 2rem;
-}
-/* Pseudo-element for hover box */
-.learn-more-btn1::before {
-    content: "";               /* Empty content for the box */
-    position: absolute;
-    top: 0;
-    left: -100%;               /* Position the box off-screen to the left */
-    width: 100%;               /* Full width of the button */
-    height: 100%;              /* Full height of the button */
-    background: black; /* Semi-transparent */
-    z-index: 0;                /* Make sure it's behind the text and icon */
-    transition: left 0.4s ease; /* Smooth transition from the left */
-}
-
-/* Hover Effect */
-.learn-more-btn1:hover::before {
-    left: 0; 
-                      /* Slide the box in from the left */
-}
-
-.learn-more-btn1:hover {
-   
-   color: #ffffff;
-}
-
-/* Icon styling */
-.learn-more-btn1 i {
-    margin-left: -2%;
-    font-size: 1.5rem;           /* Icon size */
-    z-index: 1;                  /* Ensure icon stays above the hover effect */
-  
-}
-
-/* Move the icon slightly on hover */
-.learn-more-btn1:hover i {
-    transform: translateX(5px); /* Slide the arrow icon to the right */
-    color: white;
-}
-
-.learn-more-btn1:hover span{
-    color: white;
-}
-
-
-/* Responsive Adjustments */
-@media (max-width: 600px) {
-    .learn-more-btn {
-        font-size: 1.2rem;  /* Adjust font size for smaller screens */
-        padding: 10px 20px; /* Adjust padding for smaller screens */
-    }
-}
-
-
-.page8 .rightt {
-    height: 100%;
-    width: 50%;
-    padding-top: 5%;
-    padding-left: 10%;
-    position: relative;
-    /* Set to relative for absolute positioning of circles */
-}
-
-/* General styles for the circles */
-.circle {
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    border: 2px dashed rgb(207, 207, 207);
-    flex-direction: column;
-}
-
-/* Circle headings */
-.circle h1 {
-    font-weight: 700;
-}
-
-.circle h2 {
-    font-weight: 500;
-}
-
-/* Runner element for animation along the border */
-.runner {
-    width: 2px;
-    /* Width of the runner element */
-    height: 10px;
-    /* Height of the runner element */
-    background-color: #451591;
-    /* Color of the runner element */
-    position: absolute;
-    /* Positions the runner absolutely within its parent */
-    top: 50%;
-    /* Centers the runner vertically */
-    left: 50%;
-    /* Centers the runner horizontally */
-}
-
-
-/* Circle 1 styles */
-.circle1 {
-    width: 250px;
-    height: 250px;
-    top: 30%;
-    left: 20%;
-}
-
-.circle1 .runner {
-    animation: run-along-border-1 6s linear infinite;
-}
-
-@keyframes run-along-border-1 {
-    0% {
-        transform: translate(-50%, -50%) rotate(0deg) translateX(125px);
-        /* Half of 250px */
-    }
-
-    100% {
-        transform: translate(-50%, -50%) rotate(360deg) translateX(125px);
-        /* Half of 250px */
-    }
-}
-
-/* Circle 2 styles */
-.circle2 {
-    width: 160px;
-    height: 160px;
-    top: 23%;
-    left: 55%;
-}
-
-.circle2 .runner {
-    animation: run-along-border-2 4s linear infinite;
-}
-
-@keyframes run-along-border-2 {
-    0% {
-        transform: translate(-50%, -50%) rotate(0deg) translateX(80px);
-        /* Half of 160px */
-    }
-
-    100% {
-        transform: translate(-50%, -50%) rotate(360deg) translateX(80px);
-        /* Half of 160px */
-    }
-}
-
-/* Circle 3 styles */
-.circle3 {
-    width: 200px;
-    height: 200px;
-    top: 50%;
-    left: 52%;
-}
-
-.circle3 .runner {
-    animation: run-along-border-3 5s linear infinite;
-}
-
-@keyframes run-along-border-3 {
-    0% {
-        transform: translate(-50%, -50%) rotate(0deg) translateX(100px);
-        /* Half of 200px */
-    }
-
-    100% {
-        transform: translate(-50%, -50%) rotate(360deg) translateX(100px);
-        /* Half of 200px */
-    }
-}
-
-/* Specific styles for each circle */
-.circle1 h1 {
-    margin-top: -5%;
-    font-size: 10rem;
-    /* Font size for the number in circle 1 */
-    color: #451591;
-    /* Color of the number */
-
-}
-
-.circle1 h2 {
-    margin-top: -10%;
-    font-size: 3rem;
-    /* Font size for the title in circle 1 */
-    color: #333;
-    /* Darker color for the title */
-}
-
-.circle2 h1 {
-    margin-top: -5%;
-    font-size: 5rem;
-    /* Font size for the number in circle 2 */
-    color: #451591;
-    /* Color of the number */
-}
-
-.circle2 h2 {
-    margin-top: -8%;
-    font-size: 1.5rem;
-    /* Font size for the title in circle 2 */
-    color: #333;
-    /* Darker color for the title */
-}
-
-.circle3 h1 {
-    margin-top: -5%;
-    font-size: 7rem;
-    /* Font size for the number in circle 3 */
-    color: #451591;
-    /* Color of the number */
-}
-
-.circle3 h2 {
-    margin-top: -12%;
-    font-size: 2.5rem;
-    /* Font size for the title in circle 3 */
-    color: #333;
-    /* Darker color for the title */
-}
-
-
-
-/* Responsive: Tablet (768px to 1024px) */
-@media (max-width: 1024px) {
-    .page8 {
-        flex-direction: column;
-        /* Stack the left and right sections vertically */
-        height: auto;
-        /* Adjust height based on content */
-        padding: 20px;
-        /* Add padding for spacing */
-    }
-
-    .page8 .leftt,
-    .page8 .rightt {
-        width: 100%;
-        /* Full width for each section */
-    }
-
-    .page8 .leftt h1 {
-        font-size: 5rem;
-        /* Smaller title size */
-        margin-top: -2%;
-    }
-
-    .page8 .leftt h2 {
-        font-size: 2rem;
-        /* Smaller subtitle size */
-        margin-top: 1%;
-    }
-
-    .page8 .leftt .frame {
-        gap: 10px;
-        width: 80%;
-        /* Wider frame for tablets */
-
-    }
-
-    .page8 .leftt .frame h3 {
-        margin-top: 0.5%;
-    }
-
-    .page8 .leftt .frame i {
-        height: 30px;
-        width: 30px;
-        font-size: 2rem;
-        border: 3px solid #451591;
-    }
-
-    .page8 .grid-container {
-        grid-template-columns: repeat(1, 1fr);
-        /* Stack grid items in a single column */
-    }
-
-    .page8 .grid-item {
-        font-size: 1.5rem;
-        /* Smaller font size for grid items */
-    }
-
-    .page8 .leftt button {
-        margin-top: 5%;
-        font-size: 1.5rem;
-        /* Smaller button font size */
-        padding: 8px 16px;
-        /* Adjust padding for smaller buttons */
-    }
-
-    .page8 {
-        height: 100vh;
-    }
-
-    /* Circle 3 styles */
-    .circle3 {
-        width: 200px;
-        height: 200px;
-        top: 80%;
-        left: 62%;
-    }
-
-    .circle1 {
-        left: 30%;
-        top: 60%;
-    }
-
-}
-
-/* Responsive: Mobile (max-width: 768px) */
-@media (max-width: 768px) {
-    .page8 {
-        padding: 10px;
-        /* Smaller padding for mobile */
-    }
-
-    .page8 .leftt h1 {
-        font-size: 4rem;
-        /* Further reduce title size */
-    }
-
-    .page8 .leftt h2 {
-        font-size: 1.8rem;
-        /* Further reduce subtitle size */
-    }
-
-    .page8 .leftt .frame {
-        width: 90%;
-        /* Full width for the frame */
-    }
-
-    .page8 .grid-item {
-        font-size: 1.2rem;
-        /* Smaller font size for grid items */
-    }
-
-    .page8 .leftt button {
-        font-size: 1.2rem;
-        /* Further reduce button font size */
-        padding: 6px 12px;
-        /* Smaller padding for mobile buttons */
-    }
-
-    .page8 .rightt {
-        margin-left: -20%;
-    }
-}
-
-/* Responsive: Small Mobile (max-width: 480px) */
-@media (max-width: 480px) {
-    .page8 {
-        height: 160vh;
-        /* Minimal padding for very small screens */
-    }
-
-    .page8 .leftt h1 {
-        margin-top: 10%;
-        font-size: 5rem;
-        /* Further reduce title size */
-    }
-
-    .page8 .leftt {
-        height: auto;
-    }
-
-    .page8 .leftt h2 {
-        font-size: 1.8rem;
-        margin-top: 5%;
-        /* Further reduce subtitle size */
-    }
-
-    .page8 .leftt .frame {
-        width: 100%;
-        margin-top: 5%;
-        /* Full width for the frame */
-    }
-
-    .page8 .leftt .frame h3 {
-        font-size: 2rem;
-        margin-top: 0%;
-        font-weight: 500;
-    }
-
-    .page8 .grid-item {
-        font-size: 1rem;
-        /* Further reduce font size for grid items */
-    }
-
-    .page8 .leftt button {
-        font-size: 2rem;
-        margin-top: 2%;
-        /* Further reduce button font size */
-        padding: 4px 8px;
-        /* Smaller padding for mobile buttons */
-    }
-
-    .page8 .rightt {
-        margin-top: 5%;
-        height: auto;
-    }
-
-    .circle1 {
-        top: 50vh;
-        left: 40%;
-    }
-
-    .circle2 {
-        left: 50%;
-        top: 6vh;
-    }
-
-    .circle3 {
-        left: 45%;
-        top: 26vh;
-
-    }
-}
-
-
-
-
-
-
-.footer {
-    background-color: #2b2d42;
-    color: #ffffff;
-    padding: 3rem 5%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    font-size: 1.6rem;
-    transition: background-color 0.3s ease-in-out;
-    /* Smooth background transition on hover */
-}
-
-.footer:hover {
-    background-color: #1a1c33;
-    /* Darker shade on hover */
-}
-
-.footer-content {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    transition: transform 0.3s ease-in-out;
-    /* Smooth transformation on hover */
-}
-
-
-
-.footer-brand {
-    width: 35%;
-}
-
-.footer-brand img {
-    height: 10vh;
-    text-align: left;
-    margin-left: -10%;
-}
-
-.footer-brand h2 {
-    margin-top: 5%;
-    font-size: 2rem;
-    margin-left: -3.5%;
-}
-
-.footer-brand p {
-    font-size: 1.5rem;
-    width: 60%;
-    margin-top: 2%;
-    color: rgb(186, 186, 186);
-    margin-left: -3.5%;
-}
-
-.footer-section {
-    width: 22%;
-    margin-right: 5%;
-}
-
-.footer-section h2 {
-    font-size: 2.2rem;
-    margin-bottom: 12px;
-    color: #ff68eb;
-    font-weight: 400;
-    position: relative;
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.footer-section h2::after {
-    content: "";
-    width: 0;
-    height: 2px;
-    background: #ff68eb;
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    transition: width 0.4s ease;
-}
-
-.footer-section h2:hover::after {
-    width: 100%;
-    /* Underline grows on hover */
-}
-
-.footer-section p,
-.footer-section ul {
-    font-size: 2rem;
-    margin-bottom: 12px;
-
-}
-
-.footer-section ul li a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 2rem;
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.footer-section ul li a:hover {
-    color: #ff68eb;
-    transform: translateX(5px);
-    /* Slide effect on hover */
-}
-
-.footer-section i {
-    font-size: 1.7rem;
-}
-
-.footer-section a {
-    font-size: 1.6rem;
-}
-
-.social-icons {
-    display: flex;
-    gap: 20px;
-
-}
-
-.social-icons li {
-    display: inline-block;
-}
-
-.social-icons a {
-    color: #ffffff;
-    font-size: 6rem;
-    transition: color 0.3s ease, transform 0.3s ease;
-    position: relative;
-}
-
-.social-icons a:hover {
-    color: #ff68eb;
-    transform: rotate(360deg);
-    /* Full rotation on hover */
-}
-
-.social-icons a::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: rgba(255, 104, 235, 0.3);
-    border-radius: 50%;
-    transition: width 0.5s ease, height 0.5s ease, top 0.5s ease, left 0.5s ease;
-}
-
-.social-icons a:hover::before {
-    width: 120%;
-    height: 120%;
-    top: -10%;
-    left: -10%;
-}
-
-.footer-bottom {
-    text-align: center;
-    font-size: 1.8rem;
-    margin-top: 2rem;
-    border-top: 1px solid rgb(75, 75, 75);
-    border-width: 100%;
-}
-
-.footer-bottom p {
-    font-size: 2rem;
-    margin: 0;
-    margin-top: 2%;
-    transition: color 0.3s ease;
-}
-
-.footer-bottom p:hover {
-    color: #ff68eb;
-}
-
-/* Responsive for screen widths up to 768px (tablets) */
-@media (max-width: 768px) {
-    .footer-content {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .footer-brand {
-        width: 100%;
-        margin-bottom: 2rem;
-        text-align: center;
-    }
-
-    .footer-brand img {
-        height: 8vh;
-        margin-left: 0;
-        text-align: center;
-    }
-
-    .footer-brand h2 {
-        font-size: 1.8rem;
-        margin-top: 2%;
-        margin-left: 0;
-    }
-
-    .footer-brand p {
-        font-size: 1.4rem;
-        margin-top: 1%;
-        width: 100%;
-        margin-left: 0;
-        text-align: center;
-    }
-
-    .footer-section {
-        width: 100%;
-        margin-right: 0;
-        margin-bottom: 2rem;
-    }
-
-    .footer-section h2 {
-        font-size: 2rem;
-        margin-bottom: 8px;
-    }
-
-    .footer-section p,
-    .footer-section ul li a {
-        font-size: 1.6rem;
-    }
-
-    .social-icons {
-        justify-content: center;
-    }
-
-    .social-icons a {
-        font-size: 4rem;
-    }
-
-    .footer-bottom p {
-        font-size: 1.6rem;
-    }
-}
-
-/* Responsive for screen widths up to 478px (mobile phones) */
-@media (max-width: 478px) {
-    .footer {
-        padding: 2rem 4%;
-    }
-
-    .footer-brand {
-        width: 100%;
-        margin-bottom: 2rem;
-        text-align: center;
-    }
-
-    .footer-brand img {
-        height: 7vh;
-        margin-left: 27%;
-    }
-
-    .footer-brand h2 {
-        font-size: 1.6rem;
-        margin-top: 1%;
-    }
-
-    .footer-brand p {
-        font-size: 1.2rem;
-        width: 100%;
-        margin-top: 1%;
-        text-align: center;
-    }
-
-    .footer-section {
-        width: 100%;
-        margin-right: 0;
-        margin-bottom: 1.5rem;
-    }
-
-    .footer-section h2 {
-        font-size: 1.8rem;
-        margin-bottom: 8px;
-        font-weight: 400;
-    }
-
-    .footer-section p,
-    .footer-section ul li a {
-        font-size: 1.4rem;
-        font-weight: 400;
-    }
-
-    .social-icons a {
-        font-size: 3rem;
-    }
-
-    .footer-bottom {
-        font-size: 1.4rem;
-    }
-}
+
+        .footer-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            color: #ff68eb;
+            font-weight: 600;
+            position: relative;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .footer-section h2::after {
+            content: "";
+            width: 0;
+            height: 2px;
+            background: #ff68eb;
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.4s ease;
+        }
+
+        .footer-section h2:hover::after {
+            width: 100%;
+            /* Underline grows on hover */
+        }
+
+        .footer-section p,
+        .footer-section ul {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        .footer-section p {
+            width: 150%;
+        }
+
+        .footer-section ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.6rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #ff68eb;
+            transform: translateX(5px);
+            /* Slide effect on hover */
+        }
+
+        .footer-section i {
+            font-size: 1.7rem;
+        }
+
+        .footer-section a {
+            font-size: 1.2rem;
+        }
+
+        #social {
+            margin-top: 6%;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icons li {
+            display: inline-block;
+        }
+
+        .social-icons a {
+            color: #ffffff;
+            font-size: 6rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        .social-icons a:hover {
+            color: #ff68eb;
+            transform: rotate(360deg);
+            /* Full rotation on hover */
+        }
+
+        .social-icons a::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 104, 235, 0.3);
+            border-radius: 50%;
+            transition: width 0.5s ease, height 0.5s ease, top 0.5s ease, left 0.5s ease;
+        }
+
+        .social-icons a:hover::before {
+            width: 120%;
+            height: 120%;
+            top: -10%;
+            left: -10%;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgb(75, 75, 75);
+            border-width: 100%;
+        }
+
+        .footer-bottom p {
+            font-size: 1.7rem;
+            margin: 0;
+            margin-top: 2%;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom p:hover {
+            color: #ff68eb;
+        }
+
+        /* Responsive for screen widths up to 768px (tablets) */
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-brand {
+                width: 100%;
+                margin-bottom: 2rem;
+                text-align: center;
+            }
+
+            .footer-brand img {
+                height: 8vh;
+                margin-left: 0;
+                text-align: center;
+            }
+
+            .footer-brand h2 {
+                font-size: 1.8rem;
+                margin-top: 2%;
+                margin-left: 0;
+            }
+
+            .footer-brand p {
+                font-size: 1.4rem;
+                margin-top: 1%;
+                width: 100%;
+                margin-left: 0;
+                text-align: center;
+            }
+
+            .footer-section {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 2rem;
+            }
+
+            .footer-section h2 {
+                font-size: 2rem;
+                margin-bottom: 8px;
+            }
+
+            .footer-section p,
+            .footer-section ul li a {
+                font-size: 1.6rem;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+
+            .social-icons a {
+                font-size: 4rem;
+            }
+
+            .footer-bottom p {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* Responsive for screen widths up to 478px (mobile phones) */
+        @media (max-width: 478px) {
+            .footer {
+                padding: 2rem 4%;
+            }
+
+            .footer-brand {
+                width: 100%;
+                margin-bottom: 2rem;
+                text-align: center;
+            }
+
+            .footer-brand img {
+                height: 7vh;
+                margin-left: 27%;
+            }
+
+            .footer-brand h2 {
+                font-size: 1.6rem;
+                margin-top: 1%;
+            }
+
+            .footer-brand p {
+                font-size: 1.2rem;
+                width: 100%;
+                margin-top: 1%;
+                text-align: center;
+            }
+
+            .footer-section {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 1.5rem;
+            }
+
+            .footer-section h2 {
+                font-size: 1.8rem;
+                margin-bottom: 8px;
+            }
+
+            .footer-section p,
+            .footer-section ul li a {
+                font-size: 1.4rem;
+            }
+
+            .social-icons a {
+                font-size: 3rem;
+            }
+
+            .footer-bottom {
+                font-size: 1.4rem;
+            }
+        }
     </style>
 
 </head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <body>
-    <a href="https://wa.me/7415118765?text=Hello%20there!" target="_blank" class="whatsapp-icon">
+    <a href="https://wa.me/7304745160?text=Hello%20there!" target="_blank" class="whatsapp-icon">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
     </a>
 
@@ -1531,12 +1602,15 @@ body {
         <div class="top">
             <div class="nav">
                 <div class="logo">
-                    <img src="./assets/mainlogo.png" alt="Logo">
+                    <a href="/">
+                        <img src="./assets/mainlogo.png" alt="Logo" class="cursor-pointer">
+                    </a>
                 </div>
+                
 
                 <div class="options" id="nav-options">
-                    <a href="./index.html">Home</a>
-                    <a href="./aboutus.html">About Us</a>
+                    <a href="/">Home</a>
+                    <a href="/about">About Us</a>
 
                     <!-- Services Link with Dropdown -->
                     <div class="relative inline-block text-left group">
@@ -1557,7 +1631,7 @@ body {
                             id="services-dropdown">
                             <div class="py-3 space-y-2" role="none">
                                 <!-- Executive Services -->
-                                <a href="./executiveservice.html"
+                                <a href="/executive"
                                     class="flex items-center px-4 py-3 text-base font-semibold text-gray-800 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition-all duration-300 ease-in-out"
                                     role="menuitem">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-700"
@@ -1568,7 +1642,7 @@ body {
                                     Executive Services
                                 </a>
                                 <!-- Human Resources -->
-                                <a href="./humanresources.html"
+                                <a href="/human-resource"
                                     class="flex items-center px-4 py-3 text-base font-semibold text-gray-800 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition-all duration-300 ease-in-out"
                                     role="menuitem">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-700"
@@ -1579,7 +1653,7 @@ body {
                                     Human Resources
                                 </a>
                                 <!-- Placement Services -->
-                                <a href="#"
+                                <a href="/placement"
                                     class="flex items-center px-4 py-3 text-base font-semibold text-gray-800 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition-all duration-300 ease-in-out"
                                     role="menuitem">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-700"
@@ -1593,7 +1667,7 @@ body {
                         </div>
                     </div>
 
-                    <a href="./contactus.html">Contact Us</a>
+                    <a href="/contact">Contact Us</a>
                 </div>
 
 
@@ -1624,64 +1698,64 @@ body {
                     <img src="./assets/1stpagelogo2.png" alt="">
                     <img src="./assets/1stpagelogo3.png" alt="">
                 </div>
-                <div class="rightbtn">
-                    <h1>Get Started<i class="ri-arrow-right-wide-line"></i></h1>
+                <div class="rightbtn" onclick="window.location.href='/contact'">
+                    <h1>Get Started <i class="ri-arrow-right-wide-line"></i></h1>
                 </div>
             </div>
 
-           
+
             <div id="mobile-nav"
-            class="fixed left-[-100%] top-0 w-full h-full bg-white shadow-md z-50 transition-transform duration-300 ease-in-out transform scale-100 origin-left">
-            <div class="p-4">
-                <!-- Close button -->
-                <div class="flex justify-end">
-                    <button id="close-btn" class="text-6xl font-bold" style="font-size: 4rem;">&times;</button>
-                </div>
-                <div class="space-y-4 mt-8">
-                    <a href="#" class="block px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200"
-                        style="font-size: 2rem;">Home</a>
-                    <a href="#" class="block px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200"
-                        style="font-size: 2rem;">About Us</a>
-                    
-                    <!-- Services Link with Dropdown for Mobile -->
-                    <div id="mobile-services-dropdown" class="block">
-                        <button id="mobile-services-toggle"
-                            class="w-full flex justify-between px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200 items-center"
-                            style="font-size: 2rem;">Services
-                            <svg class="h-6 w-6 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                fill="currentColor" aria-hidden="true">
-                                <path fill-rule="evenodd"
-                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                        </button>
-        
-                        <!-- Dropdown Options for Mobile -->
-                        <div id="mobile-services-content" class="hidden space-y-2 mt-2 pl-4">
-                            <a href="./executiveservice.html"
-                                class="block text-base font-semibold text-gray-800 hover:bg-gray-100 transition-all duration-300 ease-in-out py-2 rounded-lg"
-                                style="font-size: 1.8rem;">Executive Services</a>
-                            <a href="./humanresources.html"
-                                class="block text-base font-semibold text-gray-800 hover:bg-gray-100 transition-all duration-300 ease-in-out py-2 rounded-lg"
-                                style="font-size: 1.8rem;">Human Resources</a>
-                            <a href="./placementservices.html"
-                                class="block text-base font-semibold text-gray-800 hover:bg-gray-100 transition-all duration-300 ease-in-out py-2 rounded-lg"
-                                style="font-size: 1.8rem;">Placement Services</a>
-                        </div>
+                class="fixed left-[-100%] top-0 w-full h-full bg-white shadow-md z-50 transition-transform duration-300 ease-in-out transform scale-100 origin-left">
+                <div class="p-4">
+                    <!-- Close button -->
+                    <div class="flex justify-end">
+                        <button id="close-btn" class="text-6xl font-bold" style="font-size: 4rem;">&times;</button>
                     </div>
-        
-                    <a href="#" class="block px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200"
-                        style="font-size: 2rem;">Contact Us</a>
-                    <a href="#" class="block px-6 py-4 rounded bg-[#882390] transition-colors duration-200"
-                        style="font-size: 2.5rem; text-align: center;">Get Started</a>
+                    <div class="space-y-4 mt-8">
+                        <a href="/" class="block px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200"
+                            style="font-size: 2rem;">Home</a>
+                        <a href="/about" class="block px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200"
+                            style="font-size: 2rem;">About Us</a>
+
+                        <!-- Services Link with Dropdown for Mobile -->
+                        <div id="mobile-services-dropdown" class="block">
+                            <button id="mobile-services-toggle"
+                                class="w-full flex justify-between px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200 items-center"
+                                style="font-size: 2rem;">Services
+                                <svg class="h-6 w-6 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                    fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
+
+                            <!-- Dropdown Options for Mobile -->
+                            <div id="mobile-services-content" class="hidden space-y-2 mt-2 pl-4">
+                                <a href="/executive"
+                                    class="block text-base font-semibold text-gray-800 hover:bg-gray-100 transition-all duration-300 ease-in-out py-2 rounded-lg"
+                                    style="font-size: 1.8rem;">Executive Services</a>
+                                <a href="/human-resources"
+                                    class="block text-base font-semibold text-gray-800 hover:bg-gray-100 transition-all duration-300 ease-in-out py-2 rounded-lg"
+                                    style="font-size: 1.8rem;">Human Resources</a>
+                                <a href="/placement"
+                                    class="block text-base font-semibold text-gray-800 hover:bg-gray-100 transition-all duration-300 ease-in-out py-2 rounded-lg"
+                                    style="font-size: 1.8rem;">Placement Services</a>
+                            </div>
+                        </div>
+
+                        <a href="/contact" class="block px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200"
+                            style="font-size: 2rem;">Contact Us</a>
+                        <a href="/contact" class="block px-6 py-4 rounded bg-[#882390] transition-colors duration-200"
+                            style="font-size: 2.5rem; text-align: center;">Get Started</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <script>document.getElementById('mobile-services-toggle').addEventListener('click', function() {
-            const dropdownContent = document.getElementById('mobile-services-content');
-            dropdownContent.classList.toggle('show');
-        });
-        </script>
+            <script>document.getElementById('mobile-services-toggle').addEventListener('click', function () {
+                    const dropdownContent = document.getElementById('mobile-services-content');
+                    dropdownContent.classList.toggle('show');
+                });
+            </script>
 
 
 
@@ -1724,14 +1798,17 @@ body {
 
 
         </div>
-
+        <div class="ex-services">
+            <h1>Placement Services</h1>
+        </div>
         <div class="page1">
             <div class="left">
-                <h1>Placement Services</h1>
-                <img src="./assets/placementservices.jpg" alt="">
+
+                <img src="./assets/humanresource.webp" alt="">
             </div>
             <div class="right">
-                <p>We offer recruitment services to varied clients from various sectors across Middle East, Singapore
+                <p>
+                    We offer recruitment services to varied clients from various sectors across Middle East, Singapore
                     and Malaysia. We are specialized in recruiting manpower from various parts of India, Nepal, Srilanka
                     & Bangladesh for different categories as per our customers requirement. We have a large database of
                     candidates for multiple category viz. Engineers, Staffs, skilled & unskilled manpower to meet client
@@ -1746,6 +1823,7 @@ body {
 
             </div>
         </div>
+
 
         <div class="page8">
             <div class="leftt">
@@ -1821,7 +1899,6 @@ body {
 
         </div>
 
-
         <footer class="footer">
             <div class="footer-content">
                 <div class="footer-brand">
@@ -1834,12 +1911,17 @@ body {
                 <div class="footer-section">
                     <h2>Pages</h2>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Human Resources</a></li>
-                        <li><a href="#">Placement Services</a></li>
-                        <li><a href="#">Executive Services</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h2>Quick Links</h2>
+                    <ul>
+                        <li><a href="/executive">Human Resources</a></li>
+                        <li><a href="/placement">Placement Services</a></li>
+                        <li><a href="/executive">Executive Services</a></li>
                     </ul>
                 </div>
 
@@ -1859,7 +1941,8 @@ body {
                         Email: <a href="mailto:hrd@trisectglobal.com">hrd@trisectglobal.com</a>
                     </p>
                 </div>
-                <div class="footer-section social">
+
+                <div class="footer-section social" id="social">
                     <h2>Follow Us</h2>
                     <ul class="social-icons">
                         <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>

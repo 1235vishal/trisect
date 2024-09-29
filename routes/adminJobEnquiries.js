@@ -2,11 +2,6 @@ const express = require('express');
 const JobEnquiry = require('../models/JobEnquiry');
 const router = express.Router();
 
-
-
-
-
-
 // GET - Display all job enquiries to admin
 router.get('/', async (req, res) => {
     try {
@@ -21,8 +16,17 @@ router.get('/', async (req, res) => {
     }
 });
 
-
-
+router.post('/delete/:id', async (req, res) => {
+    console.log('Attempting to delete:', req.params.id);
+    try {
+        await JobEnquiry.findByIdAndDelete(req.params.id);
+        console.log(`Deleted enquiry with ID: ${req.params.id}`);
+        res.redirect('/admin');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error deleting enquiry');
+    }
+});
 
 
 module.exports = router;

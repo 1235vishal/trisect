@@ -8,11 +8,29 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="aboutus.css">
     <title>Trisect</title>
-<style>* {
+<style>
+ @font-face {
+    font-family: 'Nunito Sans';
+    src: url('./assets/nunito-sans/NunitoSans-Regular.woff2') format('woff2'),
+         url('./assets/nunito-sans/NunitoSans-Regular.woff') format('woff'),
+         url('./assets/nunito-sans/NunitoSans-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Nunito Sans';
+    src: url('./assets/nunito-sans/NunitoSans-Bold.woff2') format('woff2'),
+         url('./assets/nunito-sans/NunitoSans-Bold.woff') format('woff'),
+         url('./assets/nunito-sans/NunitoSans-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: gilroy;
+    font-family: 'Nunito Sans', sans-serif;
     font-size: 0.625rem;
     /* This sets 10px in rem */
 }
@@ -84,8 +102,7 @@ body {
 .whatsapp-icon {
     position: fixed;
     /* Fixed positioning */
-    left: 95%;
-    /* Distance from the left side */
+    left: 95%;    /* Distance from the left side */
     bottom: 20px;
     /* Distance from the bottom */
     width: 60px;
@@ -157,11 +174,11 @@ body {
     }
 
     .options a {
-        color: #333;
+        color: #060606;
         text-decoration: none;
         font-size: 1.6rem;
         /* Font size remains the same */
-        font-weight: 500;
+        font-weight: 600;
         position: relative;
         /* Needed for positioning the pseudo-element */
         overflow: hidden;
@@ -447,7 +464,7 @@ body {
 }
 
 .left h1 {
-    color: #2f2f2f;
+    color: #000000;
     font-size: 8rem;
 
 }
@@ -704,20 +721,24 @@ body {
     .whatsapp-icon {
         position: fixed;
         /* Fixed positioning */
-        left: 80%;
+        left: 82%;
     }
     .right{
        
     }
     .page1 .right h2{
-        font-size: 5rem;
-        width: 80%;
+        font-size: 3.5rem;
+        width: 95%;
     }
 .page1 .right p{
     font-size: 1.5rem;
 }
 .page1 .right .points {
     grid-template-columns: 1fr; /* Keep 1 column */
+}
+.page1 .right .dash{
+    width: 75vw;
+    margin-top: -5%;
 }
 }
 
@@ -764,7 +785,7 @@ body {
     /* Bold text for title */
     margin-bottom: 10px;
     /* Space below title */
-    width: 60%;
+    width: 70%;
     line-height: 1.2;
     color: #ffffff;
 
@@ -827,7 +848,7 @@ body {
 
 .page4 .dash {
     height: 20px;
-    width: 100%;
+    width: 82%;
 
     border-bottom: 20px solid #661C91;
     margin-top: -5%;
@@ -1027,7 +1048,7 @@ body {
         padding-top: 10%;
         width: 100%;
         /* Full width */
-        height: 55vh;
+        height: 60vh;
         /* Smaller height for small mobile */
     }
 
@@ -1049,6 +1070,7 @@ body {
         /* Adjust title font size */
         width: 100%;
         color: white;
+        text-align: left;
         /* Full width */
     }
 
@@ -1058,7 +1080,7 @@ body {
     }
 
     .page4 .dash {
-        width: 55vw;
+        width: 48vw;
         /* Adjust width */
         height: 5px;
         /* Height of the dash */
@@ -1528,112 +1550,137 @@ body {
 
 }
 
-/* Responsive: Mobile (max-width: 768px) */
+/* Base styling for mobile devices */
 @media (max-width: 768px) {
     .page8 {
         padding: 10px;
-        /* Smaller padding for mobile */
+        /* Adjust padding */
     }
 
     .page8 .leftt h1 {
-        font-size: 4rem;
-        /* Further reduce title size */
+        font-size: 3.5rem;
+        /* Adjust title size for better scalability */
     }
 
     .page8 .leftt h2 {
-        font-size: 1.8rem;
-        /* Further reduce subtitle size */
+        font-size: 1.6rem;
+        /* Adjust subtitle size */
     }
 
     .page8 .leftt .frame {
-        width: 90%;
-        /* Full width for the frame */
+        width: 100%;
+        /* Ensure frame uses full width */
+        margin-top: 5%;
     }
 
     .page8 .grid-item {
         font-size: 1.2rem;
-        /* Smaller font size for grid items */
+        /* Adjust grid item font size */
     }
 
     .page8 .leftt button {
         font-size: 1.2rem;
-        /* Further reduce button font size */
         padding: 6px 12px;
-        /* Smaller padding for mobile buttons */
+        /* Ensure button scales well */
     }
 
     .page8 .rightt {
-        margin-left: -20%;
+        margin-left: -10%;
+        /* Reduce margin for better alignment */
     }
 }
 
-/* Responsive: Small Mobile (max-width: 480px) */
+/* Styling for small mobile devices (max-width: 480px) */
 @media (max-width: 480px) {
     .page8 {
-        height: 140vh;
-        /* Minimal padding for very small screens */
+
+      height: 130vh;
+        padding: 8px;
+        /* Adjust padding and height for smaller screens */
     }
 
     .page8 .leftt h1 {
-        margin-top: -20%;
-        font-size: 5rem;
-        /* Further reduce title size */
-    }
-
-    .page8 .leftt {
-        height: auto;
+        font-size: 3rem;
+        /* Reduce title size for small mobile */
     }
 
     .page8 .leftt h2 {
-        font-size: 1.8rem;
-        margin-top: 5%;
-        /* Further reduce subtitle size */
+        font-size: 1.5rem;
+        margin-top: 3%;
+        /* Adjust subtitle size and margin */
     }
 
     .page8 .leftt .frame {
         width: 100%;
         margin-top: 5%;
-        /* Full width for the frame */
     }
 
     .page8 .leftt .frame h3 {
-        font-size: 2rem;
-        margin-top: 0%;
+        font-size: 1.5rem;
         font-weight: 500;
+        /* Adjust font size for smaller screens */
     }
 
     .page8 .grid-item {
         font-size: 1rem;
-        /* Further reduce font size for grid items */
+        /* Smaller font size for grid items */
     }
 
     .page8 .leftt button {
-        font-size: 2rem;
+        font-size: 1.5rem;
         margin-top: 2%;
-        /* Further reduce button font size */
         padding: 4px 8px;
-        /* Smaller padding for mobile buttons */
+        /* Smaller buttons for better usability */
     }
 
     .page8 .rightt {
-        margin-top: 5%;
-        height: auto;
+        margin-top: 15%;
+        /* Adjust margin and height */
     }
 
+    /* Circles alignment */
     .circle1 {
-        top: 50vh;
-        left: 40%;
+        top: 25vh;
+        left: 30%;
     }
 
     .circle2 {
-        left: 50%;
-        top: 6vh;
+        left: 40%;
+        top: -20vh;
     }
 
     .circle3 {
-        left: 45%;
-        top: 26vh;
+        left: 35%;
+        top: 0vh;
+    }
+}
 
+/* Styling for very small screens (max-width: 360px) */
+@media (max-width: 360px) {
+    .page8 .leftt h1 {
+        font-size: 2.5rem;
+        /* Further reduce title size */
+    }
+
+    .page8 .leftt h2 {
+        font-size: 1.4rem;
+        /* Adjust subtitle size */
+    }
+
+    .page8 .leftt .frame h3 {
+        font-size: 1.3rem;
+        /* Smaller font size for frame */
+    }
+
+    .page8 .leftt button {
+        font-size: 1.2rem;
+        padding: 3px 6px;
+        /* Adjust button size for very small screens */
+    }
+
+    .page8 .grid-item {
+        font-size: 0.9rem;
+        /* Smaller grid item font size */
     }
 }
 
@@ -1735,8 +1782,6 @@ body {
 }
 
 
-
-
 .footer {
     background-color: #2b2d42;
     color: #ffffff;
@@ -1757,7 +1802,6 @@ body {
 
 .footer-content {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
     transition: transform 0.3s ease-in-out;
     /* Smooth transformation on hover */
@@ -1766,7 +1810,7 @@ body {
 
 
 .footer-brand {
-    width: 35%;
+    width: 38%;
 }
 
 .footer-brand img {
@@ -1790,7 +1834,7 @@ body {
 }
 
 .footer-section {
-    width: 22%;
+    width: 15%;
     margin-right: 5%;
 }
 
@@ -1798,7 +1842,7 @@ body {
     font-size: 2.2rem;
     margin-bottom: 12px;
     color: #ff68eb;
-    font-weight: 400;
+    font-weight: 600;
     position: relative;
     transition: color 0.3s ease, transform 0.3s ease;
 }
@@ -1821,15 +1865,18 @@ body {
 
 .footer-section p,
 .footer-section ul {
-    font-size: 2rem;
+    font-size: 1.2rem;
     margin-bottom: 12px;
+}
 
+.footer-section p {
+    width: 150%;
 }
 
 .footer-section ul li a {
     color: #ffffff;
     text-decoration: none;
-    font-size: 2rem;
+    font-size: 1.6rem;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
@@ -1844,13 +1891,16 @@ body {
 }
 
 .footer-section a {
-    font-size: 1.6rem;
+    font-size: 1.2rem;
+}
+
+#social {
+    margin-top: 6%;
 }
 
 .social-icons {
     display: flex;
     gap: 20px;
-
 }
 
 .social-icons li {
@@ -1891,14 +1941,14 @@ body {
 
 .footer-bottom {
     text-align: center;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     margin-top: 2rem;
     border-top: 1px solid rgb(75, 75, 75);
     border-width: 100%;
 }
 
 .footer-bottom p {
-    font-size: 2rem;
+    font-size: 1.7rem;
     margin: 0;
     margin-top: 2%;
     transition: color 0.3s ease;
@@ -2008,13 +2058,11 @@ body {
     .footer-section h2 {
         font-size: 1.8rem;
         margin-bottom: 8px;
-        font-weight: 400;
     }
 
     .footer-section p,
     .footer-section ul li a {
         font-size: 1.4rem;
-        font-weight: 400;
     }
 
     .social-icons a {
@@ -2024,12 +2072,15 @@ body {
     .footer-bottom {
         font-size: 1.4rem;
     }
-}   </style>
+}
+ 
+
+  </style>
 </head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <body>
-    <a href="https://wa.me/7415118765?text=Hello%20there!" target="_blank" class="whatsapp-icon">
+    <a href="https://wa.me/7304745160?text=Hello%20there!" target="_blank" class="whatsapp-icon">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
     </a>
 
@@ -2037,12 +2088,15 @@ body {
         <div class="top">
             <div class="nav">
                 <div class="logo">
-                    <img src="./assets/mainlogo.png" alt="Logo">
+                    <a href="/">
+                        <img src="./assets/mainlogo.png" alt="Logo" class="cursor-pointer">
+                    </a>
                 </div>
+                
 
                 <div class="options" id="nav-options">
-                    <a href="./index.html">Home</a>
-                    <a href="./aboutus.html">About Us</a>
+                    <a href="/">Home</a>
+                    <a href="/about">About Us</a>
                 
                     <!-- Services Link with Dropdown -->
                     <div class="relative inline-block text-left group">
@@ -2057,21 +2111,21 @@ body {
                         <div class="absolute right-0 z-10 w-72 rounded-lg shadow-xl bg-white ring-1 ring-black ring-opacity-10 transition-transform duration-300 ease-out hidden group-hover:block" role="menu" aria-orientation="vertical" aria-labelledby="services-button" id="services-dropdown">
                             <div class="py-3 space-y-2" role="none">
                                 <!-- Executive Services -->
-                                <a href="./executiveservice.html" class="flex items-center px-4 py-3 text-base font-semibold text-gray-800 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition-all duration-300 ease-in-out" role="menuitem">
+                                <a href="/executive" class="flex items-center px-4 py-3 text-base font-semibold text-gray-800 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition-all duration-300 ease-in-out" role="menuitem">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-3 0v3m-3-6V9m9 3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                     Executive Services
                                 </a>
                                 <!-- Human Resources -->
-                                <a href="#" class="flex items-center px-4 py-3 text-base font-semibold text-gray-800 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition-all duration-300 ease-in-out" role="menuitem">
+                                <a href="/human-resource" class="flex items-center px-4 py-3 text-base font-semibold text-gray-800 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition-all duration-300 ease-in-out" role="menuitem">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 10H5m14 4H5m14 4H5m4-10h10M9 10H5v4m4-4v4M5 6h10m4 4V6m0 8v-4m-4 8v-4m4 0V4" />
                                     </svg>
                                     Human Resources
                                 </a>
                                 <!-- Placement Services -->
-                                <a href="#" class="flex items-center px-4 py-3 text-base font-semibold text-gray-800 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition-all duration-300 ease-in-out" role="menuitem">
+                                <a href="/placement" class="flex items-center px-4 py-3 text-base font-semibold text-gray-800 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition-all duration-300 ease-in-out" role="menuitem">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6m6-6v6m6-6v12" />
                                     </svg>
@@ -2081,7 +2135,7 @@ body {
                         </div>
                     </div>
                 
-                    <a href="./contactus.html">Contact Us</a>
+                    <a href="/contact">Contact Us</a>
                 </div>
                 
                 
@@ -2112,8 +2166,9 @@ body {
                     <img src="./assets/1stpagelogo2.png" alt="">
                     <img src="./assets/1stpagelogo3.png" alt="">
                 </div>
-                <div class="rightbtn">
-                    <h1>Get Started<i class="ri-arrow-right-wide-line"></i></h1>
+              
+                    <div class="rightbtn" onclick="window.location.href='/contact'">
+                        <h1>Get Started <i class="ri-arrow-right-wide-line"></i></h1>
                 </div>
             </div>
 
@@ -2126,9 +2181,9 @@ body {
                     <button id="close-btn" class="text-6xl font-bold" style="font-size: 4rem;">&times;</button>
                 </div>
                 <div class="space-y-4 mt-8">
-                    <a href="#" class="block px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200"
+                    <a href="/" class="block px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200"
                         style="font-size: 2rem;">Home</a>
-                    <a href="#" class="block px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200"
+                    <a href="/about" class="block px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200"
                         style="font-size: 2rem;">About Us</a>
                     
                     <!-- Services Link with Dropdown for Mobile -->
@@ -2146,21 +2201,21 @@ body {
         
                         <!-- Dropdown Options for Mobile -->
                         <div id="mobile-services-content" class="hidden space-y-2 mt-2 pl-4">
-                            <a href="./executiveservice.html"
+                            <a href="/executive"
                                 class="block text-base font-semibold text-gray-800 hover:bg-gray-100 transition-all duration-300 ease-in-out py-2 rounded-lg"
                                 style="font-size: 1.8rem;">Executive Services</a>
-                            <a href="./humanresources.html"
+                            <a href="/human-resource"
                                 class="block text-base font-semibold text-gray-800 hover:bg-gray-100 transition-all duration-300 ease-in-out py-2 rounded-lg"
                                 style="font-size: 1.8rem;">Human Resources</a>
-                            <a href="./placementservices.html"
+                            <a href="/placement"
                                 class="block text-base font-semibold text-gray-800 hover:bg-gray-100 transition-all duration-300 ease-in-out py-2 rounded-lg"
                                 style="font-size: 1.8rem;">Placement Services</a>
                         </div>
                     </div>
         
-                    <a href="#" class="block px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200"
+                    <a href="/contact" class="block px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200"
                         style="font-size: 2rem;">Contact Us</a>
-                    <a href="#" class="block px-6 py-4 rounded bg-[#882390] transition-colors duration-200"
+                    <a href="/contact" class="block px-6 py-4 rounded bg-[#882390] transition-colors duration-200"
                         style="font-size: 2.5rem; text-align: center;">Get Started</a>
                 </div>
             </div>
@@ -2392,8 +2447,8 @@ body {
         <footer class="footer">
             <div class="footer-content">
                 <div class="footer-brand">
-
-                    <img src="./assets/mainlogo.png" alt="">
+                   
+                        <img src="./assets/mainlogo.png" alt="">
 
                     <h2>Let’s Start Careers Here</h2>
                     <p>Your trusted partner in achieving career success through personalized guidance and support.</p>
@@ -2401,32 +2456,37 @@ body {
                 <div class="footer-section">
                     <h2>Pages</h2>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Human Resources</a></li>
-                        <li><a href="#">Placement Services</a></li>
-                        <li><a href="#">Executive Services</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
                     </ul>
                 </div>
-
+                <div class="footer-section">
+                    <h2>Quick Links</h2>
+                    <ul>
+                        <li><a href="/human-resource">Human Resources</a></li>
+                        <li><a href="/placement">Placement Services</a></li>
+                        <li><a href="/executive">Executive Services</a></li>
+                    </ul>
+                </div>
+                
                 <div class="footer-section">
                     <h2>Contact Us</h2>
                     <p>
-                        <i class="fas fa-map-marker-alt"></i>
-                        Address: Trisect Global, Laxmi Plaza, B Wing, No. 004, Patlipada, Hiranandani Estate, Behind
-                        McDonald's, Godbunder Road, Thane (W)- 400607 Maharashtra.
+                        <i class="fas fa-map-marker-alt"></i> 
+                        Address: Trisect Global, Laxmi Plaza, B Wing, No. 004, Patlipada, Hiranandani Estate, Behind McDonald's, Godbunder Road, Thane (W)- 400607 Maharashtra.
                     </p>
                     <p>
-                        <i class="fas fa-phone-alt"></i>
+                        <i class="fas fa-phone-alt"></i> 
                         Phone: <a href="tel:02235647615">022-35647615</a>
                     </p>
                     <p>
-                        <i class="fas fa-envelope"></i>
+                        <i class="fas fa-envelope"></i> 
                         Email: <a href="mailto:hrd@trisectglobal.com">hrd@trisectglobal.com</a>
                     </p>
                 </div>
-                <div class="footer-section social">
+                
+                <div class="footer-section social" id="social">
                     <h2>Follow Us</h2>
                     <ul class="social-icons">
                         <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
@@ -2440,7 +2500,6 @@ body {
                 <p>&copy; 2023 TRISECT GLOBAL • All Rights Reserved</p>
             </div>
         </footer>
-
 
 </body>
 
