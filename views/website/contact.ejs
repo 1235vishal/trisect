@@ -456,7 +456,7 @@ body {
 }
 
 .page1 {
-    height: 220vh;
+    height: 230vh;
     width: 100%;
     margin-top: 2%;
     margin-left: 5%;
@@ -518,82 +518,53 @@ body {
     line-height: 1.6;
 }
 
-.connect{
-    height: 50vh;
-    width: 100%;
+
+
+
+
+
+.map-container {
     display: flex;
-    padding-right: 5%;
-    margin-top: 5%;
-
-
-}
-.connect .left{
-    height: 100%;
-    width: 50%;
+    flex-direction: column;
+    align-items: flex-start; /* Aligns items to the left */
+    padding: 0 5%; /* Adds horizontal padding for better spacing */
 }
 
-
-.connect .right{
-    height: 100%;
-    width: 50%;
-}
-.connect .right h2{
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: #581991;
-}
-.connect .right p{
-    font-size: 1.5rem;
-    font-weight:400;
-    color: #4b4b4b;
-}
-.connect .right h3{
-    border-top: 1px dotted black;
-    font-size: 1.8rem;
-    font-weight: 600;
-    margin-top: 2%;
-    padding-top: 1%;
-    color: #581991;
-}
-.connect .right .social-media{
-    display: flex;
-    gap: 20px;
-    padding-top: 1%;
-    width: 30vw;
-}
-.connect .right i{
-    font-size: 2rem;
-    background-color: #621B90;
-    border-radius: 5px;
-
-    padding: 10px;
+/* Heading styling */
+.map-container h1 {
+    text-align: left;
+    margin-top: 10%;
+    line-height: 1.1;
+    font-size: 2.5rem; /* Base font size */
 }
 
-
-
-/* Responsive Typography: Adjust font size for smaller screens */
+/* Responsive adjustments */
 @media (max-width: 768px) {
-    .connect{
-        flex-direction: column;
+    .map-container {
+        padding: 0 3%; /* Reduce padding on smaller screens */
+    }
+
+    .map-container h1 {
+        font-size: 2rem; /* Smaller font size for mobile */
+        margin-top: 5%; /* Adjust margin for smaller screens */
     }
 }
 
 @media (max-width: 480px) {
-   
+    .page1{
+        height: 300vh;
+        padding-right: 5%;
+    }
+    .map-container {
+        padding: 0 2%; /* Further reduce padding for very small screens */
+    }
+
+    .map-container h1 {
+        font-size: 1.5rem; /* Even smaller font size for very small screens */
+        margin-top: 5%; /* Consistent margin for small screens */
+    }
 }
 
-
-.map-container h1{
-    text-align: left;
-    margin-top: 5%;
-    line-height: 1.1;
-}
-/* Set height and width for the maps */
-.map-container {
-    display: flex;
-    flex-direction: column;
-
-}
 
 iframe {
     width: 90%;
@@ -607,6 +578,7 @@ iframe {
     background-color: #2b2d42;
     color: #ffffff;
     padding: 3rem 5%;
+    padding-right: 5%;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -871,7 +843,9 @@ iframe {
     .footer-section ul li a {
         font-size: 1.4rem;
     }
-
+.footer-section p{
+    width: 100%;
+}
     .social-icons a {
         font-size: 3rem;
     }
@@ -1100,33 +1074,30 @@ iframe {
                         Sri Lanka</p>
                 </div>
             </div>
-            <div class="connect">
-       
-                <div class="left w-1/2 h-[60vh] bg-transparent p-4 rounded-lg overflow-y-auto mx-auto">
+            <div class="connect flex flex-col md:flex-row h-auto md:h-[50vh] w-full p-[5%]"> <!-- Changed to p-[5%] -->
+                <!-- Left Section -->
+                <div class="left w-full md:w-1/2 bg-transparent p-4 rounded-lg">
+                    <h2 class="text-2xl font-bold text-[#581991] mb-4">Fill the Form</h2>
                     <form action="/job-enquiry" method="POST" enctype="multipart/form-data" class="space-y-6">
-                        <!-- Grid container for two inputs per row -->
-                        <div class="grid grid-cols-2 gap-3 ">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <!-- Name Input -->
                             <div>
                                 <label for="name" class="block text-xl font-medium text-gray-700">Name</label>
                                 <input type="text" id="name" name="name" required
                                     class="mt-1 block w-full bg-transparent border border-gray-400 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-3 text-lg">
                             </div>
-                
                             <!-- Email Input -->
                             <div>
                                 <label for="email" class="block text-xl font-medium text-gray-700">Email</label>
                                 <input type="email" id="email" name="email" required
                                     class="mt-1 block w-full bg-transparent border border-gray-400 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-3 text-lg">
                             </div>
-                
                             <!-- Mobile Number Input -->
                             <div>
                                 <label for="mobile" class="block text-xl font-medium text-gray-700">Mobile</label>
                                 <input type="tel" id="mobile" name="mobile" required
                                     class="mt-1 block w-full bg-transparent border border-gray-400 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-3 text-lg">
                             </div>
-                
                             <!-- Subject Input -->
                             <div>
                                 <label for="subject" class="block text-xl font-medium text-gray-700">Subject</label>
@@ -1134,57 +1105,53 @@ iframe {
                                     class="mt-1 block w-full bg-transparent border border-gray-400 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-3 text-lg">
                             </div>
                         </div>
-                
-                        <!-- Message Input (full width) -->
+                        <!-- Message Input -->
                         <div>
                             <label for="message" class="block text-xl font-medium text-gray-700">Message</label>
                             <textarea id="message" name="message" rows="3" required
                                 class="mt-1 block w-full bg-transparent border border-gray-400 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-3 text-lg"></textarea>
                         </div>
-                
-                        <!-- Resume Upload (full width) -->
+                        <!-- Resume Upload -->
                         <div>
                             <label for="resume" class="block text-xl font-medium text-gray-700">Resume</label>
                             <input type="file" id="resume" name="resume" accept=".pdf, .doc, .docx" required
                                 class="mt-1 block w-full bg-transparent border border-gray-400 text-lg text-gray-500 rounded-md cursor-pointer focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
                             <p class="text-xs text-gray-500 mt-1">Accepted formats: PDF, DOC, DOCX. Max size: 2MB.</p>
                         </div>
-                
-                        <!-- Submit Button (centered and styled) -->
+                        <!-- Submit Button -->
                         <div>
-                            <button type="submit" class="w-1/4 py-3 px-4 text-white rounded-md shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 text-xl mx-auto block"
+                            <button type="submit" class="w-full md:w-1/4 py-3 px-4 text-white rounded-md shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 text-xl"
                                 style="background-color: #661C91;">
                                 Submit
                             </button>
                         </div>
                     </form>
                 </div>
-                
-                
-                
-
-                
-                
-                <div class="right">
-                    <h2>Call Us</h2>
-                    <p>022-35647615</p>
-                    <h2>Email Us</h2>
-                    <p>hrd@trisectglobal.com</p>
-                    <h2>Visit Us</h2>
-                    <p>Trisect Global, Laxmi Plaza, B Wing, No. 004, Patlipada, Hiranandani Estate, Behind McDonald's, Godbunder Road, Thane (W)- 400607 Maharashtra.</p>
-                    <h3>Social Links</h3>
-                    <div class="social-media">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-                </div>
-               
-
-       
             
-        </div>
+                <!-- Right Section -->
+                <div class="right w-full mt-8 md:w-1/2 bg-transparent p-4 rounded-lg md:mt-0">
+                    <h2 class="text-2xl font-bold text-[#581991] mb-4">Contact Us</h2>
+                    
+                    <h3 class="text-xl font-bold text-[#581991] mt-4">Call Us</h3>
+                    <p class="text-lg text-gray-700">022-35647615</p>
+                    
+                    <h3 class="text-xl font-bold text-[#581991] mt-4">Email Us</h3>
+                    <p class="text-lg text-gray-700">hrd@trisectglobal.com</p>
+                    
+                    <h3 class="text-xl font-bold text-[#581991] mt-4">Visit Us</h3>
+                    <p class="text-lg text-gray-700">Trisect Global, Laxmi Plaza, B Wing, No. 004, Patlipada, Hiranandani Estate, Behind McDonald's, Godbunder Road, Thane (W)- 400607 Maharashtra.</p>
+                    
+                    <h3 class="border-t-2 border-gray-300 text-xl font-semibold mt-4 pt-2 text-[#581991]">Social Links</h3>
+                    <div class="social-media flex gap-4 mt-2">
+                        <a href="#"><i class="fab fa-facebook text-2xl bg-[#621B90] rounded-md p-2"></i></a>
+                        <a href="#"><i class="fab fa-twitter text-2xl bg-[#621B90] rounded-md p-2"></i></a>
+                        <a href="#"><i class="fab fa-instagram text-2xl bg-[#621B90] rounded-md p-2"></i></a>
+                        <a href="#"><i class="fab fa-linkedin text-2xl bg-[#621B90] rounded-md p-2"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            
         <div class="map-container">
             <h1>Trisect Global Locations</h1>
             <!-- Embed First Location -->

@@ -1,116 +1,319 @@
-<!-- 
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="/styles.css">
-      <title>Admin Dashboard</title>
-  </head>
-  <body>
-      <header>
-          <h1>Admin Dashboard</h1>
-
-          <a href="/admin/logout">Logout</a>
-      </header>
-  
-      <main>
-          <section>
-              <h2>Manage Website Content</h2>
-              <ul>
-                  <li><a href="/admin/services">Manage Services</a></li>
-                  <li><a href="/admin/jobs">Manage Jobs</a></li>
-                  <li><a href="/admin/testimonials">Manage Testimonials</a></li>
-                  <li><a href="/admin/enquiries">Manage Job Enquiries</a></li> 
-              </ul>
-          </section>
-      </main>
-  </body>
-  </html>
-   -->
-   <!DOCTYPE html>
-   <html lang="en">
-   <head>
-       <meta charset="UTF-8">
-       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-       <title>Admin Dashboard</title>
-       <style>
-           body {
-               background-color: #f8f9fa; /* Light background */
-           }
-           header {
-               background-color: #343a40; /* Dark background */
-               color: white;
-               padding: 20px;
-               text-align: center;
-           }
-           header a {
-               color: white;
-               text-decoration: none;
-           }
-           header a:hover {
-               text-decoration: underline;
-           }
-           .card {
-               box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow effect */
-               margin: 20px 0;
-           }
-       </style>
-   </head>
-   <body>
-       <header>
-           <h1>Admin Dashboard</h1>
-           <a href="/admin/logout" class="btn btn-danger">Logout</a>
-       </header>
-     
-       <main class="container mt-4">
-           <h2 class="text-center">Manage Website Content</h2>
-           <div class="row">
-               <div class="col-md-3">
-                   <div class="card text-center">
-                       <div class="card-body">
-                           <i class="fas fa-cogs fa-3x mb-3"></i>
-                           <h5 class="card-title">Manage Services</h5>
-                           <a href="/admin/services" class="btn btn-primary">Go to Services</a>
-                       </div>
-                   </div>
-               </div>
-               <div class="col-md-3">
-                   <div class="card text-center">
-                       <div class="card-body">
-                           <i class="fas fa-briefcase fa-3x mb-3"></i>
-                           <h5 class="card-title">Manage Jobs</h5>
-                           <a href="/admin/jobs" class="btn btn-primary">Go to Jobs</a>
-                       </div>
-                   </div>
-               </div>
-               <div class="col-md-3">
-                   <div class="card text-center">
-                       <div class="card-body">
-                           <i class="fas fa-comment-dots fa-3x mb-3"></i>
-                           <h5 class="card-title">Manage Testimonials</h5>
-                           <a href="/admin/testimonials" class="btn btn-primary">Go to Testimonials</a>
-                       </div>
-                   </div>
-               </div>
-               <div class="col-md-3">
-                   <div class="card text-center">
-                       <div class="card-body">
-                           <i class="fas fa-envelope fa-3x mb-3"></i>
-                           <h5 class="card-title">Manage Job Enquiries</h5>
-                           <a href="/admin/enquiries" class="btn btn-primary">Go to Enquiries</a>
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </main>
-   
-       <!-- Bootstrap JS and dependencies (optional) -->
-       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.11/dist/umd/popper.min.js"></script>
-       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-   </body>
-   </html>
-   
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Global Styles */
+        body {
+            background-color: #f4f6f9; /* Light background */
+            font-family: 'Roboto', sans-serif;
+            color: #343a40;
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #ffffff; /* Light background */
+            color: #343a40; /* Dark text */
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        header img {
+            height: 50px;
+        }
+        
+        /* Logout Button */
+        .logout-btn {
+            background-color: #e63946; /* Logout button color */
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .logout-btn:hover {
+            background-color: #d62828;
+            text-decoration: none;
+            color: white;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            top: 70px; /* Height of the header */
+            left: 0;
+            height: 100%;
+            width: 250px;
+            background-color: #ffffff;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            padding-top: 20px;
+            transition: transform 0.3s ease-in-out;
+            overflow-y: auto;
+        }
+        
+        .sidebar.collapsed {
+            transform: translateX(-250px);
+        }
+        
+        .sidebar .nav-link {
+            color: #343a40;
+            font-size: 16px;
+            padding: 10px 20px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        
+        .sidebar .nav-link:hover {
+            background-color: #f1f1f1;
+            color: #002f6c;
+        }
+        
+        .sidebar .nav-link.active {
+            background-color: #002f6c;
+            color: white;
+        }
+        
+        .sidebar .section-title {
+            padding: 10px 20px;
+            font-size: 14px;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Main Content Styles */
+        .content {
+            margin-left: 250px;
+            padding: 100px 30px 30px 30px; /* Top padding accounts for fixed header */
+            transition: margin-left 0.3s ease-in-out;
+        }
+        
+        .content.collapsed {
+            margin-left: 0;
+        }
+        
+        main h2 {
+            margin-bottom: 30px;
+            color: #002f6c;
+            font-weight: 700;
+            text-align: center; /* Center the title */
+        }
+        
+        .card {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            background-color: white;
+            margin-bottom: 30px;
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .card-body {
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .card i {
+            color: #002f6c;
+            margin-bottom: 15px;
+        }
+        
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+            color: #002f6c;
+            font-weight: 500;
+            text-align: center; /* Center the card titles */
+        }
+        
+        .btn-primary {
+            background-color: #0077b6;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            align-self: center; /* Center the buttons */
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0096c7;
+        }
+        
+        /* Toggle Button for Sidebar */
+        .toggle-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #343a40; /* Dark color for visibility on light navbar */
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-250px);
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .content {
+                margin-left: 0;
+                padding: 100px 15px 15px 15px;
+            }
+            
+            .content.active {
+                margin-left: 250px;
+            }
+            
+            .toggle-btn {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .card-body {
+                padding: 20px 15px;
+            }
+            
+            .btn-primary {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="d-flex align-items-center">
+            <span class="toggle-btn mr-3 d-lg-none" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </span>
+            <a href="/admin/dashboard">
+                <img src="../assets/mainlogo.png" alt="Trisect Global Logo">
+            </a>
+        </div>
+        <a href="/admin/logout" class="btn logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </header>
+    
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="section-title">Manage Website Content</div>
+        <a href="/admin/testimonials" class="nav-link"><i class="fas fa-comment-dots mr-2"></i> Testimonials</a>
+        <a href="/admin/enquiries" class="nav-link"><i class="fas fa-envelope mr-2"></i> Job Enquiries</a>
+        <!-- Add more navigation links as needed -->
+        <!-- Uncomment and customize additional links
+        <div class="section-title">Other Sections</div>
+        <a href="/admin/services" class="nav-link"><i class="fas fa-cogs mr-2"></i> Services</a>
+        <a href="/admin/jobs" class="nav-link"><i class="fas fa-briefcase mr-2"></i> Jobs</a>
+        -->
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="content">
+        <main class="container-fluid">
+            <h2>Dashboard</h2>
+            <div class="row justify-content-center"> <!-- Center the row -->
+                <!-- Uncomment and customize additional cards as needed
+                <div class="col-md-3 col-sm-6">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-cogs fa-3x"></i>
+                            <h5 class="card-title">Manage Services</h5>
+                            <a href="/admin/services" class="btn btn-primary">Go to Services</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-briefcase fa-3x"></i>
+                            <h5 class="card-title">Manage Jobs</h5>
+                            <a href="/admin/jobs" class="btn btn-primary">Go to Jobs</a>
+                        </div>
+                    </div>
+                </div>
+                -->
+                <div class="col-lg-4 col-md-6 col-sm-12 d-flex"> <!-- Use d-flex to ensure equal height -->
+                    <div class="card text-center w-100">
+                        <div class="card-body d-flex flex-column">
+                            <div>
+                                <i class="fas fa-comment-dots fa-3x"></i>
+                                <h5 class="card-title">Manage Testimonials</h5>
+                            </div>
+                            <a href="/admin/testimonials" class="btn btn-primary mt-auto">Go to Testimonials</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 d-flex"> <!-- Use d-flex to ensure equal height -->
+                    <div class="card text-center w-100">
+                        <div class="card-body d-flex flex-column">
+                            <div>
+                                <i class="fas fa-envelope fa-3x"></i>
+                                <h5 class="card-title">Manage Job Enquiries</h5>
+                            </div>
+                            <a href="/admin/enquiries" class="btn btn-primary mt-auto">Go to Enquiries</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more cards as needed -->
+            </div>
+        </main>
+    </div>
+    
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.11/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <!-- Sidebar Toggle Script -->
+    <script>
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('active');
+            document.querySelector('.content').classList.toggle('active');
+        }
+        
+        // Optional: Close sidebar when clicking outside on small screens
+        document.addEventListener('click', function(event) {
+            const sidebar = document.querySelector('.sidebar');
+            const toggleBtn = document.querySelector('.toggle-btn');
+            if (!sidebar.contains(event.target) && !toggleBtn.contains(event.target) && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+                document.querySelector('.content').classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

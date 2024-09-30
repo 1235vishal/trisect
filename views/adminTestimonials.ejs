@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,12 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Manage Testimonials</title>
+    <style>
+        .navbar-brand img {
+            height: 40px; /* Adjust height of the logo */
+            margin-right: 10px; /* Spacing between logo and text */
+        }
+        .nav-link.logout {
+            color: red; /* Red color for Logout link */
+        }
+    </style>
 </head>
 <body>
-    <header class="bg-dark text-white p-3 text-center">
-        <h1>Manage Testimonials</h1>
-        <a href="/admin" class="btn btn-light">Back to Dashboard</a>
-    </header>
+   
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="../assets/mainlogo.png" alt="Company Logo"> 
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/admin/testimonials">Testimonials</a> <!-- Active class for current page -->
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link logout" href="/logout">Logout</a> <!-- Red color for Logout link -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <main class="container mt-5">
         <!-- Add New Testimonial Button -->

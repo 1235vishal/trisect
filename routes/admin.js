@@ -1,10 +1,10 @@
-// module.exports = router;
+// Load environment variables from .env file
+require('dotenv').config();
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const router = express.Router();
-const JWT_SECRET = 'your_jwt_secret_key';
 const cookieParser = require('cookie-parser');
 
 const JobEnquiry = require('../models/JobEnquiry');
@@ -19,7 +19,7 @@ const verifyToken = (req, res, next) => {
     const token = req.cookies.jwt;
     if (!token) return res.redirect('/admin/login');
     
-    jwt.verify(token, JWT_SECRET, (err, decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) return res.redirect('/admin/login');
         req.user = decoded;
         next();
@@ -42,7 +42,7 @@ router.post('/login', async (req, res) => {
         }
 
         // Generate JWT
-        const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.cookie('jwt', token, { httpOnly: true, maxAge: 3600000 }); // 1-hour JWT cookie
         req.flash('success', 'Logged in successfully');
         res.redirect('/admin/dashboard');
@@ -53,13 +53,9 @@ router.post('/login', async (req, res) => {
     }
 });
 
-
-
-
-// At the top of routes/admin.js
+// Create uploads directory if it doesn't exist
 const uploadDir = path.join(__dirname, '../public/uploads/resumes');
-
-if (!fs.existsSync(uploadDir)){
+if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
 }
 
@@ -73,9 +69,6 @@ router.get('/job-enquiries', async (req, res) => {
         res.status(500).send('Error fetching job enquiries');
     }
 });
-
-
-
 
 // GET - Render registration form
 router.get('/register', (req, res) => {
@@ -102,7 +95,7 @@ router.post('/register', async (req, res) => {
     await newUser.save();
 
     // Generate JWT and log in the user immediately after registration
-    const token = jwt.sign({ id: newUser._id }, JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.cookie('jwt', token, { httpOnly: true, maxAge: 3600000 });
     req.flash('success', 'User registered successfully! You are now logged in.');
     res.redirect('/admin/dashboard');
@@ -132,7 +125,5 @@ router.get('/logout', (req, res) => {
         res.redirect('/admin/login');
     });
 });
-
-
 
 module.exports = router;
