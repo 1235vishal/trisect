@@ -1,0 +1,141 @@
+<!-- views/contactLeads.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Leads</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .badge-primary { background-color: #007bff; }
+        .badge-success { background-color: #28a745; }
+        .badge-danger { background-color: #dc3545; }
+    </style>
+</head>
+<body>
+        <!-- Include Navbar Partial -->
+        <%- include('partials/navbar') %>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Contact Leads</h2>
+
+        <!-- Filter Options -->
+        <div class="mb-4">
+            <form method="GET" action="/contact/leads" class="form-inline">
+                <div class="form-group mr-3">
+                    <label for="status" class="mr-2">Status:</label>
+                    <select name="status" id="status" class="form-control" onchange="this.form.submit()">
+                        <option value="">All</option>
+                        <option value="New" <%= statusFilter === 'New' ? 'selected' : '' %>>New</option>
+                        <option value="Checked" <%= statusFilter === 'Checked' ? 'selected' : '' %>>Checked</option>
+                    </select>
+                </div>
+                <div class="form-group mr-3">
+                    <label for="sortBy" class="mr-2">Sort By:</label>
+                    <select name="sortBy" id="sortBy" class="form-control" onchange="this.form.submit()">
+                        <option value="createdAt" <%= sortBy === 'createdAt' ? 'selected' : '' %>>Submission Time (Newest)</option>
+                        <option value="-createdAt" <%= sortBy === '-createdAt' ? 'selected' : '' %>>Submission Time (Oldest)</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-secondary mr-2">Filter</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="resetFilters()">Reset Filters</button>
+            </form>
+        </div>
+
+        <!-- Contact Leads Table -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                    <th>Status</th>
+                    <th>Submission Time</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (leads.length > 0) { %>
+                    <% leads.forEach((lead, index) => { %>
+                        <tr>
+                            <td><%= index + 1 %></td>
+                            <td><%= lead.name %></td>
+                            <td><%= lead.email %></td>
+                            <td><%= lead.message %></td>
+                            <td>
+                                <span class="badge <%= lead.status === 'New' ? 'badge-primary' : 'badge-success' %>">
+                                    <%= lead.status %>
+                                </span>
+                            </td>
+                            <td><%= lead.createdAt.toLocaleString() %></td>
+                            <td>
+                                <% if (lead.status === 'New') { %>
+                                    <button class="btn btn-success btn-sm" onclick="updateStatus('<%= lead._id %>', 'Checked')">Mark as Checked</button>
+                                    <button class="btn btn-danger btn-sm" onclick="deleteLead('<%= lead._id %>')">Delete</button>
+                                <% } else { %>
+                                    <!-- No action buttons for Checked leads -->
+                                    N/A
+                                <% } %>
+                            </td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="7" class="text-center">No contact leads found.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+
+        <!-- Back to Admin Dashboard Button -->
+        <div class="text-center mt-4">
+            <a href="/admin/dashboard" class="btn btn-primary">Return to Admin Dashboard</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        function resetFilters() {
+            window.location.href = '/contact/leads';
+        }
+
+        function updateStatus(id, status) {
+            fetch(`/contact/leads/${id}/status`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ status })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                location.reload(); // Reload the page to see the updated status
+            })
+            .catch(error => {
+                console.error('Error updating status:', error);
+                alert('Failed to update status');
+            });
+        }
+
+        function deleteLead(id) {
+            if (confirm('Are you sure you want to delete this contact lead?')) {
+                fetch(`/contact/leads/${id}/delete`, {
+                    method: 'DELETE',
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    location.reload(); // Reload the page to see the updated list
+                })
+                .catch(error => {
+                    console.error('Error deleting lead:', error);
+                    alert('Failed to delete lead');
+                });
+            }
+        }
+    </script>
+</body>
+</html>

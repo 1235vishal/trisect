@@ -53,6 +53,33 @@ router.post('/login', async (req, res) => {
     }
 });
 
+
+
+
+
+
+module.exports = router
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Create uploads directory if it doesn't exist
 const uploadDir = path.join(__dirname, '../public/uploads/resumes');
 if (!fs.existsSync(uploadDir)) {

@@ -228,18 +228,14 @@
         <a href="/admin/logout" class="btn logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </header>
     
-    <!-- Sidebar -->
-    <nav class="sidebar">
+          <!-- Sidebar -->
+      <nav class="sidebar">
         <div class="section-title">Manage Website Content</div>
         <a href="/admin/testimonials" class="nav-link"><i class="fas fa-comment-dots mr-2"></i> Testimonials</a>
-        <a href="/admin/enquiries" class="nav-link"><i class="fas fa-envelope mr-2"></i> Job Enquiries</a>
-        <!-- Add more navigation links as needed -->
-        <!-- Uncomment and customize additional links
-        <div class="section-title">Other Sections</div>
-        <a href="/admin/services" class="nav-link"><i class="fas fa-cogs mr-2"></i> Services</a>
-        <a href="/admin/jobs" class="nav-link"><i class="fas fa-briefcase mr-2"></i> Jobs</a>
-        -->
+        <a href="/job/enquiries" class="nav-link"><i class="fas fa-briefcase mr-2"></i> Job Enquiries</a> <!-- Link to Job Enquiries -->
+        <a href="/contact/leads" class="nav-link"><i class="fas fa-envelope mr-2"></i> Contact Leads</a> <!-- Link to Contact Leads -->
     </nav>
+   
     
     <!-- Main Content -->
     <div class="content">
@@ -277,19 +273,175 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 d-flex"> <!-- Use d-flex to ensure equal height -->
+
+                <style>
+                    #job-enquiry-stats p {
+                        font-size: 1.1rem; /* Increase font size for better readability */
+                        margin: 10px 0; /* Add some spacing between the stats */
+                    }
+                    
+                    #job-enquiry-stats span {
+                        font-size: 1.3rem; /* Increase the font size of the numbers */
+                        font-weight: bold; /* Ensure the numbers are bold */
+                    }
+                    
+                    /* Optional: Add hover effects on the card */
+                    .card:hover {
+                        transform: translateY(-5px);
+                        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+                    }
+                    
+                    #job-enquiry-stats i {
+                        margin-right: 8px; /* Add space between icon and text */
+                    }
+                    
+                  
+                    
+                </style>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 d-flex">
                     <div class="card text-center w-100">
                         <div class="card-body d-flex flex-column">
                             <div>
-                                <i class="fas fa-envelope fa-3x"></i>
-                                <h5 class="card-title">Manage Job Enquiries</h5>
+                                <i class="fas fa-briefcase fa-3x"></i>
+                                <h5 class="card-title">Job Enquiry Stats</h5>
+                                <div id="job-enquiry-stats">
+                                    <p>
+                                        <i class="fas fa-list text-primary"></i>
+                                        <strong>Enquiries:</strong> 
+                                        <span id="total-enquiries" class="text-primary font-weight-bold">0</span>
+                                    </p>
+                                    <p>
+                                        <i class="fas fa-times text-danger"></i>
+                                        <strong>Rejected:</strong> 
+                                        <span id="total-rejected" class="text-danger font-weight-bold">0</span>
+                                    </p>
+                                    <p>
+                                        <i class="fas fa-check text-success"></i>
+                                        <strong>Qualified:</strong> 
+                                        <span id="qualified" class="text-success font-weight-bold">0</span>
+                                    </p>
+                                    <p>
+                                        <i class="fas fa-plus text-warning"></i>
+                                        <strong>New Jobs:</strong> 
+                                        <span id="new-jobs" class="text-warning font-weight-bold">0</span>
+                                    </p>
+                                </div>
                             </div>
-                            <a href="/admin/enquiries" class="btn btn-primary mt-auto">Go to Enquiries</a>
+                            <a href="/job/enquiries" class="btn btn-primary mt-auto">Go to Job Enquiries</a>
                         </div>
                     </div>
                 </div>
+                
+                
+                <script>
+                    // Fetch job enquiry statistics
+                    async function fetchJobEnquiryStats() {
+                        try {
+                            const response = await fetch('/job/stats');
+                            const stats = await response.json();
+                
+                            // Update the HTML with the fetched data
+                            document.getElementById('total-enquiries').innerText = stats.totalEnquiries || 0; // Total Enquiries
+                            document.getElementById('total-rejected').innerText = stats.totalRejected || 0; // Total Rejected
+                            document.getElementById('qualified').innerText = stats.qualified || 0; // Qualified
+                            document.getElementById('new-jobs').innerText = stats.newJobs || 0; // New Jobs
+                        } catch (error) {
+                            console.error('Error fetching job enquiry stats:', error);
+                        }
+                    }
+                
+                    // Call the function to fetch data when the page loads
+                    document.addEventListener('DOMContentLoaded', fetchJobEnquiryStats);
+                </script>
+                
+                <style>
+                    #contact-lead-stats {
+                        margin-top: 10px; /* Optional: Add some space above the stats */
+                    }
+                    
+                    .stat-item {
+                        display: flex; /* Use flexbox for alignment */
+                        align-items: center; /* Center items vertically */
+                        font-size: 14px; /* Smaller font size for stat descriptions */
+                        margin: 10px 80px; /* Add some margin for spacing */
+                    }
+                    
+                    .stat-item i {
+                        margin-right: 10px; /* Space between icon and text */
+                    }
+                    
+                    .stat-number {
+                        font-weight: bold; /* Make numbers bold */
+                        font-size: 20px; /* Increase font size for visibility */
+                    }
+                    
+                    /* Color codes for each type of stat */
+                    .total {
+                        color: #0077b6; /* Color for total leads */
+                    }
+                    
+                    .new {
+                        color: #28a745; /* Color for new contacts */
+                    }
+                    
+                    .checked {
+                        color: #ffc107; /* Color for checked contacts */
+                    }
+                    
+                </style>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 d-flex">
+                    <div class="card text-center w-100">
+                        <div class="card-body d-flex flex-column">
+                            <div>
+                                <i class="fas fa-address-book fa-3x"></i>
+                                <h5 class="card-title">Contact Leads Stats</h5>
+                                <div id="contact-lead-stats">
+                                    <div class="stat-item">
+                                        <i class="fas fa-users"></i>
+                                        <p><strong>Total Contact Leads:</strong> <span id="total-contact-leads" class="stat-number total">0</span></p>
+                                    </div>
+                                    <div class="stat-item">
+                                        <i class="fas fa-plus-circle"></i>
+                                        <p><strong>New Contacts:</strong> <span id="new-contacts" class="stat-number new">0</span></p>
+                                    </div>
+                                    <div class="stat-item">
+                                        <i class="fas fa-check-circle"></i>
+                                        <p><strong>Checked Contacts:</strong> <span id="checked-contacts" class="stat-number checked">0</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="/contact/leads" class="btn btn-primary mt-auto">View Leads</a>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <script>
+                    // Fetch contact lead statistics
+                    async function fetchContactLeadStats() {
+                        try {
+                            const response = await fetch('/contact/stats');
+                            const stats = await response.json();
+                
+                            // Update the HTML with the fetched data
+                            document.getElementById('total-contact-leads').innerText = stats.totalContactLeads || 0; // Total Contacts
+                            document.getElementById('new-contacts').innerText = stats.newContacts || 0; // New Contacts
+                            document.getElementById('checked-contacts').innerText = stats.checkedContacts || 0; // Checked Contacts
+                        } catch (error) {
+                            console.error('Error fetching contact lead stats:', error);
+                        }
+                    }
+                    // Call the function to fetch data when the page loads
+                    document.addEventListener('DOMContentLoaded', fetchContactLeadStats);
+                </script>
                 <!-- Add more cards as needed -->
             </div>
+
+
+
+
         </main>
     </div>
     

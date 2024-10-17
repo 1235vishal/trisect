@@ -315,7 +315,7 @@ body {
         display: flex;
         align-items: center;
         gap: 1vw;
-        margin-right: -30%;
+        margin-right: -28%;
         /* Adjusted margin for better alignment */
     }
 
@@ -830,7 +830,7 @@ body {
     /* Start with 0% width */
     height: 100%;
     /* Full height of the container */
-    background-color: #661C91;
+    background: linear-gradient(90deg, #ffb133, #e74c3c, #8e44ad);
     /* Color of the progress bar */
     transition: width 0.4s ease;
     /* Smooth transition effect */
@@ -2136,8 +2136,8 @@ body {
                             </div>
                         </div>
                     </div>
-                
                     <a href="/contact">Contact Us</a>
+                    <a href="/career">Career</a>   
                 </div>
                 
                 
@@ -2168,18 +2168,17 @@ body {
                     <img src="./assets/1stpagelogo2.png" alt="">
                     <img src="./assets/1stpagelogo3.png" alt="">
                 </div>
-              
-                    <div class="rightbtn" onclick="window.location.href='/contact'">
-                        <h1>Get Started <i class="ri-arrow-right-wide-line"></i></h1>
+                <div class="rightbtn" onclick="window.location.href='/contact'">
+                    <h1>Get Started <i class="ri-arrow-right-wide-line"></i></h1>
                 </div>
             </div>
 
             
-            <div id="mobile-nav"
+            <div id="mobile-nav"    
             class="fixed left-[-100%] top-0 w-full h-full bg-white shadow-md z-50 transition-transform duration-300 ease-in-out transform scale-100 origin-left">
             <div class="p-4">
                 <!-- Close button -->
-                <div class="flex justify-end">
+                <div class="flex justify-end " style="margin-left:90vw;">
                     <button id="close-btn" class="text-6xl font-bold" style="font-size: 4rem;">&times;</button>
                 </div>
                 <div class="space-y-4 mt-8">
@@ -2217,11 +2216,18 @@ body {
         
                     <a href="/contact" class="block px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200"
                         style="font-size: 2rem;">Contact Us</a>
+                        <a href="/career" class="block px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200"
+                        style="font-size: 2rem;">Career</a>
                     <a href="/contact" class="block px-6 py-4 rounded bg-[#882390] transition-colors duration-200"
                         style="font-size: 2.5rem; text-align: center;">Get Started</a>
                 </div>
             </div>
         </div>
+        <script>document.getElementById('mobile-services-toggle').addEventListener('click', function() {
+            const dropdownContent = document.getElementById('mobile-services-content');
+            dropdownContent.classList.toggle('show');
+        });
+        </script>
 
 
 
@@ -2259,11 +2265,7 @@ body {
                     }
                 });
             </script>
-<script>document.getElementById('mobile-services-toggle').addEventListener('click', function() {
-    const dropdownContent = document.getElementById('mobile-services-content');
-    dropdownContent.classList.toggle('show');
-});
-</script>
+
 
 
 
@@ -2349,7 +2351,7 @@ body {
             </div>
 
             <div class="right">
-                <div class="parallax-bg" style="background-image: url('./assets/1stpagebtm2.jpg');"></div>
+                <div class="parallax-bg" style="background-image: url('./assets/1stpagebtm2.png');"></div>
                 <!-- Parallax Background -->
             </div>
         </div>
@@ -2463,6 +2465,7 @@ body {
                         <li><a href="/">Home</a></li>
                         <li><a href="/about">About Us</a></li>
                         <li><a href="/contact">Contact Us</a></li>
+                        <li><a href="/career">Career</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -2478,7 +2481,9 @@ body {
                     <h2>Contact Us</h2>
                     <p>
                         <i class="fas fa-map-marker-alt"></i> 
-                        Address: Trisect Global, Laxmi Plaza, B Wing, No. 004, Patlipada, Hiranandani Estate, Behind McDonald's, Godbunder Road, Thane (W)- 400607 Maharashtra.
+                        Address: Trisect Global, 
+                        No. 26, Om Anand Industrial Estate,
+                        Opp. to Audi Service Centre, Raghunath Nagar, MS Road, Thane West- 400604, Maharashtra.
                     </p>
                     <p>
                         <i class="fas fa-phone-alt"></i> 

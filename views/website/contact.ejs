@@ -319,7 +319,7 @@ body {
         display: flex;
         align-items: center;
         gap: 1vw;
-        margin-right: -30%;
+        margin-right: -28%;
         /* Adjusted margin for better alignment */
     }
 
@@ -426,46 +426,21 @@ body {
         transition: all ease-in 0.5s;
     }
 }
-/* Ensure dropdown stays open when hovering over the dropdown */
-.group:hover .group-hover\\:block {
-    display: block;
-}
-
-#services-dropdown {
-    display: none;
-}
-
-/* Display dropdown on hover */
-.group:hover #services-dropdown {
-    display: block;
-}
-#mobile-services-content {
-    display: none;
-}
-
-#mobile-services-content.show {
-    display: block;
-}
-
-/* Additional hover effects */
-#mobile-services-dropdown button {
-    font-size: 2rem;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
 
 .page1 {
-    height: 230vh;
+    height: 300vh;
     width: 100%;
     margin-top: 2%;
     margin-left: 5%;
+    padding-right: 5%;
     background: url(./assets/2ndpagebg.png);
 }
 
 .page1 h1 {
-    font-size: 4rem;
+    font-size: 7rem;
+    color: #000000;
     font-weight: 600;
+    text-align: center;
 }
 
 /* Container for the cards */
@@ -473,7 +448,6 @@ body {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    margin-right: 5%;
 }
 
 /* Individual card styling */
@@ -526,16 +500,17 @@ body {
 .map-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Aligns items to the left */
-    padding: 0 5%; /* Adds horizontal padding for better spacing */
+    align-items: center; /* Aligns items to the left */
+    margin-left: 8%;
+    margin-top: 15%;
 }
 
 /* Heading styling */
 .map-container h1 {
-    text-align: left;
-    margin-top: 10%;
+    text-align: center;
+  
     line-height: 1.1;
-    font-size: 2.5rem; /* Base font size */
+    font-size: 5rem; /* Base font size */
 }
 
 /* Responsive adjustments */
@@ -914,8 +889,8 @@ iframe {
                             </div>
                         </div>
                     </div>
-                
                     <a href="/contact">Contact Us</a>
+                    <a href="/career">Career</a>   
                 </div>
                 
                 
@@ -952,11 +927,11 @@ iframe {
             </div>
 
             
-            <div id="mobile-nav"
+            <div id="mobile-nav"    
             class="fixed left-[-100%] top-0 w-full h-full bg-white shadow-md z-50 transition-transform duration-300 ease-in-out transform scale-100 origin-left">
             <div class="p-4">
                 <!-- Close button -->
-                <div class="flex justify-end">
+                <div class="flex justify-end " style="margin-left:90vw;">
                     <button id="close-btn" class="text-6xl font-bold" style="font-size: 4rem;">&times;</button>
                 </div>
                 <div class="space-y-4 mt-8">
@@ -994,6 +969,8 @@ iframe {
         
                     <a href="/contact" class="block px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200"
                         style="font-size: 2rem;">Contact Us</a>
+                        <a href="/career" class="block px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200"
+                        style="font-size: 2rem;">Career</a>
                     <a href="/contact" class="block px-6 py-4 rounded bg-[#882390] transition-colors duration-200"
                         style="font-size: 2.5rem; text-align: center;">Get Started</a>
                 </div>
@@ -1046,7 +1023,7 @@ iframe {
 
 
         </div>
-        <div class="page1">
+        <div class="page1"> 
             <h1>Contact Us</h1>
             <!-- Container holding the cards -->
             <div class="card-container">
@@ -1074,81 +1051,80 @@ iframe {
                         Sri Lanka</p>
                 </div>
             </div>
-            <div class="connect flex flex-col md:flex-row h-auto md:h-[50vh] w-full p-[5%]"> <!-- Changed to p-[5%] -->
+            <div class="connect flex flex-col md:flex-row h-auto md:h-[65vh] w-full p-[5%]">
                 <!-- Left Section -->
-                <div class="left w-full md:w-1/2 bg-transparent p-4 rounded-lg">
-                    <h2 class="text-2xl font-bold text-[#581991] mb-4">Fill the Form</h2>
-                    <form action="/job-enquiry" method="POST" enctype="multipart/form-data" class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <!-- Name Input -->
-                            <div>
-                                <label for="name" class="block text-xl font-medium text-gray-700">Name</label>
-                                <input type="text" id="name" name="name" required
-                                    class="mt-1 block w-full bg-transparent border border-gray-400 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-3 text-lg">
-                            </div>
-                            <!-- Email Input -->
-                            <div>
-                                <label for="email" class="block text-xl font-medium text-gray-700">Email</label>
-                                <input type="email" id="email" name="email" required
-                                    class="mt-1 block w-full bg-transparent border border-gray-400 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-3 text-lg">
-                            </div>
-                            <!-- Mobile Number Input -->
-                            <div>
-                                <label for="mobile" class="block text-xl font-medium text-gray-700">Mobile</label>
-                                <input type="tel" id="mobile" name="mobile" required
-                                    class="mt-1 block w-full bg-transparent border border-gray-400 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-3 text-lg">
-                            </div>
-                            <!-- Subject Input -->
-                            <div>
-                                <label for="subject" class="block text-xl font-medium text-gray-700">Subject</label>
-                                <input type="text" id="subject" name="subject" required
-                                    class="mt-1 block w-full bg-transparent border border-gray-400 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-3 text-lg">
-                            </div>
+                <div class="left flex-1 bg-white p-8 rounded-lg shadow-lg min-h-[500px]"> <!-- Adjusted min-height here -->
+                    <h2 class="text-4xl font-bold text-[#581991] mb-4">Get in Touch</h2>
+                    <p class="text-xl text-gray-700 mb-6">
+                        We would love to hear from you! Whether you have a question, need assistance, or just want to share your thoughts, feel free to reach out to us.
+                    </p>
+                    
+                    <form action="/contactus/submit" method="POST" class="space-y-6">
+                        <!-- Full Name Input -->
+                        <div>
+                            <label for="fullName" class="block text-xl font-medium text-gray-700">Your Name</label>
+                            <input type="text" id="fullName" name="fullName" required
+                                class="mt-1 block w-full bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-3 text-xl">
                         </div>
+                        
+                        <!-- Email Input -->
+                        <div>
+                            <label for="email" class="block text-xl font-medium text-gray-700">Your Email</label>
+                            <input type="email" id="email" name="email" required
+                                class="mt-1 block w-full bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-3 text-xl">
+                        </div>
+                
                         <!-- Message Input -->
                         <div>
-                            <label for="message" class="block text-xl font-medium text-gray-700">Message</label>
-                            <textarea id="message" name="message" rows="3" required
-                                class="mt-1 block w-full bg-transparent border border-gray-400 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-3 text-lg"></textarea>
+                            <label for="message" class="block text-xl font-medium text-gray-700">Your Message</label>
+                            <textarea id="message" name="message" rows="4" required
+                                class="mt-1 block w-full bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-3 text-xl"></textarea>
                         </div>
-                        <!-- Resume Upload -->
-                        <div>
-                            <label for="resume" class="block text-xl font-medium text-gray-700">Resume</label>
-                            <input type="file" id="resume" name="resume" accept=".pdf, .doc, .docx" required
-                                class="mt-1 block w-full bg-transparent border border-gray-400 text-lg text-gray-500 rounded-md cursor-pointer focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                            <p class="text-xs text-gray-500 mt-1">Accepted formats: PDF, DOC, DOCX. Max size: 2MB.</p>
-                        </div>
+                
                         <!-- Submit Button -->
-                        <div>
-                            <button type="submit" class="w-full md:w-1/4 py-3 px-4 text-white rounded-md shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 text-xl"
-                                style="background-color: #661C91;">
-                                Submit
+                        <div class="flex justify-center items-center h-full">
+                            <button type="submit"
+                                class="w-1/2 py-3 px-4 bg-[#661C91] mt-24 text-white rounded-md shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 text-xl">
+                                Send Message
                             </button>
                         </div>
                     </form>
                 </div>
-            
+                
                 <!-- Right Section -->
-                <div class="right w-full mt-8 md:w-1/2 bg-transparent p-4 rounded-lg md:mt-0">
-                    <h2 class="text-2xl font-bold text-[#581991] mb-4">Contact Us</h2>
-                    
-                    <h3 class="text-xl font-bold text-[#581991] mt-4">Call Us</h3>
-                    <p class="text-lg text-gray-700">022-35647615</p>
-                    
-                    <h3 class="text-xl font-bold text-[#581991] mt-4">Email Us</h3>
-                    <p class="text-lg text-gray-700">hrd@trisectglobal.com</p>
-                    
-                    <h3 class="text-xl font-bold text-[#581991] mt-4">Visit Us</h3>
-                    <p class="text-lg text-gray-700">Trisect Global, Laxmi Plaza, B Wing, No. 004, Patlipada, Hiranandani Estate, Behind McDonald's, Godbunder Road, Thane (W)- 400607 Maharashtra.</p>
-                    
-                    <h3 class="border-t-2 border-gray-300 text-xl font-semibold mt-4 pt-2 text-[#581991]">Social Links</h3>
-                    <div class="social-media flex gap-4 mt-2">
-                        <a href="#"><i class="fab fa-facebook text-2xl bg-[#621B90] rounded-md p-2"></i></a>
-                        <a href="#"><i class="fab fa-twitter text-2xl bg-[#621B90] rounded-md p-2"></i></a>
-                        <a href="#"><i class="fab fa-instagram text-2xl bg-[#621B90] rounded-md p-2"></i></a>
-                        <a href="#"><i class="fab fa-linkedin text-2xl bg-[#621B90] rounded-md p-2"></i></a>
-                    </div>
-                </div>
+<div class="right w-full mt-8 md:w-1/2 bg-transparent p-6 rounded-lg md:mt-0">
+    <h2 class="text-6xl font-bold text-[#581991] mb-6">Contact Information</h2>
+    
+    <h3 class="text-3xl font-bold text-[#581991] mt-4">Phone</h3>
+    <p class="text-xl mt-2 mb-4"><i class="fas fa-phone-alt text-[#621B90] mr-2"></i> 022-35647615</p>
+    
+    <h3 class="text-3xl font-bold text-[#581991] mt-4">Email</h3>
+    <p class="text-xl mt-2 mb-4"><i class="fas fa-envelope text-[#621B90] mr-2"></i> hrd@trisectglobal.com</p>
+    
+    <h3 class="text-3xl font-bold text-[#581991] mt-4">Visit Us</h3>
+    <p class="text-xl mt-2 mb-4 w-[50%]">
+        <i class="fas fa-map-marker-alt text-[#621B90] mr-2"></i> Trisect Global, 
+        No. 26, Om Anand Industrial Estate,
+        Opp. to Audi Service Centre, Raghunath Nagar, MS Road, Thane West- 400604, Maharashtra.
+    </p>
+
+    <!-- Office Timing Section -->
+    <div class="bg-[#F8F4FA] p-4 rounded-lg mt-6">
+        <h3 class="text-3xl font-bold text-[#581991]">Office Timing</h3>
+        <p class="text-xl mt-2 mb-2 flex items-center"><i class="fas fa-clock text-[#621B90] mr-2"></i> Monday - Friday: 9:00 AM - 6:00 PM</p>
+        <p class="text-xl flex items-center"><i class="fas fa-clock text-[#621B90] mr-2"></i> Saturday: 10:00 AM - 4:00 PM</p>
+    </div>
+    
+    <h3 class="border-t-2 border-gray-300 text-4xl font-semibold mt-8 pt-4 text-[#581991]">Follow Us</h3>
+    <p class="text-xl mt-2 text-gray-700">Stay connected through our social media platforms:</p>
+    <div class="social-media flex gap-6 mt-4">
+        <a href="#"><i class="fab fa-facebook text-3xl bg-[#621B90] text-white rounded-full p-3"></i></a>
+        <a href="#"><i class="fab fa-twitter text-3xl bg-[#621B90] text-white rounded-full p-3"></i></a>
+        <a href="#"><i class="fab fa-instagram text-3xl bg-[#621B90] text-white rounded-full p-3"></i></a>
+        <a href="#"><i class="fab fa-linkedin text-3xl bg-[#621B90] text-white rounded-full p-3"></i></a>
+    </div>
+</div>
+
             </div>
             
             
@@ -1160,9 +1136,11 @@ iframe {
                 width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
             <!-- Embed Second Location -->
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.8402784313544!2d72.9746318!3d19.2477917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7bba7c54cdf3f%3A0xdf89cd6775c79d5c!2sTrisect%20global!5e0!3m2!1sen!2sin!4v1695930951547!5m2!1sen!2sin"
-                frameborder="0" allowfullscreen></iframe>
+            <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.8402784313544!2d72.9746318!3d19.2477917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7bba7c54cdf3f%3A0xdf89cd6775c79d5c!2sTrisect%20global!5e0!3m2!1sen!2sin!4v1695930951547!5m2!1sen!2sin" 
+    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade">
+</iframe>
         </div>
 
     </div>
@@ -1181,6 +1159,7 @@ iframe {
                     <li><a href="/">Home</a></li>
                     <li><a href="/about">About Us</a></li>
                     <li><a href="/contact">Contact Us</a></li>
+                    <li><a href="/career">Career</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -1196,7 +1175,9 @@ iframe {
                 <h2>Contact Us</h2>
                 <p>
                     <i class="fas fa-map-marker-alt"></i> 
-                    Address: Trisect Global, Laxmi Plaza, B Wing, No. 004, Patlipada, Hiranandani Estate, Behind McDonald's, Godbunder Road, Thane (W)- 400607 Maharashtra.
+                    Address: Trisect Global, 
+                    No. 26, Om Anand Industrial Estate,
+                    Opp. to Audi Service Centre, Raghunath Nagar, MS Road, Thane West- 400604, Maharashtra.
                 </p>
                 <p>
                     <i class="fas fa-phone-alt"></i> 
@@ -1239,45 +1220,7 @@ iframe {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
 
-<script>
-    // Register the ScrollTrigger plugin
-    gsap.registerPlugin(ScrollTrigger);
 
-    // Select all progress items
-    const progressItems = document.querySelectorAll(".progress-item");
-
-    // Create ScrollTrigger for page4
-    ScrollTrigger.create({
-        trigger: ".page4", // The section that triggers the animation
-        start: "top 40%", // Start the animation when the top of page4 is at 40% of the viewport
-        end: "bottom top", // End the animation when the bottom of page4 hits the top of the viewport
-        onEnter: () => {
-            progressItems.forEach((item) => {
-                const progressBar = item.querySelector(".progress-bar");
-                const progressNumber = item.querySelector(".progress-number");
-
-                // Animate the progress bar width
-                gsap.to(progressBar, {
-                    width: "90%", // Fill the bar to 90%
-                    duration: 1, // Duration of the animation
-                    ease: "power1.out" // Easing function for the animation
-                });
-
-                // Animate the number from 0 to 90%
-                let count = 0; // Initialize the count
-                const interval = setInterval(() => {
-                    if (count < 90) {
-                        count++;
-                        progressNumber.innerText = count + "%"; // Update the displayed number
-                    } else {
-                        clearInterval(interval); // Clear the interval once it reaches 90%
-                    }
-                }, 10); // Adjust speed of the counting
-            });
-        },
-
-    });
-</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
     integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="

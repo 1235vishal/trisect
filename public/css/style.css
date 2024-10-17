@@ -17,3 +17,22 @@ nav ul li a {
 nav ul li a:hover {
     color: blue;
 }
+/* public/css/styles.css */
+
+/* Example Custom Styles */
+
+/* Adjust table cell padding */
+.table td, .table th {
+    vertical-align: middle;
+    padding: 0.75rem;
+}
+
+/* Style the Update Status dropdown */
+.dropdown-menu button.dropdown-item {
+    cursor: pointer;
+}
+
+/* Ensure badges have consistent sizing */
+.badge {
+    font-size: 0.9em;
+}

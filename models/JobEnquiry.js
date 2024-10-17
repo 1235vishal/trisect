@@ -1,48 +1,12 @@
-// const mongoose = require('mongoose');
-
-// const jobEnquirySchema = new mongoose.Schema({
-//     name: { type: String, required: true },
-//     email: { type: String, required: true },
-//     mobile: { type: String, required: true },
-//     subject: { type: String, required: true },
-//     message: { type: String, required: true },
-//     createdAt: { type: Date, default: Date.now }
-// });
-
-// const JobEnquiry = mongoose.model('JobEnquiry', jobEnquirySchema);
-// module.exports = JobEnquiry;
 // models/JobEnquiry.js
 const mongoose = require('mongoose');
 
-const JobEnquirySchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true
-    },
-    mobile: {
-        type: String,
-        required: true
-    },
-    subject: {
-        type: String,
-        required: true
-    },
-    message: {
-        type: String,
-        required: true
-    },
-    resume: {
-        type: String, // Store the file path or filename
-        required: true
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    }
-});
+const jobEnquirySchema = new mongoose.Schema({
+    fullName: { type: String, required: true },
+    email: { type: String, required: true },
+    phone: { type: String, required: true },
+    resume: { type: String, required: true },
+    status: { type: String, enum: ['New', 'Qualified', 'Rejected'], default: 'New' },
+}, { timestamps: true });
 
-module.exports = mongoose.model('JobEnquiry', JobEnquirySchema);
+module.exports = mongoose.model('JobEnquiry', jobEnquirySchema);

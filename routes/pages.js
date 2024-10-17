@@ -5,11 +5,14 @@ const Testimonial = require('../models/Testimonial');
 
 // Home route
 router.get('/', async (req, res) => {
-  const testimonials = await Testimonial.find(); // Fetch testimonials from the database
-  const images = testimonials.map(testimonial => ({ src: testimonial.image, alt: testimonial.name })); // Extract image paths
-  res.render('website/home', { testimonials, images }); // Pass both testimonials and images
+  try {
+      const testimonials = await Testimonial.find(); // Fetch testimonials from the database
+      res.render('website/home', { testimonials }); // Pass testimonials data to the view
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Server Error');
+  }
 });
-
 
 // About route
 router.get('/about', (req, res) => {
@@ -33,6 +36,10 @@ router.get('/human-resource', (req, res) => {
 
 router.get('/placement', (req, res) => {
   res.render('website/placement'); // Updated path
+});
+
+router.get('/career', (req, res) => {
+  res.render('website/career'); // Updated path
 });
 
 module.exports = router;

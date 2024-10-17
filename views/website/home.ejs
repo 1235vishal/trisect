@@ -323,7 +323,7 @@ body {
         display: flex;
         align-items: center;
         gap: 1vw;
-        margin-right: -30%;
+        margin-right: -28%;
         /* Adjusted margin for better alignment */
     }
 
@@ -481,19 +481,19 @@ body {
 
 @keyframes backgroundSlideshow {
     0% {
-        background-image: url(./assets/1stpagebtm1.jpg);
+        background-image: url(./assets/1stpagebtm1.png);
     }
 
     25% {
-        background-image: url(./assets/1stpagebtm2.jpg);
+        background-image: url(./assets/1stpagebtm2.png);
     }
 
     50% {
-        background-image: url(./assets/1stpagebtm3.jpg);
+        background-image: url(./assets/1stpagebtm3.png);
     }
 
     100% {
-        background-image: url(./assets/1stpagebtm1.jpg);
+        background-image: url(./assets/1stpagebtm1.png);
     }
 }
 
@@ -582,8 +582,6 @@ body {
     transition: color 0.3s ease;
     /* Transition for text color */
 }
-
-
 
 
 
@@ -730,14 +728,9 @@ body {
 
 @media (max-width: 480px) {
     .whatsapp-icon {
-        left: 82%;
+        left: 85vw;
     }
-    .page1 .bottom {
-        height: auto; /* Further adjust for smaller screens */
-        padding-left: 1%;
-        padding-top: 8vh;
-    }
-}
+
     .bottom {
         padding-top: 10vh;
         /* Further reduce padding */
@@ -775,7 +768,6 @@ body {
         margin-top: 5%;
         font-weight: 400;
     }
-    
 }
 
 .page2 {
@@ -786,10 +778,9 @@ body {
     background-color: #f1f1f1;
     height: 180vh;
     width: 100%;
-    padding-top: 2%;
+    padding-top: 3%;
     padding-left: 10%;
     padding-right: 10%;
-    
 
 }
 
@@ -818,22 +809,27 @@ body {
     padding: 20px;
     /* Padding inside the box */
     background-color: rgb(255, 255, 255);
-    display: flex;
+    padding: 15px;
+    /* Padding inside each box */
+
     color: #000;
     border-radius: 10px;
-    flex-direction: column;
+
     /* Stack contents vertically */
-    height: 55vh; /* Maintain a consistent height */
+    height: 50vh;
     transform: translateY(0);
     opacity: 1;
-    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+    transition: transform 0.5s ease-out, background 0.5s ease-in, color 0.5s ease-out;
 }
 
 .box:hover {
     background: linear-gradient(#ff68eb, #822291, #581991);
     color: #000;
-    transition: transform 0.3s ease-out, background-color 0.3s ease-out;
-    /* Smooth transition */
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    transition: transform 0.5s ease-in, background 0.5s ease-in, color 0.5s ease-in;
+}
+.box:hover p{
+color: rgb(255, 255, 255);
 }
 
 .services .box.pre-animate {
@@ -849,8 +845,10 @@ body {
     font-size: 1.8rem;
     /* Paragraph font size */
     color: gray;
-    width: 70%;
+    height: 14vh;
+    width: 90%;
 }
+
 
 .img {
     height: 85px;
@@ -878,33 +876,51 @@ body {
 }
 
 .box button {
-    background-color: #878787;
-    color: #eeeeee;
-    width: 50%;
-    margin-top: auto; /* Push button to the bottom */
-    font-weight: 600; /* Button text color */
-    padding: 10px 30px; /* Button padding */
-    border: none; /* Remove default border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Change cursor on hover */
-    font-size: 1.5rem;
-    transition: background-color 0.3s; /* Smooth transition for hover */
-}
-
-
-
-
-.box button:hover {
     background-color: #3c3c3c;
-    /* Button hover color */
-    transform: scale(1.05);
-    /* Slight scale up on hover */
+    color: #ffffff;
+    padding: 10px 30px;
+    border: none;
+   border: 2px solid black;
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin-top: 7%;
+    align-self: flex-start;
+    position: relative; /* Required for pseudo-element */
+    overflow: hidden; /* Hide overflow for the hover effect */
+    transition: color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
 }
+
+/* Button After Pseudo-element for Hover Background */
+.box button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0; /* Start with 0 width */
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2); /* Dark overlay */
+    transition: width 0.3s ease; /* Smooth transition to expand width */
+    z-index: -1; /* Position behind the text */
+    font-weight: 800;
+}
+
+/* Hover Effect */
+.box button:hover {
+    background-color: #3c3c3c; /* Change background on hover */
+    transform: scale(1.01); /* Slightly enlarge the button on hover */
+    color: #ffffff; /* Change text color on hover */
+}
+
+/* Expand background on hover */
+.box button:hover::after {
+    width: 100%; /* Expand the overlay across the entire button */
+}
+
 
 /* Large Desktops */
 @media (min-width: 1200px) {
     .service {
-        font-size: 1.6rem;
+        font-size: 1.3rem;
     }
 
 
@@ -965,7 +981,7 @@ body {
 /* Mobile Devices (max-width: 767px) */
 @media (max-width: 767px) {
     .page2 {
-        height: auto;
+        height: 400vh;
         /* Adjust height for flexibility across devices */
         background-image: none;
         background-color: #ebebeb;
@@ -974,13 +990,13 @@ body {
         /* Add padding for content spacing */
     }
 .govlogos{
-    height: 15vh;
+    margin-top: -2%;
     background-color: #ebebeb;
-    padding-bottom: 10%;
+    padding: 10px;
 }
     .services {
         margin-top: 5%;
-        padding-top: 10%;
+        padding-top: 5%;
         display: grid;
         grid-template-columns: 1fr;
         /* Single column layout for mobile */
@@ -1054,8 +1070,8 @@ body {
 /* Small Mobile Devices (max-width: 480px) */
 @media (max-width: 480px) {
     .page2 {
-      
         padding: 5px;
+        height: 370vh;
         /* Reduce padding for smaller screens */
     }
 
@@ -1072,8 +1088,9 @@ body {
     .box button {
         font-size: 1.1rem;
         /* Further reduce button font size */
-        padding: 8px 18px;
+        padding: 8px 10px;
         /* Adjust button padding */
+        margin-top: -15%;
     }
 
     .img {
@@ -1119,7 +1136,7 @@ body {
 }
 
 .page3 {
-    height: 95vh;
+    height: 100vh;
     /* Use full viewport height */
     width: 100%;
     display: flex;
@@ -1142,7 +1159,7 @@ body {
     /* Allow positioning for parallax */
     overflow: hidden;
     /* Hide overflow */
-    background-image: url('./assets/1stpagebtm1.jpg');
+    background-image: url('./assets/1stpagebtm1.png');
     /* Set the background image */
     background-size: cover;
     /* Cover the entire area */
@@ -1367,7 +1384,7 @@ body {
     }
 
     .page3 .dash {
-        width: 65vw;
+        width: 55vw;
         height: 5px;
         border-bottom: 10px solid #661C91;
         margin-top: -2.5%;
@@ -1388,7 +1405,7 @@ body {
 
 
 .page4 {
-    height: 100vh;
+    height: 95vh;
     /* Use full viewport height */
     width: 100%;
     display: flex;
@@ -1439,7 +1456,7 @@ body {
     /* Font size for paragraph */
     margin-bottom: 20px;
     /* Space below paragraph */
-    color: #a2a2a2;
+    color: #e3e3e3;
     /* Dark text color for contrast */
     margin-top: 2%;
     width: 80%;
@@ -1473,16 +1490,18 @@ body {
     /* Start with 0% width */
     height: 100%;
     /* Full height of the container */
-    background-color: #661C91;
-    /* Color of the progress bar */
-    transition: width 0.4s ease;
-    /* Smooth transition effect */
+    background: linear-gradient(90deg, #ffb133, #e74c3c, #8e44ad);
+    /* New vibrant gradient colors */
+    transition: width 0.4s ease, background 0.4s ease;
+    /* Smooth transition effect for both width and background */
 }
+
+
 
 .progress-number {
     font-size: 16px;
     margin-top: 2%;
-    color: #661C91;
+    color: #ab3dd9;
     /* Color of the number */
     font-weight: bold;
     /* Make the number bold */
@@ -1499,40 +1518,66 @@ body {
 
 .page4 .left button {
     padding: 10px 25px;
-    /* Padding for .page4 .left button*/
-    background-color: #661C91;
-    /* Button color */
+    /* Padding for .page4 .left button */
+    background: linear-gradient(#661C91, #581991);
+    /* Gradient background for more visual appeal */
     color: white;
     /* Button text color */
-    border: none;
+    text-align: center;
     /* Remove default border */
-    margin-top: 3%;
-    border-radius: 5px;
+    margin-top: 5%;
+   border: 2px solid black;
     /* Rounded corners */
     cursor: pointer;
     /* Pointer cursor */
     font-size: 1.5rem;
     /* Font size */
-    transition: background-color 0.3s;
-    /* Smooth background change */
+    position: relative;
+    /* Position for the pseudo-element */
+    overflow: hidden;
+    /* Hide overflow for the after pseudo-element */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    /* Smooth transition for background, transform */
+}
+
+.page4 .left button:after {
+    content: '';
+    /* Required for pseudo-element */
+    position: absolute;
+    /* Positioning */
+    top: 0;
+    /* Align to the top */
+    left: 0;
+    /* Align to the left */
+    width: 0;
+    /* Initial width */
+    height: 100%;
+    /* Full height */
+    background-color: rgba(0, 0, 0, 0.3);
+    /* Dark overlay for hover effect */
+    transition: width 0.3s ease;
+    /* Transition for expanding width */
+    z-index: -1;
+    /* Position behind the text */
 }
 
 .page4 .left button:hover {
+    color: #ffffff;
+    /* Change text color on hover */
     background-color: #5a1580;
-    /* Darker color on hover */
+    /* Darker gradient color on hover */
+    transform: scale(1.01);
+    /* Slightly enlarge the button on hover */
 }
 
-.page4 {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 90vh;
-    /* Full height of the viewport */
-    background-color: #3a3a3a;
-    /* Background color */
-
+.page4 .left button:hover:after {
+    width: 100%;
+    /* Expand the overlay color on hover */
 }
-
+.page4 .left button i{
+    font-size: 1.5  rem;
+    
+}
 
 .right {
     width: 51vw;
@@ -1720,7 +1765,7 @@ body {
     }
 
     .page4 .dash {
-        width: 47vw;
+        width: 55vw;
         /* Adjust width */
         height: 5px;
         /* Height of the dash */
@@ -1847,7 +1892,7 @@ body {
 
 @media (max-width: 478px) {
     .page5 {
-        height: 230vh;
+       height: 230vh;
     }
 
     .logo-box:hover {
@@ -1887,7 +1932,7 @@ body {
     /* Full width */
     overflow: hidden;
     /* Prevent content overflow */
-    background-image: url('./assets/1stpagebtm1.jpg');
+    background-image: url('./assets/1stpagebtm1.png');
     /* Background image */
     background-size: cover;
     /* Ensure the background covers the entire container */
@@ -2005,15 +2050,11 @@ body {
     /* Expand the background color */
 }
 
-/* Optional: Ensure proper styling for the icon */
-.page6 .text button i {
-    transition: color 0.3s ease;
-    /* Transition for icon color */
-}
+
 
 /* Change icon color on hover */
 .page6 .text button:hover i {
-    color: black;
+    color: rgb(255, 255, 255);
     /* Change icon color to black */
 }
 
@@ -2166,143 +2207,162 @@ body {
 }
 
 
+
 .page7 {
-    height: 70vh;
-    width: 100%;
-    background-color: #ffffff;
-    border-radius: 15px;
-    /* Rounded corners */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    /* Soft shadow */
-    background-image: url(./assets/2ndpagebg.png);
+    background: #ffffff; /* Background color */
+    height: 60vh; /* Adjusted height for better spacing */
+    width: 100%; 
+    background-image: url(./assets/2ndpagebg.png); /* Background image */
+    background-size: cover; /* Cover the entire area */
+    background-position: center; /* Center background image */
 }
 
-.page7 .reviews {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    height: 70vh;
-    /* Overall section height remains the same */
+.page7 h2 {
+    font-size: 3rem; /* Font size for better visibility */
+    color: #000000; /* Change color of heading */
+    margin-bottom: 20px; /* Space below heading */
+    text-align: center; /* Center heading text */
+    font-weight: 700;
 }
 
-.page7 .reviews h1 {
-    font-size: 5rem;
-    /* Adjusted size */
-    font-weight: 600;
-    color: #451591;
-    /* Darker color for contrast */
-    margin-bottom: 20px;
-    /* Space below the title */
+.container {
+    width: 100%; /* Width of the container */
+    height: 100%; /* Height of the container */
+    position: relative; /* Allow absolute positioning for child elements */
 }
 
-.rimg {
-    height: 100%;
-    /* Increased container height to 60vh */
-    width: 40vw;
-    /* Decreased width for a more balanced look */
-    position: relative;
-    /* Enable positioning for the children */
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: auto;
-    overflow: hidden;
-    /* Prevent overflow of images */
+.testimonial-box {
+    display: flex; /* Use flex to center the testimonials */
+    justify-content: center; /* Center testimonials */
+  margin-top: 5%;
+    width: 100%; /* Full width of the container */
+    height: 100%; /* Full height of the container */
+    position: relative; /* Enable absolute positioning for the testimonials */
+    overflow: hidden; /* Hide overflow if needed */
 }
 
-.rimg img {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    object-fit: cover;
-    /* Ensure images cover the container */
-    opacity: 0;
-    /* Initially hidden */
-    transform: scale(0.8);
-    /* Start slightly smaller */
+.testimonial {
+    position: absolute; /* Position testimonials absolutely */
+    padding: 20px; /* Padding for a larger box */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background-image: linear-gradient(120deg, #d9d9d9 0%, #ffffff 100%);
     border-radius: 10px;
-    /* Match image corners */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack content vertically */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text */
+    transition: opacity 0.5s ease-in-out; /* Smooth transition */
+    opacity: 0; /* Initially hidden */
+    width: 40vw; /* Fixed width for all cards */
+    height: 40vh; /* Increased fixed height for all cards */
 }
 
-
-/* Responsive: Tablet (768px to 1024px) */
-@media (max-width: 1024px) {
-    .page7 {
-        height: auto;
-        /* Allow height to adjust based on content */
-        padding: 20px;
-        /* Add some padding for better spacing */
-    }
-
-    .page7 .reviews h1 {
-        font-size: 4rem;
-        /* Smaller title size for tablets */
-    }
-
-    .rimg {
-        width: 80vw;
-        /* Make image container wider */
-    }
-
-    .rimg img {
-        transform: scale(0.9);
-        /* Adjust scale for better visibility */
-    }
+.testimonial.active {
+    opacity: 1; /* Show the active testimonial */
 }
 
-/* Responsive: Mobile (max-width: 768px) */
+.fas {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    font-size: 25px;
+    color: #222;
+}
+
+.testimonial-text {
+    font-size: 2rem; /* Font size for message */
+    line-height: 1.5; /* Keep this fixed */
+    margin: 10px 0;
+    flex: 1; /* Allow this to grow and fill available space */
+    font-style: bold;
+}
+
+.testimonial-user {
+    display: flex; /* Flexbox for user info layout */
+    align-items: center; /* Align items center */
+  
+    width: 100%; /* Full width for user info */
+}
+
+.user-img {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 60px; /* User image size */
+    height: 60px; /* User image size */
+    border-radius: 50%; /* Circle shape */
+}
+
+.user-info {
+    margin-left: 20px; /* Space between image and text */
+    display: flex; /* Use flexbox for user info layout */
+    flex-direction: column; /* Stack name and job details vertically */
+    align-items: flex-start; /* Align items to the start */
+}
+
+.user-name {
+    font-weight: 800; /* Bold name */
+    font-size: 18px; /* Fixed font size for user name */
+}
+
+.user-job-details {
+    font-size: 14px; /* Fixed font size for job title */
+}
+
+.line {
+    width: 2px; /* Width of the line */
+    height: 100%; /* Full height */
+    background: #000; /* Line color */
+    margin: 0 10px; /* Space around the line */
+}
+/* Responsive Styles */
 @media (max-width: 768px) {
-    .page7 {
-        height: auto;
-        /* Allow height to adjust based on content */
-        padding: 15px;
-        /* Adjust padding for smaller screens */
+    .page7 h2 {
+        font-size: 2.5rem; /* Reduce font size on smaller screens */
     }
 
-    .page7 .reviews h1 {
-        font-size: 3.5rem;
-        /* Further reduce title size */
+    .testimonial {
+        width: 80vw; /* Make testimonials wider on small screens */
+        height: auto; /* Allow height to be flexible */
     }
 
-    .rimg {
-        width: 90vw;
-        /* Make image container wider */
-        height: 50vh;
-        /* Adjust height for mobile */
+    .testimonial-text {
+        font-size: 1.5rem; /* Reduce font size on smaller screens */
     }
 
-    .rimg img {
-        transform: scale(1);
-        /* Scale back to normal size */
+    .user-name {
+        font-size: 16px; /* Reduce user name font size */
+    }
+
+    .user-job-details {
+        font-size: 12px; /* Reduce job title font size */
     }
 }
 
-/* Responsive: Small Mobile (max-width: 480px) */
 @media (max-width: 480px) {
-    .page7 {
-        padding: 10px;
-        /* Smaller padding for very small screens */
+    .page7{
+        padding-top: 20%;
+    }
+    .page7 h2 {
+        font-size: 2rem; /* Further reduce font size */
     }
 
-    .page7 .reviews h1 {
-        font-size: 3rem;
-        /* Further reduce title size */
+    .testimonial {
+        width: 90vw; /* Make testimonials even wider on very small screens */
     }
 
-    .rimg {
-        width: 100vw;
-        /* Full width for small mobile */
-        height: 40vh;
-        /* Smaller height */
+    .testimonial-text {
+        font-size: 1.2rem; /* Further reduce font size */
     }
 
-    .rimg img {
-        transform: scale(1);
-        /* Keep the image size normal */
+    .user-name {
+        font-size: 14px; /* Further reduce user name font size */
+    }
+
+    .user-job-details {
+        font-size: 10px; /* Further reduce job title font size */
     }
 }
+
 
 
 .page8 {
@@ -2334,7 +2394,9 @@ body {
     color: #454545;
     margin-top: 5%;
 }
-
+.page8 i{
+    font-size: 1.5rem;
+}
 .page8 .leftt .frame {
     height: 20vh;
     width: 40vw;
@@ -2758,7 +2820,7 @@ body {
 @media (max-width: 480px) {
     .page8 {
 
-      height: 130vh;
+      height: 140vh;
         padding: 8px;
         /* Adjust padding and height for smaller screens */
     }
@@ -2804,7 +2866,7 @@ body {
 
     /* Circles alignment */
     .circle1 {
-        top: 25vh;
+        top: 26vh;
         left: 30%;
     }
 
@@ -3131,9 +3193,7 @@ body {
     .footer-section ul li a {
         font-size: 1.4rem;
     }
-    .footer-section p{
-        width: 100%;
-    }
+
     .social-icons a {
         font-size: 3rem;
     }
@@ -3160,6 +3220,7 @@ body {
                     </a>
                 </div>
                 
+
                 <div class="options" id="nav-options">
                     <a href="/">Home</a>
                     <a href="/about">About Us</a>
@@ -3174,7 +3235,7 @@ body {
                         </a>
                 
                         <!-- Dropdown Options -->
-                        <div class="absolute right-0 z-10  w-72 rounded-lg shadow-xl bg-white ring-1 ring-black ring-opacity-10 transition-transform duration-300 ease-out hidden group-hover:block" role="menu" aria-orientation="vertical" aria-labelledby="services-button" id="services-dropdown">
+                        <div class="absolute right-0 z-10 w-72 rounded-lg shadow-xl bg-white ring-1 ring-black ring-opacity-10 transition-transform duration-300 ease-out hidden group-hover:block" role="menu" aria-orientation="vertical" aria-labelledby="services-button" id="services-dropdown">
                             <div class="py-3 space-y-2" role="none">
                                 <!-- Executive Services -->
                                 <a href="/executive" class="flex items-center px-4 py-3 text-base font-semibold text-gray-800 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg transition-all duration-300 ease-in-out" role="menuitem">
@@ -3200,8 +3261,8 @@ body {
                             </div>
                         </div>
                     </div>
-                
                     <a href="/contact">Contact Us</a>
+                    <a href="/career">Career</a>   
                 </div>
                 
                 
@@ -3235,17 +3296,17 @@ body {
                 <div class="rightbtn" onclick="window.location.href='/contact'">
                     <h1>Get Started <i class="ri-arrow-right-wide-line"></i></h1>
                 </div>
-                
             </div>
 
-            <div id="mobile-nav"
+            
+            <div id="mobile-nav"    
             class="fixed left-[-100%] top-0 w-full h-full bg-white shadow-md z-50 transition-transform duration-300 ease-in-out transform scale-100 origin-left">
             <div class="p-4">
                 <!-- Close button -->
-                <div class="flex justify-end">
+                <div class="flex justify-end " style="margin-left:90vw;">
                     <button id="close-btn" class="text-6xl font-bold" style="font-size: 4rem;">&times;</button>
                 </div>
-                <div class="space-y-6 mt-8">
+                <div class="space-y-4 mt-8">
                     <a href="/" class="block px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200"
                         style="font-size: 2rem;">Home</a>
                     <a href="/about" class="block px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200"
@@ -3267,30 +3328,33 @@ body {
                         <!-- Dropdown Options for Mobile -->
                         <div id="mobile-services-content" class="hidden space-y-2 mt-2 pl-4">
                             <a href="/executive"
-                                class="block text-base font-semibold py-4 mt-2 text-gray-800 hover:bg-gray-100 transition-all duration-300 ease-in-out py-2 rounded-lg"
-                                style="font-size: 2rem;">Executive Services</a>
+                                class="block text-base font-semibold text-gray-800 hover:bg-gray-100 transition-all duration-300 ease-in-out py-2 rounded-lg"
+                                style="font-size: 1.8rem;">Executive Services</a>
                             <a href="/human-resource"
-                                class="block text-base font-semibold py-4 text-gray-800 hover:bg-gray-100 transition-all duration-300 ease-in-out py-2 rounded-lg"
-                                style="font-size: 2rem;">Human Resources</a>
+                                class="block text-base font-semibold text-gray-800 hover:bg-gray-100 transition-all duration-300 ease-in-out py-2 rounded-lg"
+                                style="font-size: 1.8rem;">Human Resources</a>
                             <a href="/placement"
-                                class="block text-base font-semibold py-4 text-gray-800 hover:bg-gray-100 transition-all duration-300 ease-in-out py-2 rounded-lg"
-                                style="font-size: 2rem;">Placement Services</a>
+                                class="block text-base font-semibold text-gray-800 hover:bg-gray-100 transition-all duration-300 ease-in-out py-2 rounded-lg"
+                                style="font-size: 1.8rem;">Placement Services</a>
                         </div>
                     </div>
         
                     <a href="/contact" class="block px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200"
                         style="font-size: 2rem;">Contact Us</a>
+                        <a href="/career" class="block px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200"
+                        style="font-size: 2rem;">Career</a>
                     <a href="/contact" class="block px-6 py-4 rounded bg-[#882390] transition-colors duration-200"
                         style="font-size: 2.5rem; text-align: center;">Get Started</a>
                 </div>
             </div>
         </div>
-        
         <script>document.getElementById('mobile-services-toggle').addEventListener('click', function() {
             const dropdownContent = document.getElementById('mobile-services-content');
             dropdownContent.classList.toggle('show');
         });
         </script>
+
+
 
 
             <script>
@@ -3366,7 +3430,7 @@ body {
             </script>
 
 
-        </div>
+           </div>
         <div class="govlogos flex overflow-hidden">
             <div class="flex animate-scroll space-x-8">
                 <!-- Original set of images -->
@@ -3428,8 +3492,6 @@ body {
     width: 100%;
     height: 10vh;
     overflow: hidden;
- 
-    
 }
 
 /* Flex container for the scrolling effect */
@@ -3594,7 +3656,7 @@ body {
         </div>
         <div class="page3">
             <div class="left">
-                <div class="parallax-bg" style="background-image: url('./assets/1stpagebtm1.jpg');"></div>
+                <div class="parallax-bg" style="background-image: url('./assets/1stpagebtm1.png');"></div>
                 <!-- Parallax Background -->
             </div>
 
@@ -3667,7 +3729,7 @@ body {
             </div>
 
             <div class="right">
-                <div class="parallax-bg" style="background-image: url('./assets/1stpagebtm2.jpg');"></div>
+                <div class="parallax-bg" style="background-image: url('./assets/1stpagebtm2.png');"></div>
                 <!-- Parallax Background -->
             </div>
         </div>
@@ -3701,7 +3763,7 @@ body {
                     transformation.</h2>
                 <p>We’re helping individuals overcome challenges, find meaningful work, and achieve their career goals.
                 </p>
-                <button onclick="window.location.href='./about'">Learn more<i class="ri-arrow-right-s-line"></i></button>
+                <button onclick="window.location.href='/about'">Learn more<i class="ri-arrow-right-s-line"></i></button>
             </div>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/ScrollTrigger.min.js"></script>
@@ -3746,63 +3808,45 @@ body {
 
         </div>
         <div class="page7">
-            <div class="reviews">
-                <h1>Career Testimonials</h1>
-                <div class="rimg">
-                    <% images.forEach(image => { %>
-                        <img src="<%= image.src %>" alt="<%= image.alt %>" width="100px">
-                    <% }) %>
+            <div class="container">
+                <h2 class="text-center mb-4">What Our Clients Say</h2>
+                <div class="testimonial-box">
+                    <% testimonials.forEach((testimonial, index) => { %>
+                        <div class="testimonial <%= index === 0 ? 'active' : '' %>">
+                            <i class="fas fa-quote-right"></i>
+                            <span class="testimonial-text"><%= testimonial.message %></span>
+                            <div class="testimonial-user">
+                                <img src="<%= testimonial.image || 'https://randomuser.me/api/portraits/women/17.jpg' %>" alt="user-img" class="user-img">
+                                <div class="user-info">
+                                    <span class="user-name"><%= testimonial.name %></span>
+                                    <div class="user-job-details">
+                                        <!-- Job and post details can go here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% }); %>
                 </div>
-                
-                
             </div>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
-            <script>
-                const reviewImages = document.querySelectorAll('.rimg img');
-                let currentIndex = 0; // Keep track of the current image index
+        </div><script>
+            const testimonials = document.querySelectorAll('.testimonial');
+let currentIndex = 0;
 
-                function animateImages() {
-                    // Hide all images initially
-                    reviewImages.forEach((img) => {
-                        img.style.opacity = 0; // Hide all images
-                        img.style.transform = 'scale(0.8)'; // Scale down
-                    });
+function showNextTestimonial() {
+    testimonials[currentIndex].classList.remove('active');
+    currentIndex = (currentIndex + 1) % testimonials.length;
+    testimonials[currentIndex].classList.add('active');
+}
 
-                    // Show the current image
-                    function showNextImage() {
-                        // Animate the current image
-                        const img = reviewImages[currentIndex];
-                        gsap.to(img, {
-                            opacity: 1,
-                            scale: 1,
-                            duration: 0.5,
-                            ease: "power1.out",
-                            onComplete: () => {
-                                // Set a timeout before hiding the current image and showing the next
-                                setTimeout(() => {
-                                    gsap.to(img, {
-                                        opacity: 0,
-                                        scale: 0.8,
-                                        duration: 0.5,
-                                        ease: "power1.in",
-                                        onComplete: () => {
-                                            currentIndex = (currentIndex + 1) % reviewImages.length; // Loop back to the start
-                                            showNextImage(); // Show the next image
-                                        }
-                                    });
-                                }, 2000); // Show each image for 2 seconds
-                            }
-                        });
-                    }
+// Change testimonial every 3 seconds
+setInterval(showNextTestimonial, 3000);
 
-                    // Start the animation
-                    showNextImage();
-                }
-
-                // Call the animation function when the DOM is fully loaded
-                document.addEventListener("DOMContentLoaded", animateImages);
-            </script>
-        </div>
+        </script>
+        
+        
+        
+        
+        
         <div class="page8">
             <div class="leftt">
                 <h1>More Jobs Equal a Better World</h1>
@@ -3826,7 +3870,7 @@ body {
                     </div>
                 </div>
 
-                <button onclick="window.location.href='/about'">Learn more</button>
+                <button onclick="window.location.href='./about'">Learn more<i class="ri-arrow-right-s-line"></i></button>
             </div>
             <div class="rightt">
                 <div class="circle circle1">
@@ -3897,37 +3941,38 @@ body {
                 <div class="footer-section">
                     <h2>Pages</h2>
                     <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/contact">Contact Us</a></li>
+                        <li><a href="./">Home</a></li>
+                        <li><a href="./about">About Us</a></li>
+                        <li><a href="./contact">Contact Us</a></li>
+                        <li><a href="./career">Career</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h2>Quick Links</h2>
                     <ul>
-                        <li><a href="/human-resource">Human Resources</a></li>
-                        <li><a href="/placement">Placement Services</a></li>
-                        <li><a href="/executive">Executive Services</a></li>
+                        <li><a href="./human-resources">Human Resources</a></li>
+                        <li><a href="./placement">Placement Services</a></li>
+                        <li><a href="./executive">Executive Services</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
                     <h2>Contact Us</h2>
                     <p>
-                        <i class="fas fa-map-marker-alt"></i> 
-                        Address: Trisect Global, Laxmi Plaza, B Wing, No. 004, Patlipada, Hiranandani Estate, Behind McDonald's, Godbunder Road, Thane (W)- 400607 Maharashtra.
+                       
+                        Address: Trisect Global, 
+                        No. 26, Om Anand Industrial Estate,
+                        Opp. to Audi Service Centre, Raghunath Nagar, MS Road, Thane West- 400604, Maharashtra
                     </p>
                     <p>
-                        <i class="fas fa-phone-alt"></i> 
+                      
                         Phone: <a href="tel:02235647615">022-35647615</a>
                     </p>
                     <p>
-                        <i class="fas fa-envelope"></i> 
+                      
                         Email: <a href="mailto:hrd@trisectglobal.com">hrd@trisectglobal.com</a>
                     </p>
                 </div>
-              
-
                 
                 <div class="footer-section social" id="social">
                     <h2>Follow Us</h2>
@@ -3939,14 +3984,16 @@ body {
                     </ul>
                 </div>
             </div>
-            <div class="footer-bottom flex flex-col md:flex-row justify-between items-center py-6 px-4 bg-gray-800 text-white">
-                <!-- Admin Page Button -->
-                <a href="/admin/login" class="inline-block px-8 py-4 bg-indigo-600 text-white font-semibold text-xl md:text-2xl rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 ease-in-out md:w-auto text-center mb-4 md:mb-0">
-                    Admin Page
+            <div class="footer-bottom d-flex justify-content-between align-items-center">
+                <p>
+                    <a href="/admin/dashboard" style="text-decoration: none; color: inherit;">
+                    </a>
+                                            &copy; 2023 TRISECT GLOBAL • All Rights Reserved
+
+                </p>
+                <a href="/admin/login" class="btn btn-primary btn-sm">
+                    Admin Login
                 </a>
-            
-                <!-- Copyright Text -->
-                <p class="text-sm md:text-base">&copy; 2023 TRISECT GLOBAL • All Rights Reserved</p>
             </div>
             
         </footer>

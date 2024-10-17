@@ -2,10 +2,15 @@ const express = require('express');
 const router = express.Router();
 const verifyToken = require('../middlewares/auth');
 
+
+
 // GET - Admin Dashboard (protected route)
 router.get('/', verifyToken, (req, res) => {
     res.render('dashboard', { admin: req.admin });
 });
+
+
+
 
 // GET - Job Enquiries (protected route)
 router.get('/admin/enquiries', verifyToken, async (req, res) => {

@@ -1,0 +1,169 @@
+<!-- views/jobEnquiries.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Enquiries</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        .badge-primary {
+            background-color: #007bff;
+        }
+        .badge-success {
+            background-color: #28a745;
+        }
+        .badge-danger {
+            background-color: #dc3545;
+        }
+        .badge-secondary {
+            background-color: #6c757d;
+        }
+        /* Optional: Adjust table styles for better readability */
+        table th, table td {
+            vertical-align: middle !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Navbar Partial -->
+    <%- include('partials/navbar') %>
+    
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Job Enquiries</h2>
+
+        <!-- Filter Options -->
+        <div class="mb-4">
+            <form method="GET" action="/job/enquiries" class="form-inline justify-content-center">
+                <div class="form-group mr-3">
+                    <label for="status" class="mr-2">Status:</label>
+                    <select name="status" id="status" class="form-control" onchange="this.form.submit()">
+                        <option value="">All</option>
+                        <option value="New" <%= statusFilter === 'New' ? 'selected' : '' %>>New</option>
+                        <option value="Qualified" <%= statusFilter === 'Qualified' ? 'selected' : '' %>>Qualified</option>
+                        <option value="Rejected" <%= statusFilter === 'Rejected' ? 'selected' : '' %>>Rejected</option>
+                    </select>
+                </div>
+                <div class="form-group mr-3">
+                    <label for="sortBy" class="mr-2">Sort By:</label>
+                    <select name="sortBy" id="sortBy" class="form-control" onchange="this.form.submit()">
+                        <option value="createdAt" <%= sortBy === 'createdAt' ? 'selected' : '' %>>Submission Time (Newest)</option>
+                        <option value="-createdAt" <%= sortBy === '-createdAt' ? 'selected' : '' %>>Submission Time (Oldest)</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-secondary mr-2">Filter</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="resetFilters()">Reset Filters</button>
+            </form>
+        </div>
+
+        <!-- Job Enquiries Table -->
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Resume</th>
+                        <th>Status</th>
+                        <th>Submission Time</th>
+                        <th>Actions</th> <!-- Column for action buttons -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (enquiries.length > 0) { %>
+                        <% enquiries.forEach((enquiry, index) => { %>
+                            <tr>
+                                <td><%= index + 1 %></td>
+                                <td><%= enquiry.fullName %></td>
+                                <td><%= enquiry.email %></td>
+                                <td><%= enquiry.phone %></td>
+                                <td>
+                                    <a href="<%= enquiry.resume %>" target="_blank" class="btn btn-info btn-sm">
+                                        <i class="fas fa-file-download"></i> Download
+                                    </a>
+                                </td>
+                                <td>
+                                    <span class="badge <%= enquiry.status === 'New' ? 'badge-primary' : enquiry.status === 'Qualified' ? 'badge-success' : 'badge-danger' %>">
+                                        <%= enquiry.status %>
+                                    </span>
+                                </td>
+                                <td><%= enquiry.createdAt.toLocaleString() %></td>
+                                <td>
+                                    <% if (enquiry.status === 'New') { %>
+                                        <div class="btn-group" role="group">
+                                            <button class="btn btn-success btn-sm" onclick="updateStatus('<%= enquiry._id %>', 'Qualified')">
+                                                <i class="fas fa-check"></i> Qualify
+                                            </button>
+                                            <button class="btn btn-danger btn-sm" onclick="updateStatus('<%= enquiry._id %>', 'Rejected')">
+                                                <i class="fas fa-times"></i> Reject
+                                            </button>
+                                        </div>
+                                        
+                                    <% } else { %>
+                                        <!-- No action buttons for Qualified or Rejected statuses -->
+                                        <span class="text-muted">N/A</span>
+                                    <% } %>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="8" class="text-center">No job enquiries found.</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Back to Admin Dashboard Button -->
+        <div class="text-center mt-4">
+            <a href="/admin/dashboard" class="btn btn-primary">Return to Admin Dashboard</a>
+        </div>
+    </div>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Function to reset filters
+        function resetFilters() {
+            window.location.href = '/job/enquiries';
+        }
+
+        // Function to update the status of a job enquiry
+        function updateStatus(id, status) {
+            if (confirm(`Are you sure you want to mark this enquiry as "${status}"?`)) {
+                fetch(`/job/enquiries/${id}/status`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ status })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);
+                        location.reload(); // Reload the page to see the updated status
+                    } else {
+                        alert('Unexpected response from the server.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error updating status:', error);
+                    alert('Failed to update status. Please try again.');
+                });
+            }
+        }
+    </script>
+</body>
+</html>
